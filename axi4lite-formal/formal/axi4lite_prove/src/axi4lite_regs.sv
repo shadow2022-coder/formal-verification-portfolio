@@ -299,6 +299,42 @@ always_ff @(posedge aclk) begin
     end
 end
 
+`ifdef FORMAL
+
+    axi4lite_functional_properties functional_properties (
+        .aclk             (aclk),
+        .aresetn          (aresetn),
+
+        .s_axi_awaddr     (s_axi_awaddr),
+        .s_axi_awvalid    (s_axi_awvalid),
+        .s_axi_awready    (s_axi_awready),
+
+        .s_axi_wdata      (s_axi_wdata),
+        .s_axi_wstrb      (s_axi_wstrb),
+        .s_axi_wvalid     (s_axi_wvalid),
+        .s_axi_wready     (s_axi_wready),
+
+        .s_axi_bresp      (s_axi_bresp),
+        .s_axi_bvalid     (s_axi_bvalid),
+        .s_axi_bready     (s_axi_bready),
+
+        .s_axi_araddr     (s_axi_araddr),
+        .s_axi_arvalid    (s_axi_arvalid),
+        .s_axi_arready    (s_axi_arready),
+
+        .s_axi_rdata      (s_axi_rdata),
+        .s_axi_rresp      (s_axi_rresp),
+        .s_axi_rvalid     (s_axi_rvalid),
+        .s_axi_rready     (s_axi_rready),
+
+        .dut_control_reg  (control_reg),
+        .dut_status_reg   (status_reg),
+        .dut_data0_reg    (data0_reg),
+        .dut_data1_reg    (data1_reg)
+    );
+
+`endif
+
 endmodule
 /*
 AW handshake → address stored

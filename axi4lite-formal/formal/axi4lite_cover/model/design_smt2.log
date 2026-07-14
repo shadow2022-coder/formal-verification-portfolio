@@ -17,11 +17,13 @@ Attribute `top' found on module `axi4lite_formal'. Setting top module to axi4lit
 2.1. Analyzing design hierarchy..
 Top module:  \axi4lite_formal
 Used module:     \axi4lite_regs
+Used module:         \axi4lite_functional_properties
 Used module:     \axi4lite_properties
 
 2.2. Analyzing design hierarchy..
 Top module:  \axi4lite_formal
 Used module:     \axi4lite_regs
+Used module:         \axi4lite_functional_properties
 Used module:     \axi4lite_properties
 Removed 0 unused modules.
 Module axi4lite_formal directly or indirectly contains formal properties -> setting "keep" attribute.
@@ -56,27 +58,51 @@ Module axi4lite_properties directly or indirectly contains formal properties -> 
         1   axi4lite_properties
         1   axi4lite_regs
 
+=== axi4lite_functional_properties ===
+
+        +----------Local Count, excluding submodules.
+        | 
+      133 wires
+     1563 wire bits
+       41 public wires
+      431 public wire bits
+       23 ports
+      220 port bits
+      109 cells
+        1   $anyinit
+        6   $eq
+        1   $eqx
+       28   $ff
+        6   $logic_and
+        3   $logic_not
+       62   $mux
+        1   $pmux
+        1   $reduce_or
+
 === axi4lite_properties ===
 
         +----------Local Count, excluding submodules.
         | 
-      128 wires
-      493 wire bits
-       33 public wires
-      179 public wire bits
+      187 wires
+      552 wire bits
+       44 public wires
+      190 public wire bits
        19 ports
        92 port bits
-      113 cells
+      178 cells
         4   $and
        13   $anyinit
         7   $assume
-       10   $cover
-        4   $eq
+       16   $cover
+        6   $eq
         1   $eqx
-       37   $ff
-       11   $logic_and
-        5   $logic_not
-       21   $mux
+       53   $ff
+       20   $logic_and
+        6   $logic_not
+        2   $logic_or
+       48   $mux
+        1   $ne
+        1   $reduce_bool
 
 === axi4lite_regs ===
 
@@ -98,40 +124,46 @@ Module axi4lite_properties directly or indirectly contains formal properties -> 
       104   $mux
         1   $pmux
         2   $reduce_or
+        1 submodules
+        1   axi4lite_functional_properties
 
 === design hierarchy ===
 
         +----------Count including submodules.
         | 
-      309 axi4lite_formal
-      113 axi4lite_properties
+      483 axi4lite_formal
+      178 axi4lite_properties
       161 axi4lite_regs
+      109   axi4lite_functional_properties
 
         +----------Count including submodules.
         | 
-      329 wires
-     2022 wire bits
-       82 public wires
-      535 public wire bits
-       38 ports
-      184 port bits
+      521 wires
+     3644 wire bits
+      134 public wires
+      977 public wire bits
+       61 ports
+      404 port bits
         - memories
         - memory bits
         - processes
-      309 cells
+      483 cells
         7   $and
-       28   $anyinit
+       29   $anyinit
        10   $anyseq
         9   $assume
-       11   $cover
-       10   $eq
-        3   $eqx
-       62   $ff
-       24   $logic_and
-       13   $logic_not
-      129   $mux
-        1   $pmux
-        2   $reduce_or
+       17   $cover
+       18   $eq
+        4   $eqx
+      106   $ff
+       39   $logic_and
+       17   $logic_not
+        2   $logic_or
+      218   $mux
+        1   $ne
+        2   $pmux
+        1   $reduce_bool
+        3   $reduce_or
         2 submodules
         1   axi4lite_properties
         1   axi4lite_regs
@@ -141,10 +173,11 @@ Module axi4lite_properties directly or indirectly contains formal properties -> 
 6.1. Executing BMUXMAP pass.
 
 6.2. Executing DEMUXMAP pass.
-Creating SMT-LIBv2 representation of module axi4lite_regs.
 Creating SMT-LIBv2 representation of module axi4lite_properties.
+Creating SMT-LIBv2 representation of module axi4lite_functional_properties.
+Creating SMT-LIBv2 representation of module axi4lite_regs.
 Creating SMT-LIBv2 representation of module axi4lite_formal.
 
-End of script. Logfile hash: 8cc1073ae4, time: 0.01s, user: 0.01s, system: 0.00s, MEM: 17.31 MB peak
+End of script. Logfile hash: 3417c74fa2, time: 0.01s, user: 0.01s, system: 0.00s, MEM: 17.67 MB peak
 Yosys 0.67+31 (git sha1 22c15a7ec-dirty, Release, Clang /usr/local/osxcross/target/bin/aarch64-apple-darwin23.5-clang++ 18.1.8)
-Time spent: 74% 2x write_smt2 (0 sec), 16% 2x read_rtlil (0 sec), ...
+Time spent: 74% 2x write_smt2 (0 sec), 17% 2x read_rtlil (0 sec), ...

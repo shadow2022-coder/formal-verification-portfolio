@@ -194,15 +194,15 @@ module testbench(input clock, output reg genclock);
     // state 2
     if (cycle == 1) begin
       UUT.aresetn <= 1'b1;
-      UUT.s_axi_araddr <= 4'b0110;
-      UUT.s_axi_arvalid <= 1'b1;
-      UUT.s_axi_awaddr <= 4'b0000;
+      UUT.s_axi_araddr <= 4'b1110;
+      UUT.s_axi_arvalid <= 1'b0;
+      UUT.s_axi_awaddr <= 4'b1101;
       UUT.s_axi_awvalid <= 1'b1;
       UUT.s_axi_bready <= 1'b0;
       UUT.s_axi_rready <= 1'b0;
       UUT.s_axi_wdata <= 32'b00000000000000000000000000000000;
       UUT.s_axi_wstrb <= 4'b0000;
-      UUT.s_axi_wvalid <= 1'b0;
+      UUT.s_axi_wvalid <= 1'b1;
     end
 
     // state 3
@@ -222,13 +222,13 @@ module testbench(input clock, output reg genclock);
     // state 4
     if (cycle == 3) begin
       UUT.aresetn <= 1'b1;
-      UUT.s_axi_araddr <= 4'b0000;
-      UUT.s_axi_arvalid <= 1'b0;
-      UUT.s_axi_awaddr <= 4'b0000;
-      UUT.s_axi_awvalid <= 1'b0;
+      UUT.s_axi_araddr <= 4'b0110;
+      UUT.s_axi_arvalid <= 1'b1;
+      UUT.s_axi_awaddr <= 4'b1111;
+      UUT.s_axi_awvalid <= 1'b1;
       UUT.s_axi_bready <= 1'b0;
-      UUT.s_axi_rready <= 1'b0;
-      UUT.s_axi_wdata <= 32'b00000000000000000000000000000000;
+      UUT.s_axi_rready <= 1'b1;
+      UUT.s_axi_wdata <= 32'b11111111111111111111111111111111;
       UUT.s_axi_wstrb <= 4'b0000;
       UUT.s_axi_wvalid <= 1'b1;
     end
@@ -247,7 +247,35 @@ module testbench(input clock, output reg genclock);
       UUT.s_axi_wvalid <= 1'b0;
     end
 
-    genclock <= cycle < 5;
+    // state 6
+    if (cycle == 5) begin
+      UUT.aresetn <= 1'b1;
+      UUT.s_axi_araddr <= 4'b0110;
+      UUT.s_axi_arvalid <= 1'b1;
+      UUT.s_axi_awaddr <= 4'b1111;
+      UUT.s_axi_awvalid <= 1'b1;
+      UUT.s_axi_bready <= 1'b0;
+      UUT.s_axi_rready <= 1'b0;
+      UUT.s_axi_wdata <= 32'b11111111111111111111111111111111;
+      UUT.s_axi_wstrb <= 4'b0000;
+      UUT.s_axi_wvalid <= 1'b1;
+    end
+
+    // state 7
+    if (cycle == 6) begin
+      UUT.aresetn <= 1'b0;
+      UUT.s_axi_araddr <= 4'b0000;
+      UUT.s_axi_arvalid <= 1'b0;
+      UUT.s_axi_awaddr <= 4'b0000;
+      UUT.s_axi_awvalid <= 1'b0;
+      UUT.s_axi_bready <= 1'b0;
+      UUT.s_axi_rready <= 1'b0;
+      UUT.s_axi_wdata <= 32'b00000000000000000000000000000000;
+      UUT.s_axi_wstrb <= 4'b0000;
+      UUT.s_axi_wvalid <= 1'b0;
+    end
+
+    genclock <= cycle < 7;
     cycle <= cycle + 1;
   end
 endmodule

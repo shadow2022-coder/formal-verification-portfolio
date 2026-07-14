@@ -1,0 +1,268 @@
+
+ /----------------------------------------------------------------------------\
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |  Copyright (C) 2012 - 2026  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |  Distributed under an ISC-like license, type "license" to see terms        |
+ \----------------------------------------------------------------------------/
+ Yosys 0.67+31 (git sha1 22c15a7ec-dirty, Release, Clang /usr/local/osxcross/target/bin/aarch64-apple-darwin23.5-clang++ 18.1.8)
+
+-- Executing script file `design_aiger.ys' --
+
+1. Executing RTLIL frontend.
+Input filename: design_prep.il
+
+2. Executing HIERARCHY pass (managing design hierarchy).
+Attribute `top' found on module `axi4lite_formal'. Setting top module to axi4lite_formal.
+
+2.1. Analyzing design hierarchy..
+Top module:  \axi4lite_formal
+Used module:     \axi4lite_regs
+Used module:         \axi4lite_functional_properties
+Used module:     \axi4lite_properties
+
+2.2. Analyzing design hierarchy..
+Top module:  \axi4lite_formal
+Used module:     \axi4lite_regs
+Used module:         \axi4lite_functional_properties
+Used module:     \axi4lite_properties
+Removed 0 unused modules.
+Module axi4lite_formal directly or indirectly contains formal properties -> setting "keep" attribute.
+Module axi4lite_functional_properties directly or indirectly contains formal properties -> setting "keep" attribute.
+Module axi4lite_properties directly or indirectly contains formal properties -> setting "keep" attribute.
+Module axi4lite_regs directly or indirectly contains formal properties -> setting "keep" attribute.
+
+3. Executing FORMALFF pass.
+
+4. Executing FLATTEN pass (flatten design).
+Deleting now unused module axi4lite_functional_properties.
+Deleting now unused module axi4lite_properties.
+Deleting now unused module axi4lite_regs.
+<suppressed ~3 debug messages>
+
+5. Executing SETUNDEF pass (replace undef values with defined constants).
+
+6. Executing OPT pass (performing simple optimizations).
+
+6.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module axi4lite_formal.
+<suppressed ~82 debug messages>
+
+6.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\axi4lite_formal'.
+Computing hashes of 635 cells of `\axi4lite_formal'.
+Finding duplicate cells in `\axi4lite_formal'.
+Computing hashes of 604 cells of `\axi4lite_formal'.
+Finding duplicate cells in `\axi4lite_formal'.
+Computing hashes of 597 cells of `\axi4lite_formal'.
+Finding duplicate cells in `\axi4lite_formal'.
+Computing hashes of 595 cells of `\axi4lite_formal'.
+Finding duplicate cells in `\axi4lite_formal'.
+<suppressed ~120 debug messages>
+Removed a total of 40 cells.
+
+6.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \axi4lite_formal..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~289 debug messages>
+
+6.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \axi4lite_formal.
+    Consolidated identical input bits for $mux cell $flatten\dut.$procmux$1427:
+      Old ports: A=2'10, B=2'00, Y=$flatten\dut.$procmux$1427_Y
+      New ports: A=1'1, B=1'0, Y=$flatten\dut.$procmux$1427_Y [1]
+      New connections: $flatten\dut.$procmux$1427_Y [0] = 1'0
+    Consolidated identical input bits for $mux cell $flatten\dut.\functional_properties.$procmux$1314:
+      Old ports: A=2'10, B=2'00, Y=$flatten\dut.\functional_properties.$procmux$1314_Y
+      New ports: A=1'1, B=1'0, Y=$flatten\dut.\functional_properties.$procmux$1314_Y [1]
+      New connections: $flatten\dut.\functional_properties.$procmux$1314_Y [0] = 1'0
+    Consolidated identical input bits for $mux cell $flatten\dut.$procmux$1768:
+      Old ports: A=2'10, B=2'00, Y=$flatten\dut.$procmux$1768_Y
+      New ports: A=1'1, B=1'0, Y=$flatten\dut.$procmux$1768_Y [1]
+      New connections: $flatten\dut.$procmux$1768_Y [0] = 1'0
+  Optimizing cells in module \axi4lite_formal.
+Performed a total of 3 changes.
+
+6.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\axi4lite_formal'.
+Computing hashes of 595 cells of `\axi4lite_formal'.
+Finding duplicate cells in `\axi4lite_formal'.
+Computing hashes of 594 cells of `\axi4lite_formal'.
+Finding duplicate cells in `\axi4lite_formal'.
+<suppressed ~3 debug messages>
+Removed a total of 1 cells.
+
+6.6. Executing OPT_SHARE pass.
+
+6.7. Executing OPT_DFF pass (perform DFF optimizations).
+
+6.8. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \axi4lite_formal..
+Removed 0 unused cells and 78 unused wires.
+<suppressed ~1 debug messages>
+
+6.9. Executing OPT_EXPR pass (perform const folding).
+Optimizing module axi4lite_formal.
+<suppressed ~2 debug messages>
+
+6.10. Rerunning OPT passes. (Maybe there is more to do..)
+
+6.11. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \axi4lite_formal..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~286 debug messages>
+
+6.12. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \axi4lite_formal.
+Performed a total of 0 changes.
+
+6.13. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\axi4lite_formal'.
+Computing hashes of 594 cells of `\axi4lite_formal'.
+Finding duplicate cells in `\axi4lite_formal'.
+Removed a total of 0 cells.
+
+6.14. Executing OPT_SHARE pass.
+
+6.15. Executing OPT_DFF pass (perform DFF optimizations).
+
+6.16. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \axi4lite_formal..
+
+6.17. Executing OPT_EXPR pass (perform const folding).
+Optimizing module axi4lite_formal.
+
+6.18. Finished fast OPT passes. (There is nothing left to do.)
+
+7. Executing TECHMAP pass (map to technology primitives).
+
+7.1. Executing Verilog-2005 frontend: /Users/harsha/oss-cad-suite/libexec/../share/yosys/techmap.v
+Parsing Verilog input from `/Users/harsha/oss-cad-suite/libexec/../share/yosys/techmap.v' to AST representation.
+Generating RTLIL representation for module `\_90_simplemap_bool_ops'.
+Generating RTLIL representation for module `\_90_simplemap_reduce_ops'.
+Generating RTLIL representation for module `\_90_simplemap_logic_ops'.
+Generating RTLIL representation for module `\_90_simplemap_compare_ops'.
+Generating RTLIL representation for module `\_90_simplemap_various'.
+Generating RTLIL representation for module `\_90_simplemap_registers'.
+Generating RTLIL representation for module `\_90_shift_ops_shr_shl_sshl_sshr'.
+Generating RTLIL representation for module `\_90_shift_shiftx'.
+Generating RTLIL representation for module `\_90_fa'.
+Generating RTLIL representation for module `\_90_lcu_brent_kung'.
+Generating RTLIL representation for module `\_90_alu'.
+Generating RTLIL representation for module `\_90_macc'.
+Generating RTLIL representation for module `\_90_alumacc'.
+Generating RTLIL representation for module `$__div_mod_u'.
+Generating RTLIL representation for module `$__div_mod_trunc'.
+Generating RTLIL representation for module `\_90_div'.
+Generating RTLIL representation for module `\_90_mod'.
+Generating RTLIL representation for module `$__div_mod_floor'.
+Generating RTLIL representation for module `\_90_divfloor'.
+Generating RTLIL representation for module `\_90_modfloor'.
+Generating RTLIL representation for module `\_90_pow'.
+Generating RTLIL representation for module `\_90_demux'.
+Generating RTLIL representation for module `\_90_lut'.
+Generating RTLIL representation for module `$connect'.
+Generating RTLIL representation for module `$input_port'.
+Successfully finished Verilog frontend.
+
+7.2. Continuing TECHMAP pass.
+Using extmapper simplemap for cells of type $not.
+Using extmapper simplemap for cells of type $ff.
+Using extmapper simplemap for cells of type $mux.
+Using extmapper simplemap for cells of type $logic_not.
+Using extmapper simplemap for cells of type $and.
+Using extmapper simplemap for cells of type $logic_and.
+Using extmapper simplemap for cells of type $eq.
+Using extmapper simplemap for cells of type $logic_or.
+Using extmapper simplemap for cells of type $or.
+Using extmapper simplemap for cells of type $reduce_or.
+Using extmapper simplemap for cells of type $pmux.
+Using extmapper simplemap for cells of type $eqx.
+No more expansions possible.
+<suppressed ~574 debug messages>
+
+8. Executing OPT pass (performing simple optimizations).
+
+8.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module axi4lite_formal.
+<suppressed ~807 debug messages>
+
+8.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\axi4lite_formal'.
+Computing hashes of 4090 cells of `\axi4lite_formal'.
+Finding duplicate cells in `\axi4lite_formal'.
+Computing hashes of 4067 cells of `\axi4lite_formal'.
+Finding duplicate cells in `\axi4lite_formal'.
+Computing hashes of 4065 cells of `\axi4lite_formal'.
+Finding duplicate cells in `\axi4lite_formal'.
+<suppressed ~75 debug messages>
+Removed a total of 25 cells.
+
+8.3. Executing OPT_DFF pass (perform DFF optimizations).
+
+8.4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \axi4lite_formal..
+Removed 0 unused cells and 54 unused wires.
+<suppressed ~1 debug messages>
+
+8.5. Finished fast OPT passes.
+
+9. Executing MEMORY_MAP pass (converting memories to logic and flip-flops).
+
+10. Executing FORMALFF pass.
+
+11. Executing SIMPLEMAP pass (map simple cells to gate primitives).
+
+12. Executing DFFUNMAP pass (unmap clock enable and synchronous reset from FFs).
+
+13. Executing AIGMAP pass (map logic to AIG).
+Module axi4lite_formal: replaced 2763 cells with 17541 new cells, skipped 1302 cells.
+  replaced 3 cell types:
+    1921 $_MUX_
+     600 $_OR_
+     242 $_XOR_
+  not replaced 8 cell types:
+     349 $_AND_
+     787 $_FF_
+      69 $_NOT_
+      29 $anyinit
+      12 $anyseq
+      44 $assert
+       9 $assume
+       3 $scopeinfo
+
+14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \axi4lite_formal..
+Removed 0 unused cells and 891 unused wires.
+<suppressed ~1 debug messages>
+
+15. Printing statistics.
+
+=== axi4lite_formal ===
+
+        +----------Local Count, excluding submodules.
+        | 
+    17739 wires
+    19504 wire bits
+      136 public wires
+      979 public wire bits
+    18843 cells
+     7438   $_AND_
+      787   $_FF_
+    10521   $_NOT_
+       29   $anyinit
+       12   $anyseq
+       44   $assert
+        9   $assume
+        3   $scopeinfo
+
+16. Executing AIGER backend.
+
+End of script. Logfile hash: 60d7f555b3, time: 0.08s, user: 0.11s, system: 0.01s, MEM: 54.70 MB peak
+Yosys 0.67+31 (git sha1 22c15a7ec-dirty, Release, Clang /usr/local/osxcross/target/bin/aarch64-apple-darwin23.5-clang++ 18.1.8)
+Time spent: 37% 4x opt_clean (0 sec), 14% 4x opt_expr (0 sec), ...

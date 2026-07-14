@@ -13,6 +13,7 @@ Input filename: design.il
 
 2. Executing SCC pass (detecting logic loops).
 Found 0 SCCs in module axi4lite_formal.
+Found 0 SCCs in module axi4lite_functional_properties.
 Found 0 SCCs in module axi4lite_properties.
 Found 0 SCCs in module axi4lite_regs.
 Found 0 SCCs.
@@ -24,55 +25,77 @@ Found 0 SCCs.
 5. Executing CLK2FFLOGIC pass (convert clocked FFs to generic $ff cells).
 
 5.1. Executing PEEPOPT pass (run peephole optimizers).
-Replacing axi4lite_formal.$procdff$630 ($dff): CLK=\aclk, D=1'1, Q=\f_past_valid
-Replacing axi4lite_formal.$procdff$631 ($dff): CLK=\aclk, D=\aresetn, Q=$past$axi4lite_formal.sv:100$9$0
-Replacing axi4lite_properties.$procdff$616 ($dff): CLK=\aclk, D=1'1, Q=\f_past_valid
-Replacing axi4lite_properties.$procdff$617 ($dff): CLK=\aclk, D=\aresetn, Q=$past$axi4lite_properties.sv:33$38$0
-Replacing axi4lite_properties.$procdff$618 ($dff): CLK=\aclk, D=$0$past$axi4lite_properties.sv:37$39$0[0:0]$53, Q=$past$axi4lite_properties.sv:37$39$0
-Replacing axi4lite_properties.$procdff$619 ($dff): CLK=\aclk, D=\s_axi_awaddr, Q=$past$axi4lite_properties.sv:39$40$0
-Replacing axi4lite_properties.$procdff$620 ($dff): CLK=\aclk, D=$0$past$axi4lite_properties.sv:43$41$0[0:0]$55, Q=$past$axi4lite_properties.sv:43$41$0
-Replacing axi4lite_properties.$procdff$621 ($dff): CLK=\aclk, D=\s_axi_wdata, Q=$past$axi4lite_properties.sv:45$42$0
-Replacing axi4lite_properties.$procdff$622 ($dff): CLK=\aclk, D=\s_axi_wstrb, Q=$past$axi4lite_properties.sv:46$43$0
-Replacing axi4lite_properties.$procdff$623 ($dff): CLK=\aclk, D=$0$past$axi4lite_properties.sv:50$44$0[0:0]$58, Q=$past$axi4lite_properties.sv:50$44$0
-Replacing axi4lite_properties.$procdff$624 ($dff): CLK=\aclk, D=\s_axi_araddr, Q=$past$axi4lite_properties.sv:52$45$0
-Replacing axi4lite_properties.$procdff$625 ($dff): CLK=\aclk, D=$0$past$axi4lite_properties.sv:57$46$0[0:0]$60, Q=$past$axi4lite_properties.sv:57$46$0
-Replacing axi4lite_properties.$procdff$626 ($dff): CLK=\aclk, D=\s_axi_bresp, Q=$past$axi4lite_properties.sv:59$47$0
-Replacing axi4lite_properties.$procdff$627 ($dff): CLK=\aclk, D=$0$past$axi4lite_properties.sv:63$48$0[0:0]$62, Q=$past$axi4lite_properties.sv:63$48$0
-Replacing axi4lite_properties.$procdff$628 ($dff): CLK=\aclk, D=\s_axi_rdata, Q=$past$axi4lite_properties.sv:65$49$0
-Replacing axi4lite_properties.$procdff$629 ($dff): CLK=\aclk, D=\s_axi_rresp, Q=$past$axi4lite_properties.sv:66$50$0
-Replacing axi4lite_regs.$procdff$598 ($dff): CLK=\aclk, D=$0\s_axi_rdata[31:0], Q=\s_axi_rdata
-Replacing axi4lite_regs.$procdff$599 ($dff): CLK=\aclk, D=$0\s_axi_rresp[1:0], Q=\s_axi_rresp
-Replacing axi4lite_regs.$procdff$600 ($dff): CLK=\aclk, D=$0\s_axi_rvalid[0:0], Q=\s_axi_rvalid
-Replacing axi4lite_regs.$procdff$601 ($dff): CLK=\aclk, D=$0\s_axi_bresp[1:0], Q=\s_axi_bresp
-Replacing axi4lite_regs.$procdff$602 ($dff): CLK=\aclk, D=$0\s_axi_bvalid[0:0], Q=\s_axi_bvalid
-Replacing axi4lite_regs.$procdff$603 ($dff): CLK=\aclk, D=$0\control_reg[31:0], Q=\control_reg
-Replacing axi4lite_regs.$procdff$604 ($dff): CLK=\aclk, D=$0\status_reg[31:0], Q=\status_reg
-Replacing axi4lite_regs.$procdff$605 ($dff): CLK=\aclk, D=$0\data0_reg[31:0], Q=\data0_reg
-Replacing axi4lite_regs.$procdff$606 ($dff): CLK=\aclk, D=$0\data1_reg[31:0], Q=\data1_reg
-Replacing axi4lite_regs.$procdff$607 ($dff): CLK=\aclk, D=$0\aw_pending[0:0], Q=\aw_pending
-Replacing axi4lite_regs.$procdff$608 ($dff): CLK=\aclk, D=$0\awaddr_hold[3:0], Q=\awaddr_hold
-Replacing axi4lite_regs.$procdff$609 ($dff): CLK=\aclk, D=$0\w_pending[0:0], Q=\w_pending
-Replacing axi4lite_regs.$procdff$610 ($dff): CLK=\aclk, D=$0\wdata_hold[31:0], Q=\wdata_hold
-Replacing axi4lite_regs.$procdff$611 ($dff): CLK=\aclk, D=$0\wstrb_hold[3:0], Q=\wstrb_hold
+Replacing axi4lite_formal.$procdff$2171 ($dff): CLK=\aclk, D=1'1, Q=\f_past_valid
+Replacing axi4lite_formal.$procdff$2172 ($dff): CLK=\aclk, D=\aresetn, Q=$past$axi4lite_formal.sv:100$10$0
+Replacing axi4lite_functional_properties.$procdff$2094 ($dff): CLK=\aclk, D=1'1, Q=\f_past_valid
+Replacing axi4lite_functional_properties.$procdff$2095 ($dff): CLK=\aclk, D=$0\model_aw_pending[0:0], Q=\model_aw_pending
+Replacing axi4lite_functional_properties.$procdff$2096 ($dff): CLK=\aclk, D=$0\model_awaddr[3:0], Q=\model_awaddr
+Replacing axi4lite_functional_properties.$procdff$2097 ($dff): CLK=\aclk, D=$0\model_w_pending[0:0], Q=\model_w_pending
+Replacing axi4lite_functional_properties.$procdff$2098 ($dff): CLK=\aclk, D=$0\model_wdata[31:0], Q=\model_wdata
+Replacing axi4lite_functional_properties.$procdff$2099 ($dff): CLK=\aclk, D=$0\model_wstrb[3:0], Q=\model_wstrb
+Replacing axi4lite_functional_properties.$procdff$2100 ($dff): CLK=\aclk, D=$0\model_control[31:0], Q=\model_control
+Replacing axi4lite_functional_properties.$procdff$2101 ($dff): CLK=\aclk, D=$0\model_status[31:0], Q=\model_status
+Replacing axi4lite_functional_properties.$procdff$2102 ($dff): CLK=\aclk, D=$0\model_data0[31:0], Q=\model_data0
+Replacing axi4lite_functional_properties.$procdff$2103 ($dff): CLK=\aclk, D=$0\model_data1[31:0], Q=\model_data1
+Replacing axi4lite_functional_properties.$procdff$2104 ($dff): CLK=\aclk, D=$0\expected_read_valid[0:0], Q=\expected_read_valid
+Replacing axi4lite_functional_properties.$procdff$2105 ($dff): CLK=\aclk, D=$0\expected_read_data[31:0], Q=\expected_read_data
+Replacing axi4lite_functional_properties.$procdff$2106 ($dff): CLK=\aclk, D=$0\expected_read_resp[1:0], Q=\expected_read_resp
+Replacing axi4lite_functional_properties.$procdff$2133 ($dff): CLK=\aclk, D=\aresetn, Q=$past$axi4lite_functional.sv:253$237$0
+Replacing axi4lite_properties.$procdff$2152 ($dff): CLK=\aclk, D=1'1, Q=\f_past_valid
+Replacing axi4lite_properties.$procdff$2153 ($dff): CLK=\aclk, D=$0\aw_seen[0:0], Q=\aw_seen
+Replacing axi4lite_properties.$procdff$2154 ($dff): CLK=\aclk, D=$0\w_seen[0:0], Q=\w_seen
+Replacing axi4lite_properties.$procdff$2155 ($dff): CLK=\aclk, D=$0\write_request_open[0:0], Q=\write_request_open
+Replacing axi4lite_properties.$procdff$2156 ($dff): CLK=\aclk, D=$0\write_wait_cycle[0:0], Q=\write_wait_cycle
+Replacing axi4lite_properties.$procdff$2157 ($dff): CLK=\aclk, D=$0\read_request_open[0:0], Q=\read_request_open
+Replacing axi4lite_properties.$procdff$2158 ($dff): CLK=\aclk, D=\aresetn, Q=$past$axi4lite_properties.sv:99$39$0
+Replacing axi4lite_properties.$procdff$2159 ($dff): CLK=\aclk, D=$0$past$axi4lite_properties.sv:102$40$0[0:0]$64, Q=$past$axi4lite_properties.sv:102$40$0
+Replacing axi4lite_properties.$procdff$2160 ($dff): CLK=\aclk, D=\s_axi_awaddr, Q=$past$axi4lite_properties.sv:104$41$0
+Replacing axi4lite_properties.$procdff$2161 ($dff): CLK=\aclk, D=$0$past$axi4lite_properties.sv:108$42$0[0:0]$66, Q=$past$axi4lite_properties.sv:108$42$0
+Replacing axi4lite_properties.$procdff$2162 ($dff): CLK=\aclk, D=\s_axi_wdata, Q=$past$axi4lite_properties.sv:110$43$0
+Replacing axi4lite_properties.$procdff$2163 ($dff): CLK=\aclk, D=\s_axi_wstrb, Q=$past$axi4lite_properties.sv:111$44$0
+Replacing axi4lite_properties.$procdff$2164 ($dff): CLK=\aclk, D=$0$past$axi4lite_properties.sv:115$45$0[0:0]$69, Q=$past$axi4lite_properties.sv:115$45$0
+Replacing axi4lite_properties.$procdff$2165 ($dff): CLK=\aclk, D=\s_axi_araddr, Q=$past$axi4lite_properties.sv:117$46$0
+Replacing axi4lite_properties.$procdff$2166 ($dff): CLK=\aclk, D=$0$past$axi4lite_properties.sv:127$47$0[0:0]$71, Q=$past$axi4lite_properties.sv:127$47$0
+Replacing axi4lite_properties.$procdff$2167 ($dff): CLK=\aclk, D=\s_axi_bresp, Q=$past$axi4lite_properties.sv:129$48$0
+Replacing axi4lite_properties.$procdff$2168 ($dff): CLK=\aclk, D=$0$past$axi4lite_properties.sv:133$49$0[0:0]$73, Q=$past$axi4lite_properties.sv:133$49$0
+Replacing axi4lite_properties.$procdff$2169 ($dff): CLK=\aclk, D=\s_axi_rdata, Q=$past$axi4lite_properties.sv:135$50$0
+Replacing axi4lite_properties.$procdff$2170 ($dff): CLK=\aclk, D=\s_axi_rresp, Q=$past$axi4lite_properties.sv:136$51$0
+Replacing axi4lite_regs.$procdff$2134 ($dff): CLK=\aclk, D=$0\s_axi_rdata[31:0], Q=\s_axi_rdata
+Replacing axi4lite_regs.$procdff$2135 ($dff): CLK=\aclk, D=$0\s_axi_rresp[1:0], Q=\s_axi_rresp
+Replacing axi4lite_regs.$procdff$2136 ($dff): CLK=\aclk, D=$0\s_axi_rvalid[0:0], Q=\s_axi_rvalid
+Replacing axi4lite_regs.$procdff$2137 ($dff): CLK=\aclk, D=$0\s_axi_bresp[1:0], Q=\s_axi_bresp
+Replacing axi4lite_regs.$procdff$2138 ($dff): CLK=\aclk, D=$0\s_axi_bvalid[0:0], Q=\s_axi_bvalid
+Replacing axi4lite_regs.$procdff$2139 ($dff): CLK=\aclk, D=$0\control_reg[31:0], Q=\control_reg
+Replacing axi4lite_regs.$procdff$2140 ($dff): CLK=\aclk, D=$0\status_reg[31:0], Q=\status_reg
+Replacing axi4lite_regs.$procdff$2141 ($dff): CLK=\aclk, D=$0\data0_reg[31:0], Q=\data0_reg
+Replacing axi4lite_regs.$procdff$2142 ($dff): CLK=\aclk, D=$0\data1_reg[31:0], Q=\data1_reg
+Replacing axi4lite_regs.$procdff$2143 ($dff): CLK=\aclk, D=$0\aw_pending[0:0], Q=\aw_pending
+Replacing axi4lite_regs.$procdff$2144 ($dff): CLK=\aclk, D=$0\awaddr_hold[3:0], Q=\awaddr_hold
+Replacing axi4lite_regs.$procdff$2145 ($dff): CLK=\aclk, D=$0\w_pending[0:0], Q=\w_pending
+Replacing axi4lite_regs.$procdff$2146 ($dff): CLK=\aclk, D=$0\wdata_hold[31:0], Q=\wdata_hold
+Replacing axi4lite_regs.$procdff$2147 ($dff): CLK=\aclk, D=$0\wstrb_hold[3:0], Q=\wstrb_hold
 
 6. Executing OPT_CLEAN pass (remove unused cells and wires).
 Finding unused cells or wires in module \axi4lite_formal..
+Finding unused cells or wires in module \axi4lite_functional_properties..
 Finding unused cells or wires in module \axi4lite_properties..
 Finding unused cells or wires in module \axi4lite_regs..
-Removed 70 unused cells and 100 unused wires.
-<suppressed ~73 debug messages>
+Removed 193 unused cells and 242 unused wires.
+<suppressed ~197 debug messages>
 
 7. Executing FORMALFF pass.
 
 8. Executing OPT_CLEAN pass (remove unused cells and wires).
 Finding unused cells or wires in module \axi4lite_formal..
+Finding unused cells or wires in module \axi4lite_functional_properties..
 Finding unused cells or wires in module \axi4lite_properties..
 Finding unused cells or wires in module \axi4lite_regs..
-Removed 54 unused cells and 54 unused wires.
-<suppressed ~56 debug messages>
+Removed 357 unused cells and 357 unused wires.
+<suppressed ~360 debug messages>
 
 9. Executing CHECK pass (checking for obvious problems).
 Checking module axi4lite_formal...
+Checking module axi4lite_functional_properties...
 Checking module axi4lite_properties...
 Checking module axi4lite_regs...
 Found and reported 0 problems.
@@ -84,8 +107,9 @@ Found and reported 0 problems.
 11.1. Executing OPT_EXPR pass (perform const folding).
 Optimizing module axi4lite_formal.
 <suppressed ~3 debug messages>
+Optimizing module axi4lite_functional_properties.
 Optimizing module axi4lite_properties.
-<suppressed ~17 debug messages>
+<suppressed ~23 debug messages>
 Optimizing module axi4lite_regs.
 
 11.2. Executing OPT_MERGE pass (detect identical cells).
@@ -97,45 +121,55 @@ Finding duplicate cells in `\axi4lite_formal'.
 Computing hashes of 37 cells of `\axi4lite_formal'.
 Finding duplicate cells in `\axi4lite_formal'.
 <suppressed ~27 debug messages>
+Finding identical cells in module `\axi4lite_functional_properties'.
+Computing hashes of 135 cells of `\axi4lite_functional_properties'.
+Finding duplicate cells in `\axi4lite_functional_properties'.
+Computing hashes of 122 cells of `\axi4lite_functional_properties'.
+Finding duplicate cells in `\axi4lite_functional_properties'.
+Computing hashes of 109 cells of `\axi4lite_functional_properties'.
+Finding duplicate cells in `\axi4lite_functional_properties'.
+<suppressed ~78 debug messages>
 Finding identical cells in module `\axi4lite_properties'.
-Computing hashes of 199 cells of `\axi4lite_properties'.
+Computing hashes of 298 cells of `\axi4lite_properties'.
 Finding duplicate cells in `\axi4lite_properties'.
-Computing hashes of 156 cells of `\axi4lite_properties'.
+Computing hashes of 238 cells of `\axi4lite_properties'.
 Finding duplicate cells in `\axi4lite_properties'.
-Computing hashes of 126 cells of `\axi4lite_properties'.
+Computing hashes of 197 cells of `\axi4lite_properties'.
 Finding duplicate cells in `\axi4lite_properties'.
-Computing hashes of 113 cells of `\axi4lite_properties'.
+Computing hashes of 178 cells of `\axi4lite_properties'.
 Finding duplicate cells in `\axi4lite_properties'.
-<suppressed ~258 debug messages>
+<suppressed ~360 debug messages>
 Finding identical cells in module `\axi4lite_regs'.
-Computing hashes of 187 cells of `\axi4lite_regs'.
+Computing hashes of 188 cells of `\axi4lite_regs'.
 Finding duplicate cells in `\axi4lite_regs'.
-Computing hashes of 174 cells of `\axi4lite_regs'.
+Computing hashes of 175 cells of `\axi4lite_regs'.
 Finding duplicate cells in `\axi4lite_regs'.
-Computing hashes of 161 cells of `\axi4lite_regs'.
+Computing hashes of 162 cells of `\axi4lite_regs'.
 Finding duplicate cells in `\axi4lite_regs'.
 <suppressed ~78 debug messages>
-Removed a total of 121 cells.
+Removed a total of 181 cells.
 
 11.3. Executing OPT_DFF pass (perform DFF optimizations).
 
 11.4. Executing OPT_CLEAN pass (remove unused cells and wires).
 Finding unused cells or wires in module \axi4lite_formal..
+Finding unused cells or wires in module \axi4lite_functional_properties..
 Finding unused cells or wires in module \axi4lite_properties..
 Finding unused cells or wires in module \axi4lite_regs..
-Removed 0 unused cells and 141 unused wires.
-<suppressed ~3 debug messages>
+Removed 0 unused cells and 207 unused wires.
+<suppressed ~4 debug messages>
 
 11.5. Finished fast OPT passes.
 
 12. Executing OPT_CLEAN pass (remove unused cells and wires).
 Finding unused cells or wires in module \axi4lite_formal..
+Finding unused cells or wires in module \axi4lite_functional_properties..
 Finding unused cells or wires in module \axi4lite_properties..
 Finding unused cells or wires in module \axi4lite_regs..
 
 13. Executing RTLIL backend.
 Output filename: ../model/design_prep.il
 
-End of script. Logfile hash: c1c682c8f8, time: 0.01s, user: 0.02s, system: 0.00s, MEM: 20.59 MB peak
+End of script. Logfile hash: 3bfa1fcd8d, time: 0.02s, user: 0.03s, system: 0.00s, MEM: 22.25 MB peak
 Yosys 0.67+31 (git sha1 22c15a7ec-dirty, Release, Clang /usr/local/osxcross/target/bin/aarch64-apple-darwin23.5-clang++ 18.1.8)
 Time spent: 39% 4x opt_clean (0 sec), 10% 1x check (0 sec), ...
