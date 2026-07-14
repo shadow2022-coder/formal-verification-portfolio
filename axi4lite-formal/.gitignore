@@ -5,4 +5,8 @@ formal/axi4lite/
 formal/axi4lite_prove/
 formal/axi4lite_cover/
 formal/axi4lite_assumption_audit/
+formal/axi4lite_bug_*/formal/axi4lite/
+formal/axi4lite_prove/
+formal/axi4lite_cover/
+formal/axi4lite_assumption_audit/
 formal/axi4lite_bug_*/
