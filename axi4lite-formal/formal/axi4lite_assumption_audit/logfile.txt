@@ -1,0 +1,46 @@
+SBY 17:43:53 [axi4lite_assumption_audit] Removing directory '/Users/harsha/Desktop/untitled folder 2/axi4lite-formal/formal/axi4lite_assumption_audit'.
+SBY 17:43:53 [axi4lite_assumption_audit] Copy '/Users/harsha/Desktop/untitled folder 2/axi4lite-formal/formal/axi4lite_functional.sv' to '/Users/harsha/Desktop/untitled folder 2/axi4lite-formal/formal/axi4lite_assumption_audit/src/axi4lite_functional.sv'.
+SBY 17:43:53 [axi4lite_assumption_audit] Copy '/Users/harsha/Desktop/untitled folder 2/axi4lite-formal/formal/../rtl/axi4lite_regs.sv' to '/Users/harsha/Desktop/untitled folder 2/axi4lite-formal/formal/axi4lite_assumption_audit/src/axi4lite_regs.sv'.
+SBY 17:43:53 [axi4lite_assumption_audit] Copy '/Users/harsha/Desktop/untitled folder 2/axi4lite-formal/formal/axi4lite_properties.sv' to '/Users/harsha/Desktop/untitled folder 2/axi4lite-formal/formal/axi4lite_assumption_audit/src/axi4lite_properties.sv'.
+SBY 17:43:53 [axi4lite_assumption_audit] Copy '/Users/harsha/Desktop/untitled folder 2/axi4lite-formal/formal/axi4lite_assumption_audit.sv' to '/Users/harsha/Desktop/untitled folder 2/axi4lite-formal/formal/axi4lite_assumption_audit/src/axi4lite_assumption_audit.sv'.
+SBY 17:43:53 [axi4lite_assumption_audit] Copy '/Users/harsha/Desktop/untitled folder 2/axi4lite-formal/formal/axi4lite_formal.sv' to '/Users/harsha/Desktop/untitled folder 2/axi4lite-formal/formal/axi4lite_assumption_audit/src/axi4lite_formal.sv'.
+SBY 17:43:53 [axi4lite_assumption_audit] engine_0: smtbmc boolector
+SBY 17:43:53 [axi4lite_assumption_audit] base: starting process "cd axi4lite_assumption_audit/src; yosys -ql ../model/design.log ../model/design.ys"
+SBY 17:43:53 [axi4lite_assumption_audit] base: finished (returncode=0)
+SBY 17:43:53 [axi4lite_assumption_audit] prep: starting process "cd axi4lite_assumption_audit/model; yosys -ql design_prep.log design_prep.ys"
+SBY 17:43:53 [axi4lite_assumption_audit] prep: finished (returncode=0)
+SBY 17:43:53 [axi4lite_assumption_audit] smt2: starting process "cd axi4lite_assumption_audit/model; yosys -ql design_smt2.log design_smt2.ys"
+SBY 17:43:53 [axi4lite_assumption_audit] smt2: finished (returncode=0)
+SBY 17:43:53 [axi4lite_assumption_audit] engine_0: starting process "cd axi4lite_assumption_audit; yosys-smtbmc -s boolector --presat --unroll --noprogress -t 15  --append 0 --dump-vcd engine_0/trace.vcd --dump-yw engine_0/trace.yw --dump-vlogtb engine_0/trace_tb.v --dump-smtc engine_0/trace.smtc model/design_smt2.smt2"
+SBY 17:43:53 [axi4lite_assumption_audit] engine_0: ##   0:00:00  Solver: boolector
+SBY 17:43:53 [axi4lite_assumption_audit] engine_0: ##   0:00:00  Checking assumptions in step 0..
+SBY 17:43:53 [axi4lite_assumption_audit] engine_0: ##   0:00:00  Checking assertions in step 0..
+SBY 17:43:53 [axi4lite_assumption_audit] engine_0: ##   0:00:00  Checking assumptions in step 1..
+SBY 17:43:53 [axi4lite_assumption_audit] engine_0: ##   0:00:00  Checking assertions in step 1..
+SBY 17:43:53 [axi4lite_assumption_audit] engine_0: ##   0:00:00  Checking assumptions in step 2..
+SBY 17:43:53 [axi4lite_assumption_audit] engine_0: ##   0:00:00  Checking assertions in step 2..
+SBY 17:43:53 [axi4lite_assumption_audit] engine_0: ##   0:00:00  Checking assumptions in step 3..
+SBY 17:43:53 [axi4lite_assumption_audit] engine_0: ##   0:00:00  Checking assertions in step 3..
+SBY 17:43:53 [axi4lite_assumption_audit] engine_0: ##   0:00:00  Checking assumptions in step 4..
+SBY 17:43:53 [axi4lite_assumption_audit] engine_0: ##   0:00:00  Checking assertions in step 4..
+SBY 17:43:53 [axi4lite_assumption_audit] engine_0: ##   0:00:00  Checking assumptions in step 5..
+SBY 17:43:53 [axi4lite_assumption_audit] engine_0: ##   0:00:00  Checking assertions in step 5..
+SBY 17:43:53 [axi4lite_assumption_audit] engine_0: ##   0:00:00  Checking assumptions in step 6..
+SBY 17:43:53 [axi4lite_assumption_audit] engine_0: ##   0:00:00  Checking assertions in step 6..
+SBY 17:43:53 [axi4lite_assumption_audit] engine_0: ##   0:00:00  Checking assumptions in step 7..
+SBY 17:43:53 [axi4lite_assumption_audit] engine_0: ##   0:00:00  Checking assertions in step 7..
+SBY 17:43:53 [axi4lite_assumption_audit] engine_0: ##   0:00:00  BMC failed!
+SBY 17:43:53 [axi4lite_assumption_audit] engine_0: ##   0:00:00  Assert failed in axi4lite_formal.assumption_audit: axi4lite_assumption_audit.sv:38.17-38.38 (_witness_.check_assert_axi4lite_assumption_audit_sv_38_66)
+SBY 17:43:53 [axi4lite_assumption_audit] engine_0: ##   0:00:00  Writing trace to VCD file: engine_0/trace.vcd
+SBY 17:43:53 [axi4lite_assumption_audit] engine_0: ##   0:00:00  Writing trace to Verilog testbench: engine_0/trace_tb.v
+SBY 17:43:54 [axi4lite_assumption_audit] engine_0: ##   0:00:00  Writing trace to constraints file: engine_0/trace.smtc
+SBY 17:43:54 [axi4lite_assumption_audit] engine_0: ##   0:00:00  Writing trace to Yosys witness file: engine_0/trace.yw
+SBY 17:43:54 [axi4lite_assumption_audit] engine_0: ##   0:00:00  Status: failed
+SBY 17:43:54 [axi4lite_assumption_audit] engine_0: finished (returncode=1)
+SBY 17:43:54 [axi4lite_assumption_audit] engine_0: Status returned by engine: FAIL
+SBY 17:43:54 [axi4lite_assumption_audit] summary: Elapsed clock time [H:MM:SS (secs)]: 0:00:00 (0)
+SBY 17:43:54 [axi4lite_assumption_audit] summary: Elapsed process time [H:MM:SS (secs)]: 0:00:00 (0)
+SBY 17:43:54 [axi4lite_assumption_audit] summary: engine_0 (smtbmc boolector) returned FAIL
+SBY 17:43:54 [axi4lite_assumption_audit] summary: counterexample trace: axi4lite_assumption_audit/engine_0/trace.vcd
+SBY 17:43:54 [axi4lite_assumption_audit] summary:   failed assertion axi4lite_formal.assumption_audit._witness_.check_assert_axi4lite_assumption_audit_sv_38_66 at axi4lite_assumption_audit.sv:38.17-38.38 step 7
+SBY 17:43:54 [axi4lite_assumption_audit] DONE (FAIL, rc=2)

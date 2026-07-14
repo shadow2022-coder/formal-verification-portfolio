@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+<testsuite timestamp="2026-07-14T17:43:54" hostname="Harshas-MacBook-Air.local" package="axi4lite_assumption_audit" id="0" name="default" tests="68" errors="0" failures="2" time="0" skipped="67">
+<properties>
+<property name="os" value="Darwin"/>
+<property name="expect" value="PASS"/>
+<property name="status" value="FAIL"/>
+</properties>
+<testcase classname="default" name="build execution" time="0">
+<failure type="FAIL" message="Task returned status FAIL." />
+</testcase>
+<testcase classname="default" name="Property ASSERT in axi4lite_formal at axi4lite_formal.sv:101.13-101.34" time="0" type="ASSERT" location="axi4lite_formal.sv:101.13-101.34" id="_witness_.check_assert_axi4lite_formal_sv_101_31">
+<skipped />
+</testcase>
+<testcase classname="default" name="Property ASSERT in axi4lite_formal at axi4lite_formal.sv:102.13-102.34" time="0" type="ASSERT" location="axi4lite_formal.sv:102.13-102.34" id="_witness_.check_assert_axi4lite_formal_sv_102_33">
+<skipped />
+</testcase>
+<testcase classname="default" name="Property COVER in axi4lite_formal at axi4lite_formal.sv:106.9-106.39" time="0" type="COVER" location="axi4lite_formal.sv:106.9-106.39" id="_witness_.check_cover_axi4lite_formal_sv_106_35">
+<skipped />
+</testcase>
+<testcase classname="default" name="Property ASSERT in axi4lite_formal/dut/functional_properties at axi4lite_functional.sv:228.13-228.53" time="0" type="ASSERT" location="axi4lite_functional.sv:228.13-228.53" id="_witness_.check_assert_axi4lite_functional_sv_228_371">
+<skipped />
+</testcase>
+<testcase classname="default" name="Property ASSERT in axi4lite_formal/dut/functional_properties at axi4lite_functional.sv:229.13-229.52" time="0" type="ASSERT" location="axi4lite_functional.sv:229.13-229.52" id="_witness_.check_assert_axi4lite_functional_sv_229_373">
+<skipped />
+</testcase>
+<testcase classname="default" name="Property ASSERT in axi4lite_formal/dut/functional_properties at axi4lite_functional.sv:230.13-230.51" time="0" type="ASSERT" location="axi4lite_functional.sv:230.13-230.51" id="_witness_.check_assert_axi4lite_functional_sv_230_375">
+<skipped />
+</testcase>
+<testcase classname="default" name="Property ASSERT in axi4lite_formal/dut/functional_properties at axi4lite_functional.sv:231.13-231.51" time="0" type="ASSERT" location="axi4lite_functional.sv:231.13-231.51" id="_witness_.check_assert_axi4lite_functional_sv_231_377">
+<skipped />
+</testcase>
+<testcase classname="default" name="Property ASSERT in axi4lite_formal/dut/functional_properties at axi4lite_functional.sv:236.21-236.52" time="0" type="ASSERT" location="axi4lite_functional.sv:236.21-236.52" id="_witness_.check_assert_axi4lite_functional_sv_236_382">
+<skipped />
+</testcase>
+<testcase classname="default" name="Property ASSERT in axi4lite_formal/dut/functional_properties at axi4lite_functional.sv:238.21-238.54" time="0" type="ASSERT" location="axi4lite_functional.sv:238.21-238.54" id="_witness_.check_assert_axi4lite_functional_sv_238_384">
+<skipped />
+</testcase>
+<testcase classname="default" name="Property ASSERT in axi4lite_formal/dut/functional_properties at axi4lite_functional.sv:243.17-243.44" time="0" type="ASSERT" location="axi4lite_functional.sv:243.17-243.44" id="_witness_.check_assert_axi4lite_functional_sv_243_386">
+<skipped />
+</testcase>
+<testcase classname="default" name="Property ASSERT in axi4lite_formal/dut/functional_properties at axi4lite_functional.sv:244.17-244.58" time="0" type="ASSERT" location="axi4lite_functional.sv:244.17-244.58" id="_witness_.check_assert_axi4lite_functional_sv_244_387">
+<skipped />
+</testcase>
+<testcase classname="default" name="Property ASSERT in axi4lite_formal/dut/functional_properties at axi4lite_functional.sv:245.17-245.58" time="0" type="ASSERT" location="axi4lite_functional.sv:245.17-245.58" id="_witness_.check_assert_axi4lite_functional_sv_245_389">
+<skipped />
+</testcase>
+<testcase classname="default" name="Property ASSERT in axi4lite_formal/dut/functional_properties at axi4lite_functional.sv:249.17-249.37" time="0" type="ASSERT" location="axi4lite_functional.sv:249.17-249.37" id="_witness_.check_assert_axi4lite_functional_sv_249_391">
+<skipped />
+</testcase>
+<testcase classname="default" name="Property ASSERT in axi4lite_formal/dut/functional_properties at axi4lite_functional.sv:254.13-254.53" time="0" type="ASSERT" location="axi4lite_functional.sv:254.13-254.53" id="_witness_.check_assert_axi4lite_functional_sv_254_394">
+<skipped />
+</testcase>
+<testcase classname="default" name="Property ASSERT in axi4lite_formal/dut/functional_properties at axi4lite_functional.sv:255.13-255.53" time="0" type="ASSERT" location="axi4lite_functional.sv:255.13-255.53" id="_witness_.check_assert_axi4lite_functional_sv_255_396">
+<skipped />
+</testcase>
+<testcase classname="default" name="Property ASSERT in axi4lite_formal/dut/functional_properties at axi4lite_functional.sv:256.13-256.53" time="0" type="ASSERT" location="axi4lite_functional.sv:256.13-256.53" id="_witness_.check_assert_axi4lite_functional_sv_256_398">
+<skipped />
+</testcase>
+<testcase classname="default" name="Property ASSERT in axi4lite_formal/dut/functional_properties at axi4lite_functional.sv:257.13-257.53" time="0" type="ASSERT" location="axi4lite_functional.sv:257.13-257.53" id="_witness_.check_assert_axi4lite_functional_sv_257_400">
+<skipped />
+</testcase>
+<testcase classname="default" name="Property ASSERT in axi4lite_formal/dut/functional_properties at axi4lite_functional.sv:259.13-259.34" time="0" type="ASSERT" location="axi4lite_functional.sv:259.13-259.34" id="_witness_.check_assert_axi4lite_functional_sv_259_402">
+<skipped />
+</testcase>
+<testcase classname="default" name="Property ASSERT in axi4lite_formal/dut/functional_properties at axi4lite_functional.sv:260.13-260.34" time="0" type="ASSERT" location="axi4lite_functional.sv:260.13-260.34" id="_witness_.check_assert_axi4lite_functional_sv_260_404">
+<skipped />
+</testcase>
+<testcase classname="default" name="Property ASSERT in axi4lite_formal/properties at axi4lite_properties.sv:139.21-139.41" time="0" type="ASSERT" location="axi4lite_properties.sv:139.21-139.41" id="_witness_.check_assert_axi4lite_properties_sv_139_101">
+<skipped />
+</testcase>
+<testcase classname="default" name="Property ASSERT in axi4lite_formal/properties at axi4lite_properties.sv:140.21-140.62" time="0" type="ASSERT" location="axi4lite_properties.sv:140.21-140.62" id="_witness_.check_assert_axi4lite_properties_sv_140_102">
+<skipped />
+</testcase>
+<testcase classname="default" name="Property ASSERT in axi4lite_formal/properties at axi4lite_properties.sv:145.21-145.41" time="0" type="ASSERT" location="axi4lite_properties.sv:145.21-145.41" id="_witness_.check_assert_axi4lite_properties_sv_145_104">
+<skipped />
+</testcase>
+<testcase classname="default" name="Property ASSERT in axi4lite_formal/properties at axi4lite_properties.sv:146.21-146.62" time="0" type="ASSERT" location="axi4lite_properties.sv:146.21-146.62" id="_witness_.check_assert_axi4lite_properties_sv_146_105">
+<skipped />
+</testcase>
+<testcase classname="default" name="Property ASSERT in axi4lite_formal/properties at axi4lite_properties.sv:147.21-147.62" time="0" type="ASSERT" location="axi4lite_properties.sv:147.21-147.62" id="_witness_.check_assert_axi4lite_properties_sv_147_107">
+<skipped />
+</testcase>
+<testcase classname="default" name="Property ASSERT in axi4lite_formal/properties at axi4lite_properties.sv:159.13-159.41" time="0" type="ASSERT" location="axi4lite_properties.sv:159.13-159.41" id="_witness_.check_assert_axi4lite_properties_sv_159_109">
+<skipped />
+</testcase>
+<testcase classname="default" name="Property ASSERT in axi4lite_formal/properties at axi4lite_properties.sv:162.13-162.65" time="0" type="ASSERT" location="axi4lite_properties.sv:162.13-162.65" id="_witness_.check_assert_axi4lite_properties_sv_162_112">
+<skipped />
+</testcase>
+<testcase classname="default" name="Property ASSERT in axi4lite_formal/properties at axi4lite_properties.sv:166.17-166.33" time="0" type="ASSERT" location="axi4lite_properties.sv:166.17-166.33" id="_witness_.check_assert_axi4lite_properties_sv_166_116">
+<skipped />
+</testcase>
+<testcase classname="default" name="Property ASSERT in axi4lite_formal/properties at axi4lite_properties.sv:170.17-170.32" time="0" type="ASSERT" location="axi4lite_properties.sv:170.17-170.32" id="_witness_.check_assert_axi4lite_properties_sv_170_118">
+<skipped />
+</testcase>
+<testcase classname="default" name="Property ASSERT in axi4lite_formal/properties at axi4lite_properties.sv:174.17-174.33" time="0" type="ASSERT" location="axi4lite_properties.sv:174.17-174.33" id="_witness_.check_assert_axi4lite_properties_sv_174_120">
+<skipped />
+</testcase>
+<testcase classname="default" name="Property ASSERT in axi4lite_formal/properties at axi4lite_properties.sv:175.17-175.32" time="0" type="ASSERT" location="axi4lite_properties.sv:175.17-175.32" id="_witness_.check_assert_axi4lite_properties_sv_175_122">
+<skipped />
+</testcase>
+<testcase classname="default" name="Property ASSERT in axi4lite_formal/properties at axi4lite_properties.sv:187.17-187.43" time="0" type="ASSERT" location="axi4lite_properties.sv:187.17-187.43" id="_witness_.check_assert_axi4lite_properties_sv_187_124">
+<skipped />
+</testcase>
+<testcase classname="default" name="Property ASSERT in axi4lite_formal/properties at axi4lite_properties.sv:193.17-193.44" time="0" type="ASSERT" location="axi4lite_properties.sv:193.17-193.44" id="_witness_.check_assert_axi4lite_properties_sv_193_125">
+<skipped />
+</testcase>
+<testcase classname="default" name="Property ASSERT in axi4lite_formal/properties at axi4lite_properties.sv:201.21-201.37" time="0" type="ASSERT" location="axi4lite_properties.sv:201.21-201.37" id="_witness_.check_assert_axi4lite_properties_sv_201_127">
+<skipped />
+</testcase>
+<testcase classname="default" name="Property ASSERT in axi4lite_formal/properties at axi4lite_properties.sv:202.21-202.48" time="0" type="ASSERT" location="axi4lite_properties.sv:202.21-202.48" id="_witness_.check_assert_axi4lite_properties_sv_202_129">
+<skipped />
+</testcase>
+<testcase classname="default" name="Property ASSERT in axi4lite_formal/properties at axi4lite_properties.sv:207.21-207.36" time="0" type="ASSERT" location="axi4lite_properties.sv:207.21-207.36" id="_witness_.check_assert_axi4lite_properties_sv_207_131">
+<skipped />
+</testcase>
+<testcase classname="default" name="Property ASSERT in axi4lite_formal/properties at axi4lite_properties.sv:208.21-208.48" time="0" type="ASSERT" location="axi4lite_properties.sv:208.21-208.48" id="_witness_.check_assert_axi4lite_properties_sv_208_133">
+<skipped />
+</testcase>
+<testcase classname="default" name="Property ASSERT in axi4lite_formal/properties at axi4lite_properties.sv:215.17-215.43" time="0" type="ASSERT" location="axi4lite_properties.sv:215.17-215.43" id="_witness_.check_assert_axi4lite_properties_sv_215_135">
+<skipped />
+</testcase>
+<testcase classname="default" name="Property ASSERT in axi4lite_formal/properties at axi4lite_properties.sv:219.17-222.18" time="0" type="ASSERT" location="axi4lite_properties.sv:219.17-222.18" id="_witness_.check_assert_axi4lite_properties_sv_219_136">
+<skipped />
+</testcase>
+<testcase classname="default" name="Property ASSERT in axi4lite_formal/properties at axi4lite_properties.sv:234.21-234.46" time="0" type="ASSERT" location="axi4lite_properties.sv:234.21-234.46" id="_witness_.check_assert_axi4lite_properties_sv_234_140">
+<skipped />
+</testcase>
+<testcase classname="default" name="Property ASSERT in axi4lite_formal/properties at axi4lite_properties.sv:247.17-247.33" time="0" type="ASSERT" location="axi4lite_properties.sv:247.17-247.33" id="_witness_.check_assert_axi4lite_properties_sv_247_142">
+<skipped />
+</testcase>
+<testcase classname="default" name="Property ASSERT in axi4lite_formal/properties at axi4lite_properties.sv:255.17-255.42" time="0" type="ASSERT" location="axi4lite_properties.sv:255.17-255.42" id="_witness_.check_assert_axi4lite_properties_sv_255_144">
+<skipped />
+</testcase>
+<testcase classname="default" name="Property ASSERT in axi4lite_formal/properties at axi4lite_properties.sv:259.17-259.43" time="0" type="ASSERT" location="axi4lite_properties.sv:259.17-259.43" id="_witness_.check_assert_axi4lite_properties_sv_259_145">
+<skipped />
+</testcase>
+<testcase classname="default" name="Property ASSERT in axi4lite_formal/properties at axi4lite_properties.sv:265.17-265.42" time="0" type="ASSERT" location="axi4lite_properties.sv:265.17-265.42" id="_witness_.check_assert_axi4lite_properties_sv_265_147">
+<skipped />
+</testcase>
+<testcase classname="default" name="Property ASSERT in axi4lite_formal/properties at axi4lite_properties.sv:269.17-269.37" time="0" type="ASSERT" location="axi4lite_properties.sv:269.17-269.37" id="_witness_.check_assert_axi4lite_properties_sv_269_148">
+<skipped />
+</testcase>
+<testcase classname="default" name="Property ASSERT in axi4lite_formal/properties at axi4lite_properties.sv:273.17-276.18" time="0" type="ASSERT" location="axi4lite_properties.sv:273.17-276.18" id="_witness_.check_assert_axi4lite_properties_sv_273_149">
+<skipped />
+</testcase>
+<testcase classname="default" name="Property COVER in axi4lite_formal/properties at axi4lite_properties.sv:289.13-289.27" time="0" type="COVER" location="axi4lite_properties.sv:289.13-289.27" id="_witness_.check_cover_axi4lite_properties_sv_289_153">
+<skipped />
+</testcase>
+<testcase classname="default" name="Property COVER in axi4lite_formal/properties at axi4lite_properties.sv:290.13-290.26" time="0" type="COVER" location="axi4lite_properties.sv:290.13-290.26" id="_witness_.check_cover_axi4lite_properties_sv_290_154">
+<skipped />
+</testcase>
+<testcase classname="default" name="Property COVER in axi4lite_formal/properties at axi4lite_properties.sv:291.13-291.26" time="0" type="COVER" location="axi4lite_properties.sv:291.13-291.26" id="_witness_.check_cover_axi4lite_properties_sv_291_155">
+<skipped />
+</testcase>
+<testcase classname="default" name="Property COVER in axi4lite_formal/properties at axi4lite_properties.sv:292.13-292.27" time="0" type="COVER" location="axi4lite_properties.sv:292.13-292.27" id="_witness_.check_cover_axi4lite_properties_sv_292_156">
+<skipped />
+</testcase>
+<testcase classname="default" name="Property COVER in axi4lite_formal/properties at axi4lite_properties.sv:293.13-293.26" time="0" type="COVER" location="axi4lite_properties.sv:293.13-293.26" id="_witness_.check_cover_axi4lite_properties_sv_293_157">
+<skipped />
+</testcase>
+<testcase classname="default" name="Property COVER in axi4lite_formal/properties at axi4lite_properties.sv:296.13-296.51" time="0" type="COVER" location="axi4lite_properties.sv:296.13-296.51" id="_witness_.check_cover_axi4lite_properties_sv_296_158">
+<skipped />
+</testcase>
+<testcase classname="default" name="Property COVER in axi4lite_formal/properties at axi4lite_properties.sv:297.13-297.50" time="0" type="COVER" location="axi4lite_properties.sv:297.13-297.50" id="_witness_.check_cover_axi4lite_properties_sv_297_161">
+<skipped />
+</testcase>
+<testcase classname="default" name="Property COVER in axi4lite_formal/properties at axi4lite_properties.sv:298.13-298.50" time="0" type="COVER" location="axi4lite_properties.sv:298.13-298.50" id="_witness_.check_cover_axi4lite_properties_sv_298_164">
+<skipped />
+</testcase>
+<testcase classname="default" name="Property COVER in axi4lite_formal/properties at axi4lite_properties.sv:299.13-299.51" time="0" type="COVER" location="axi4lite_properties.sv:299.13-299.51" id="_witness_.check_cover_axi4lite_properties_sv_299_167">
+<skipped />
+</testcase>
+<testcase classname="default" name="Property COVER in axi4lite_formal/properties at axi4lite_properties.sv:300.13-300.50" time="0" type="COVER" location="axi4lite_properties.sv:300.13-300.50" id="_witness_.check_cover_axi4lite_properties_sv_300_170">
+<skipped />
+</testcase>
+<testcase classname="default" name="Property COVER in axi4lite_formal/properties at axi4lite_properties.sv:303.13-303.37" time="0" type="COVER" location="axi4lite_properties.sv:303.13-303.37" id="_witness_.check_cover_axi4lite_properties_sv_303_173">
+<skipped />
+</testcase>
+<testcase classname="default" name="Property COVER in axi4lite_formal/properties at axi4lite_properties.sv:304.13-304.37" time="0" type="COVER" location="axi4lite_properties.sv:304.13-304.37" id="_witness_.check_cover_axi4lite_properties_sv_304_175">
+<skipped />
+</testcase>
+<testcase classname="default" name="Property COVER in axi4lite_formal/properties at axi4lite_properties.sv:305.13-305.37" time="0" type="COVER" location="axi4lite_properties.sv:305.13-305.37" id="_witness_.check_cover_axi4lite_properties_sv_305_177">
+<skipped />
+</testcase>
+<testcase classname="default" name="Property COVER in axi4lite_formal/properties at axi4lite_properties.sv:308.13-312.14" time="0" type="COVER" location="axi4lite_properties.sv:308.13-312.14" id="_witness_.check_cover_axi4lite_properties_sv_308_179">
+<skipped />
+</testcase>
+<testcase classname="default" name="Property COVER in axi4lite_formal/properties at axi4lite_properties.sv:315.13-315.57" time="0" type="COVER" location="axi4lite_properties.sv:315.13-315.57" id="_witness_.check_cover_axi4lite_properties_sv_315_184">
+<skipped />
+</testcase>
+<testcase classname="default" name="Property COVER in axi4lite_formal/properties at axi4lite_properties.sv:316.13-316.57" time="0" type="COVER" location="axi4lite_properties.sv:316.13-316.57" id="_witness_.check_cover_axi4lite_properties_sv_316_187">
+<skipped />
+</testcase>
+<testcase classname="default" name="Property ASSERT in axi4lite_formal/assumption_audit at axi4lite_assumption_audit.sv:27.17-27.38" time="0" type="ASSERT" location="axi4lite_assumption_audit.sv:27.17-27.38" id="_witness_.check_assert_axi4lite_assumption_audit_sv_27_58">
+<skipped />
+</testcase>
+<testcase classname="default" name="Property ASSERT in axi4lite_formal/assumption_audit at axi4lite_assumption_audit.sv:28.17-28.60" time="0" type="ASSERT" location="axi4lite_assumption_audit.sv:28.17-28.60" id="_witness_.check_assert_axi4lite_assumption_audit_sv_28_59">
+<skipped />
+</testcase>
+<testcase classname="default" name="Property ASSERT in axi4lite_formal/assumption_audit at axi4lite_assumption_audit.sv:32.17-32.37" time="0" type="ASSERT" location="axi4lite_assumption_audit.sv:32.17-32.37" id="_witness_.check_assert_axi4lite_assumption_audit_sv_32_61">
+<skipped />
+</testcase>
+<testcase classname="default" name="Property ASSERT in axi4lite_formal/assumption_audit at axi4lite_assumption_audit.sv:33.17-33.58" time="0" type="ASSERT" location="axi4lite_assumption_audit.sv:33.17-33.58" id="_witness_.check_assert_axi4lite_assumption_audit_sv_33_62">
+<skipped />
+</testcase>
+<testcase classname="default" name="Property ASSERT in axi4lite_formal/assumption_audit at axi4lite_assumption_audit.sv:34.17-34.58" time="0" type="ASSERT" location="axi4lite_assumption_audit.sv:34.17-34.58" id="_witness_.check_assert_axi4lite_assumption_audit_sv_34_64">
+<skipped />
+</testcase>
+<testcase classname="default" name="Property ASSERT in axi4lite_formal/assumption_audit at axi4lite_assumption_audit.sv:38.17-38.38" time="0" type="ASSERT" location="axi4lite_assumption_audit.sv:38.17-38.38" id="_witness_.check_assert_axi4lite_assumption_audit_sv_38_66" tracefile="engine_0/trace.vcd">
+<failure type="ASSERT" message="Property ASSERT in axi4lite_formal/assumption_audit at axi4lite_assumption_audit.sv:38.17-38.38 failed. Trace file: engine_0/trace.vcd" />
+</testcase>
+<testcase classname="default" name="Property ASSERT in axi4lite_formal/assumption_audit at axi4lite_assumption_audit.sv:39.17-39.60" time="0" type="ASSERT" location="axi4lite_assumption_audit.sv:39.17-39.60" id="_witness_.check_assert_axi4lite_assumption_audit_sv_39_67">
+<skipped />
+</testcase>
+<system-out>SBY 17:43:53 [axi4lite_assumption_audit] Removing directory '/Users/harsha/Desktop/untitled folder 2/axi4lite-formal/formal/axi4lite_assumption_audit'.
+SBY 17:43:53 [axi4lite_assumption_audit] Copy '/Users/harsha/Desktop/untitled folder 2/axi4lite-formal/formal/axi4lite_functional.sv' to '/Users/harsha/Desktop/untitled folder 2/axi4lite-formal/formal/axi4lite_assumption_audit/src/axi4lite_functional.sv'.
+SBY 17:43:53 [axi4lite_assumption_audit] Copy '/Users/harsha/Desktop/untitled folder 2/axi4lite-formal/formal/../rtl/axi4lite_regs.sv' to '/Users/harsha/Desktop/untitled folder 2/axi4lite-formal/formal/axi4lite_assumption_audit/src/axi4lite_regs.sv'.
+SBY 17:43:53 [axi4lite_assumption_audit] Copy '/Users/harsha/Desktop/untitled folder 2/axi4lite-formal/formal/axi4lite_properties.sv' to '/Users/harsha/Desktop/untitled folder 2/axi4lite-formal/formal/axi4lite_assumption_audit/src/axi4lite_properties.sv'.
+SBY 17:43:53 [axi4lite_assumption_audit] Copy '/Users/harsha/Desktop/untitled folder 2/axi4lite-formal/formal/axi4lite_assumption_audit.sv' to '/Users/harsha/Desktop/untitled folder 2/axi4lite-formal/formal/axi4lite_assumption_audit/src/axi4lite_assumption_audit.sv'.
+SBY 17:43:53 [axi4lite_assumption_audit] Copy '/Users/harsha/Desktop/untitled folder 2/axi4lite-formal/formal/axi4lite_formal.sv' to '/Users/harsha/Desktop/untitled folder 2/axi4lite-formal/formal/axi4lite_assumption_audit/src/axi4lite_formal.sv'.
+SBY 17:43:53 [axi4lite_assumption_audit] engine_0: smtbmc boolector
+SBY 17:43:53 [axi4lite_assumption_audit] base: starting process &quot;cd axi4lite_assumption_audit/src; yosys -ql ../model/design.log ../model/design.ys&quot;
+SBY 17:43:53 [axi4lite_assumption_audit] base: finished (returncode=0)
+SBY 17:43:53 [axi4lite_assumption_audit] prep: starting process &quot;cd axi4lite_assumption_audit/model; yosys -ql design_prep.log design_prep.ys&quot;
+SBY 17:43:53 [axi4lite_assumption_audit] prep: finished (returncode=0)
+SBY 17:43:53 [axi4lite_assumption_audit] smt2: starting process &quot;cd axi4lite_assumption_audit/model; yosys -ql design_smt2.log design_smt2.ys&quot;
+SBY 17:43:53 [axi4lite_assumption_audit] smt2: finished (returncode=0)
+SBY 17:43:53 [axi4lite_assumption_audit] engine_0: starting process &quot;cd axi4lite_assumption_audit; yosys-smtbmc -s boolector --presat --unroll --noprogress -t 15  --append 0 --dump-vcd engine_0/trace.vcd --dump-yw engine_0/trace.yw --dump-vlogtb engine_0/trace_tb.v --dump-smtc engine_0/trace.smtc model/design_smt2.smt2&quot;
+SBY 17:43:53 [axi4lite_assumption_audit] engine_0: ##   0:00:00  Solver: boolector
+SBY 17:43:53 [axi4lite_assumption_audit] engine_0: ##   0:00:00  Checking assumptions in step 0..
+SBY 17:43:53 [axi4lite_assumption_audit] engine_0: ##   0:00:00  Checking assertions in step 0..
+SBY 17:43:53 [axi4lite_assumption_audit] engine_0: ##   0:00:00  Checking assumptions in step 1..
+SBY 17:43:53 [axi4lite_assumption_audit] engine_0: ##   0:00:00  Checking assertions in step 1..
+SBY 17:43:53 [axi4lite_assumption_audit] engine_0: ##   0:00:00  Checking assumptions in step 2..
+SBY 17:43:53 [axi4lite_assumption_audit] engine_0: ##   0:00:00  Checking assertions in step 2..
+SBY 17:43:53 [axi4lite_assumption_audit] engine_0: ##   0:00:00  Checking assumptions in step 3..
+SBY 17:43:53 [axi4lite_assumption_audit] engine_0: ##   0:00:00  Checking assertions in step 3..
+SBY 17:43:53 [axi4lite_assumption_audit] engine_0: ##   0:00:00  Checking assumptions in step 4..
+SBY 17:43:53 [axi4lite_assumption_audit] engine_0: ##   0:00:00  Checking assertions in step 4..
+SBY 17:43:53 [axi4lite_assumption_audit] engine_0: ##   0:00:00  Checking assumptions in step 5..
+SBY 17:43:53 [axi4lite_assumption_audit] engine_0: ##   0:00:00  Checking assertions in step 5..
+SBY 17:43:53 [axi4lite_assumption_audit] engine_0: ##   0:00:00  Checking assumptions in step 6..
+SBY 17:43:53 [axi4lite_assumption_audit] engine_0: ##   0:00:00  Checking assertions in step 6..
+SBY 17:43:53 [axi4lite_assumption_audit] engine_0: ##   0:00:00  Checking assumptions in step 7..
+SBY 17:43:53 [axi4lite_assumption_audit] engine_0: ##   0:00:00  Checking assertions in step 7..
+SBY 17:43:53 [axi4lite_assumption_audit] engine_0: ##   0:00:00  BMC failed!
+SBY 17:43:53 [axi4lite_assumption_audit] engine_0: ##   0:00:00  Assert failed in axi4lite_formal.assumption_audit: axi4lite_assumption_audit.sv:38.17-38.38 (_witness_.check_assert_axi4lite_assumption_audit_sv_38_66)
+SBY 17:43:53 [axi4lite_assumption_audit] engine_0: ##   0:00:00  Writing trace to VCD file: engine_0/trace.vcd
+SBY 17:43:53 [axi4lite_assumption_audit] engine_0: ##   0:00:00  Writing trace to Verilog testbench: engine_0/trace_tb.v
+SBY 17:43:54 [axi4lite_assumption_audit] engine_0: ##   0:00:00  Writing trace to constraints file: engine_0/trace.smtc
+SBY 17:43:54 [axi4lite_assumption_audit] engine_0: ##   0:00:00  Writing trace to Yosys witness file: engine_0/trace.yw
+SBY 17:43:54 [axi4lite_assumption_audit] engine_0: ##   0:00:00  Status: failed
+SBY 17:43:54 [axi4lite_assumption_audit] engine_0: finished (returncode=1)
+SBY 17:43:54 [axi4lite_assumption_audit] engine_0: Status returned by engine: FAIL
+SBY 17:43:54 [axi4lite_assumption_audit] summary: Elapsed clock time [H:MM:SS (secs)]: 0:00:00 (0)
+SBY 17:43:54 [axi4lite_assumption_audit] summary: Elapsed process time [H:MM:SS (secs)]: 0:00:00 (0)
+SBY 17:43:54 [axi4lite_assumption_audit] summary: engine_0 (smtbmc boolector) returned FAIL
+SBY 17:43:54 [axi4lite_assumption_audit] summary: counterexample trace: axi4lite_assumption_audit/engine_0/trace.vcd
+SBY 17:43:54 [axi4lite_assumption_audit] summary:   failed assertion axi4lite_formal.assumption_audit._witness_.check_assert_axi4lite_assumption_audit_sv_38_66 at axi4lite_assumption_audit.sv:38.17-38.38 step 7
+SBY 17:43:54 [axi4lite_assumption_audit] DONE (FAIL, rc=2)
+</system-out>
+<system-err>
+</system-err>
+</testsuite>
+</testsuites>

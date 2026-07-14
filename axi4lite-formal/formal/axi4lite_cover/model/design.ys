@@ -1,8 +1,0 @@
-# running in axi4lite_cover/src/
-read -formal -D FORMAL -sv axi4lite_functional.sv axi4lite_regs.sv axi4lite_properties.sv axi4lite_formal.sv
-prep -top axi4lite_formal
-
-hierarchy -smtcheck
-rename -witness
-write_jny -no-connections ../model/design.json
-write_rtlil ../model/design.il

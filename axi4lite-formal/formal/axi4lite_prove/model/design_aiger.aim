@@ -1,5 +1,0 @@
-latch 0 0 dut.functional_properties.aclk
-latch 0 0 properties.aclk
-latch 0 0 dut.aclk
-latch 0 0 aclk
-ninitff 1083
