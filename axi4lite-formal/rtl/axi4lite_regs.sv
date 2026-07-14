@@ -246,10 +246,58 @@ module axi4lite_regs #(
     end
 
     // Read path will be implemented next.
-    assign s_axi_arready = 1'b0;
+   /*  assign s_axi_arready = 1'b0;
     assign s_axi_rvalid  = 1'b0;
     assign s_axi_rdata   = '0;
-    assign s_axi_rresp   = AXI_OKAY;
+    assign s_axi_rresp   = AXI_OKAY; */
+    // Accept one read request only when no response is waiting.
+assign s_axi_arready = aresetn && !s_axi_rvalid;
+
+always_ff @(posedge aclk) begin
+    if (!aresetn) begin
+        s_axi_rvalid <= 1'b0;
+        s_axi_rdata  <= '0;
+        s_axi_rresp  <= AXI_OKAY;
+    end else begin
+
+        // Read-address handshake
+        if (s_axi_arvalid && s_axi_arready) begin
+            case (s_axi_araddr)
+                4'h0: begin
+                    s_axi_rdata <= control_reg;
+                    s_axi_rresp <= AXI_OKAY;
+                end
+
+                4'h4: begin
+                    s_axi_rdata <= status_reg;
+                    s_axi_rresp <= AXI_OKAY;
+                end
+
+                4'h8: begin
+                    s_axi_rdata <= data0_reg;
+                    s_axi_rresp <= AXI_OKAY;
+                end
+
+                4'hC: begin
+                    s_axi_rdata <= data1_reg;
+                    s_axi_rresp <= AXI_OKAY;
+                end
+
+                default: begin
+                    s_axi_rdata <= '0;
+                    s_axi_rresp <= AXI_SLVERR;
+                end
+            endcase
+
+            s_axi_rvalid <= 1'b1;
+        end
+
+        // Read-response handshake
+        else if (s_axi_rvalid && s_axi_rready) begin
+            s_axi_rvalid <= 1'b0;
+        end
+    end
+end
 
 endmodule
 /*
