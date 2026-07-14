@@ -1,1 +1,6 @@
 .DS_Store
+axi4lite-formal/formal/axi4lite/
+axi4lite-formal/formal/axi4lite_cover/
+axi4lite-formal/formal/axi4lite_prove/
+axi4lite-formal/formal/axi4lite_assumption_audit/
+axi4lite-formal/formal/axi4lite_bug_*/
