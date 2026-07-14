@@ -296,6 +296,11 @@ always_ff @(posedge aclk) begin
         else if (s_axi_rvalid && s_axi_rready) begin
             s_axi_rvalid <= 1'b0;
         end
+       /* // INTENTIONAL BUG:
+        // Change RDATA while the master is not ready.
+        if (s_axi_rvalid && !s_axi_rready) begin
+            s_axi_rdata <= s_axi_rdata + 32'h1;
+        end */
     end
 end
 

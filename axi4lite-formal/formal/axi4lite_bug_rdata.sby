@@ -1,0 +1,17 @@
+[options]
+multiclock on
+mode bmc
+depth 20
+
+[engines]
+smtbmc boolector
+
+[script]
+read -formal -D FORMAL -sv axi4lite_functional.sv axi4lite_regs.sv axi4lite_properties.sv axi4lite_formal.sv
+prep -top axi4lite_formal
+
+[files]
+axi4lite_functional.sv
+../rtl/axi4lite_regs.sv
+axi4lite_properties.sv
+axi4lite_formal.sv
