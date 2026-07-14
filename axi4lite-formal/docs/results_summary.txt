@@ -1,0 +1,11 @@
+AXI4-Lite Verification Results
+======================================
+Safety proof        : PASS 0 8
+Cover analysis      : PASS 0 0
+Assumption audit    : FAIL 2 0
+Simulation waveform : GENERATED
+
+Expected:
+  Safety proof     : PASS
+  Cover analysis   : PASS
+  Assumption audit : FAIL (intentional)

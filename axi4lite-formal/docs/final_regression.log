@@ -1,0 +1,542 @@
+verilator --lint-only -Wall --Wno-fatal rtl/axi4lite_regs.sv
+%Warning-EOFNEWLINE: rtl/axi4lite_regs.sv:349:4: Missing newline at end of file (POSIX 3.206).
+                                               : ... Suggest add newline.
+  349 | */ 
+      |    ^
+                     ... For warning description see https://verilator.org/warn/EOFNEWLINE?v=5.051
+                     ... Use "/* verilator lint_off EOFNEWLINE */" and lint_on around source to disable this message.
+- V e r i l a t i o n   R e p o r t: Verilator 5.051 devel rev v5.050-62-g3afb7e1a2 (mod)
+- Verilator: Built from 0.043 MB sources in 2 modules, into 0.039 MB in 3 C++ files needing 0.000 MB
+- Verilator: Walltime 0.022 s (elab=0.004, cvt=0.009, bld=0.000); cpu 0.009 s on 1 threads; allocated 11.578 MB
+yosys -p "read_verilog -sv rtl/axi4lite_regs.sv; hierarchy -top axi4lite_regs; proc; check"
+
+ /----------------------------------------------------------------------------\
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |  Copyright (C) 2012 - 2026  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |  Distributed under an ISC-like license, type "license" to see terms        |
+ \----------------------------------------------------------------------------/
+ Yosys 0.67+31 (git sha1 22c15a7ec-dirty, Release, Clang /usr/local/osxcross/target/bin/aarch64-apple-darwin23.5-clang++ 18.1.8)
+
+-- Running command `read_verilog -sv rtl/axi4lite_regs.sv; hierarchy -top axi4lite_regs; proc; check' --
+
+1. Executing Verilog-2005 frontend: rtl/axi4lite_regs.sv
+Parsing SystemVerilog input from `rtl/axi4lite_regs.sv' to AST representation.
+Generating RTLIL representation for module `\axi4lite_regs'.
+Successfully finished Verilog frontend.
+
+2. Executing HIERARCHY pass (managing design hierarchy).
+
+2.1. Analyzing design hierarchy..
+Top module:  \axi4lite_regs
+
+2.2. Analyzing design hierarchy..
+Top module:  \axi4lite_regs
+Removed 0 unused modules.
+
+3. Executing PROC pass (convert processes to netlists).
+
+3.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+3.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Marked 3 switch rules as full_case in process $proc$rtl/axi4lite_regs.sv:256$43 in module axi4lite_regs.
+Marked 3 switch rules as full_case in process $proc$rtl/axi4lite_regs.sv:147$17 in module axi4lite_regs.
+Removed a total of 0 dead cases.
+
+3.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 0 redundant assignments.
+Promoted 4 assignments to connections.
+
+3.4. Executing PROC_INIT pass (extract init attributes).
+
+3.5. Executing PROC_ARST pass (detect async resets in processes).
+
+3.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+<suppressed ~26 debug messages>
+
+3.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `\axi4lite_regs.$proc$rtl/axi4lite_regs.sv:256$43'.
+     1/3: $0\s_axi_rvalid[0:0]
+     2/3: $0\s_axi_rresp[1:0]
+     3/3: $0\s_axi_rdata[31:0]
+Creating decoders for process `\axi4lite_regs.$proc$rtl/axi4lite_regs.sv:147$17'.
+     1/35: $0\data1_reg[31:0] [31:24]
+     2/35: $0\data1_reg[31:0] [23:16]
+     3/35: $0\data1_reg[31:0] [15:8]
+     4/35: $0\data1_reg[31:0] [7:0]
+     5/35: $0\data0_reg[31:0] [23:16]
+     6/35: $0\data0_reg[31:0] [15:8]
+     7/35: $0\data0_reg[31:0] [7:0]
+     8/35: $0\status_reg[31:0] [23:16]
+     9/35: $0\status_reg[31:0] [15:8]
+    10/35: $0\status_reg[31:0] [7:0]
+    11/35: $0\control_reg[31:0] [23:16]
+    12/35: $0\control_reg[31:0] [15:8]
+    13/35: $0\control_reg[31:0] [7:0]
+    14/35: $3$fordecl_block$7.byte_index[31:0]$39
+    15/35: $3$fordecl_block$5.byte_index[31:0]$38
+    16/35: $3$fordecl_block$3.byte_index[31:0]$37
+    17/35: $2$fordecl_block$7.byte_index[31:0]$35
+    18/35: $2$fordecl_block$5.byte_index[31:0]$34
+    19/35: $2$fordecl_block$3.byte_index[31:0]$33
+    20/35: $2$fordecl_block$1.byte_index[31:0]$32
+    21/35: $1$fordecl_block$7.byte_index[31:0]$26
+    22/35: $1$fordecl_block$5.byte_index[31:0]$25
+    23/35: $1$fordecl_block$3.byte_index[31:0]$24
+    24/35: $1$fordecl_block$1.byte_index[31:0]$23
+    25/35: $0\wstrb_hold[3:0]
+    26/35: $0\wdata_hold[31:0]
+    27/35: $0\w_pending[0:0]
+    28/35: $0\awaddr_hold[3:0]
+    29/35: $0\aw_pending[0:0]
+    30/35: $0\data0_reg[31:0] [31:24]
+    31/35: $0\status_reg[31:0] [31:24]
+    32/35: $0\control_reg[31:0] [31:24]
+    33/35: $3$fordecl_block$1.byte_index[31:0]$36
+    34/35: $0\s_axi_bvalid[0:0]
+    35/35: $0\s_axi_bresp[1:0]
+
+3.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+
+3.9. Executing PROC_DFF pass (convert process syncs to FFs).
+Creating register for signal `\axi4lite_regs.\s_axi_rdata' using process `\axi4lite_regs.$proc$rtl/axi4lite_regs.sv:256$43'.
+  created $dff cell `$procdff$408' with positive edge clock.
+Creating register for signal `\axi4lite_regs.\s_axi_rresp' using process `\axi4lite_regs.$proc$rtl/axi4lite_regs.sv:256$43'.
+  created $dff cell `$procdff$409' with positive edge clock.
+Creating register for signal `\axi4lite_regs.\s_axi_rvalid' using process `\axi4lite_regs.$proc$rtl/axi4lite_regs.sv:256$43'.
+  created $dff cell `$procdff$410' with positive edge clock.
+Creating register for signal `\axi4lite_regs.\s_axi_bresp' using process `\axi4lite_regs.$proc$rtl/axi4lite_regs.sv:147$17'.
+  created $dff cell `$procdff$411' with positive edge clock.
+Creating register for signal `\axi4lite_regs.\s_axi_bvalid' using process `\axi4lite_regs.$proc$rtl/axi4lite_regs.sv:147$17'.
+  created $dff cell `$procdff$412' with positive edge clock.
+Creating register for signal `\axi4lite_regs.\control_reg' using process `\axi4lite_regs.$proc$rtl/axi4lite_regs.sv:147$17'.
+  created $dff cell `$procdff$413' with positive edge clock.
+Creating register for signal `\axi4lite_regs.\status_reg' using process `\axi4lite_regs.$proc$rtl/axi4lite_regs.sv:147$17'.
+  created $dff cell `$procdff$414' with positive edge clock.
+Creating register for signal `\axi4lite_regs.\data0_reg' using process `\axi4lite_regs.$proc$rtl/axi4lite_regs.sv:147$17'.
+  created $dff cell `$procdff$415' with positive edge clock.
+Creating register for signal `\axi4lite_regs.\data1_reg' using process `\axi4lite_regs.$proc$rtl/axi4lite_regs.sv:147$17'.
+  created $dff cell `$procdff$416' with positive edge clock.
+Creating register for signal `\axi4lite_regs.\aw_pending' using process `\axi4lite_regs.$proc$rtl/axi4lite_regs.sv:147$17'.
+  created $dff cell `$procdff$417' with positive edge clock.
+Creating register for signal `\axi4lite_regs.\awaddr_hold' using process `\axi4lite_regs.$proc$rtl/axi4lite_regs.sv:147$17'.
+  created $dff cell `$procdff$418' with positive edge clock.
+Creating register for signal `\axi4lite_regs.\w_pending' using process `\axi4lite_regs.$proc$rtl/axi4lite_regs.sv:147$17'.
+  created $dff cell `$procdff$419' with positive edge clock.
+Creating register for signal `\axi4lite_regs.\wdata_hold' using process `\axi4lite_regs.$proc$rtl/axi4lite_regs.sv:147$17'.
+  created $dff cell `$procdff$420' with positive edge clock.
+Creating register for signal `\axi4lite_regs.\wstrb_hold' using process `\axi4lite_regs.$proc$rtl/axi4lite_regs.sv:147$17'.
+  created $dff cell `$procdff$421' with positive edge clock.
+Creating register for signal `\axi4lite_regs.$fordecl_block$1.byte_index' using process `\axi4lite_regs.$proc$rtl/axi4lite_regs.sv:147$17'.
+  created $dff cell `$procdff$422' with positive edge clock.
+Creating register for signal `\axi4lite_regs.$fordecl_block$3.byte_index' using process `\axi4lite_regs.$proc$rtl/axi4lite_regs.sv:147$17'.
+  created $dff cell `$procdff$423' with positive edge clock.
+Creating register for signal `\axi4lite_regs.$fordecl_block$5.byte_index' using process `\axi4lite_regs.$proc$rtl/axi4lite_regs.sv:147$17'.
+  created $dff cell `$procdff$424' with positive edge clock.
+Creating register for signal `\axi4lite_regs.$fordecl_block$7.byte_index' using process `\axi4lite_regs.$proc$rtl/axi4lite_regs.sv:147$17'.
+  created $dff cell `$procdff$425' with positive edge clock.
+
+3.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+3.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Found and cleaned up 4 empty switches in `\axi4lite_regs.$proc$rtl/axi4lite_regs.sv:256$43'.
+Removing empty process `axi4lite_regs.$proc$rtl/axi4lite_regs.sv:256$43'.
+Found and cleaned up 22 empty switches in `\axi4lite_regs.$proc$rtl/axi4lite_regs.sv:147$17'.
+Removing empty process `axi4lite_regs.$proc$rtl/axi4lite_regs.sv:147$17'.
+Cleaned up 26 empty switches.
+
+3.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module axi4lite_regs.
+<suppressed ~46 debug messages>
+
+4. Executing CHECK pass (checking for obvious problems).
+Checking module axi4lite_regs...
+Found and reported 0 problems.
+
+End of script. Logfile hash: 784f43a3ae, time: 0.02s, user: 0.01s, system: 0.01s, MEM: 20.75 MB peak
+Yosys 0.67+31 (git sha1 22c15a7ec-dirty, Release, Clang /usr/local/osxcross/target/bin/aarch64-apple-darwin23.5-clang++ 18.1.8)
+Time spent: 34% 2x read_verilog (0 sec), 28% 1x check (0 sec), ...
+mkdir -p build
+iverilog -g2012 -Wall -s axi4lite_tb -o build/axi4lite_sim rtl/axi4lite_regs.sv sim/axi4lite_tb.sv
+error: Failed to open '/Users/harsha/oss-cad-suite/lib/ivl/system.vpi' because:
+     : dlopen(/Users/harsha/oss-cad-suite/lib/ivl/system.vpi, 0x0001): symbol not found in flat namespace '_vpip_format_pretty'
+warning: Some design elements have no explicit time unit and/or
+       : time precision. This may cause confusing timing results.
+       : Affected design elements are:
+       :   -- module axi4lite_regs declared here: rtl/axi4lite_regs.sv:89
+vvp build/axi4lite_sim
+VCD info: dumpfile build/axi4lite.vcd opened for output.
+PASS: same-cycle write response
+PASS: CONTROL read response
+PASS: CONTROL value = 11223344
+PASS: address-before-data response
+PASS: DATA0 full write = aabbccdd
+PASS: data-before-address response
+PASS: DATA1 value = 55667788
+PASS: DATA0 partial write = aa22cc44
+PASS: write-response backpressure
+PASS: read-response backpressure
+PASS: STATUS stalled read = deadbeef
+PASS: invalid write address
+PASS: invalid read address
+PASS: invalid read data = 00000000
+PASS: concurrent write
+PASS: concurrent read
+PASS: concurrent CONTROL read = 11223344
+PASS: concurrent DATA0 write = cafebabe
+PASS: CONTROL after reset = 00000000
+PASS: STATUS after reset = 00000000
+PASS: DATA0 after reset = 00000000
+PASS: DATA1 after reset = 00000000
+
+======================================
+ALL AXI4-LITE SIMULATION TESTS PASSED
+======================================
+sim/axi4lite_tb.sv:535: $finish called at 1170000 (1ps)
+cd formal && sby -f axi4lite.sby prove
+SBY 22:34:52 [axi4lite_prove] Removing directory '/Users/harsha/Desktop/untitled folder 2/axi4lite-formal/formal/axi4lite_prove'.
+SBY 22:34:52 [axi4lite_prove] Copy '/Users/harsha/Desktop/untitled folder 2/axi4lite-formal/formal/axi4lite_functional.sv' to '/Users/harsha/Desktop/untitled folder 2/axi4lite-formal/formal/axi4lite_prove/src/axi4lite_functional.sv'.
+SBY 22:34:52 [axi4lite_prove] Copy '/Users/harsha/Desktop/untitled folder 2/axi4lite-formal/formal/../rtl/axi4lite_regs.sv' to '/Users/harsha/Desktop/untitled folder 2/axi4lite-formal/formal/axi4lite_prove/src/axi4lite_regs.sv'.
+SBY 22:34:52 [axi4lite_prove] Copy '/Users/harsha/Desktop/untitled folder 2/axi4lite-formal/formal/axi4lite_properties.sv' to '/Users/harsha/Desktop/untitled folder 2/axi4lite-formal/formal/axi4lite_prove/src/axi4lite_properties.sv'.
+SBY 22:34:52 [axi4lite_prove] Copy '/Users/harsha/Desktop/untitled folder 2/axi4lite-formal/formal/axi4lite_formal.sv' to '/Users/harsha/Desktop/untitled folder 2/axi4lite-formal/formal/axi4lite_prove/src/axi4lite_formal.sv'.
+SBY 22:34:52 [axi4lite_prove] engine_0: abc pdr
+SBY 22:34:52 [axi4lite_prove] base: starting process "cd axi4lite_prove/src; yosys -ql ../model/design.log ../model/design.ys"
+SBY 22:34:52 [axi4lite_prove] base: finished (returncode=0)
+SBY 22:34:52 [axi4lite_prove] prep: starting process "cd axi4lite_prove/model; yosys -ql design_prep.log design_prep.ys"
+SBY 22:34:52 [axi4lite_prove] prep: finished (returncode=0)
+SBY 22:34:52 [axi4lite_prove] aig: starting process "cd axi4lite_prove/model; yosys -ql design_aiger.log design_aiger.ys"
+SBY 22:34:52 [axi4lite_prove] aig: finished (returncode=0)
+SBY 22:34:52 [axi4lite_prove] engine_0: starting process "cd axi4lite_prove; yosys-abc -c 'read_aiger model/design_aiger.aig; fold; strash; pdr -v -l; write_cex -a engine_0/trace.aiw'"
+SBY 22:34:52 [axi4lite_prove] engine_0: ======== ABC command line "read_aiger model/design_aiger.aig; fold; strash; pdr -v -l; write_cex -a engine_0/trace.aiw"
+SBY 22:34:52 [axi4lite_prove] engine_0: Warning: The last 9 outputs are interpreted as constraints.
+SBY 22:34:52 [axi4lite_prove] engine_0: VarMax = 300. FrameMax = 10000. QueMax = 0. TimeMax = 979. MonoCNF = no. SkipGen = no. SolveAll = no.
+SBY 22:34:52 [axi4lite_prove] engine_0: Frame Clauses                                                     Max Queue Flops Time
+SBY 22:34:52 [axi4lite_prove] engine_0: 1 : 0 22                                                                1    24      0.01 sec  T/O =  0  PRV =  0
+SBY 22:34:52 [axi4lite_prove] engine_0: 2 : 0 16 18 ~8                                                           2    30      0.02 sec  T/O =  0  PRV =  0
+SBY 22:34:52 [axi4lite_prove] engine_0: 3 : 0 25 15 38 ~23                                                       3    69      0.03 sec  T/O =  0  PRV =  0
+SBY 22:34:52 [axi4lite_prove] engine_0: 3 : 0 34 24 79 ~23                                                       3   110      0.04 sec  T/O =  0  PRV =  0
+SBY 22:34:52 [axi4lite_prove] engine_0: 3 : 0 44 34 119 ~23                                                      3   150      0.05 sec  T/O =  0  PRV =  0
+SBY 22:34:52 [axi4lite_prove] engine_0: 3 : 0 59 49 168 ~23                                                      3   199      0.06 sec  T/O =  0  PRV =  0
+SBY 22:34:52 [axi4lite_prove] engine_0: 3 : 0 69 59 208 ~23                                                      3   239      0.07 sec  T/O =  0  PRV =  0
+SBY 22:34:52 [axi4lite_prove] engine_0: 3 : 0 78 67 249 ~23                                                      3   281      0.08 sec  T/O =  0  PRV =  0
+SBY 22:34:52 [axi4lite_prove] engine_0: 3 : 0 89 79 299 ~23                                                      3   330      0.09 sec  T/O =  0  PRV =  0
+SBY 22:34:53 [axi4lite_prove] engine_0: 3 : 0 99 89 339 ~23                                                      3   370      0.11 sec  T/O =  0  PRV =  0
+SBY 22:34:53 [axi4lite_prove] engine_0: 3 : 0 109 99 379 ~23                                                     3   410      0.11 sec  T/O =  0  PRV =  0
+SBY 22:34:53 [axi4lite_prove] engine_0: 3 : 0 122 111 427 ~23                                                    3   459      0.13 sec  T/O =  0  PRV =  0
+SBY 22:34:53 [axi4lite_prove] engine_0: 3 : 0 131 121 468 ~23                                                    3   499      0.14 sec  T/O =  0  PRV =  0
+SBY 22:34:53 [axi4lite_prove] engine_0: 3 : 0 141 131 508 ~23                                                    3   539      0.15 sec  T/O =  0  PRV =  0
+SBY 22:34:53 [axi4lite_prove] engine_0: 3 : 0 144 134 565 ~23                                                    3   579      0.16 sec  T/O =  0  PRV =  0
+SBY 22:34:53 [axi4lite_prove] engine_0: 4 : 0 144 133 297 30 ~292                                                1   579      0.25 sec  T/O =  0  PRV =  0
+SBY 22:34:53 [axi4lite_prove] engine_0: 5 : 0 144 133 308 48 29 ~292                                             7   609      0.33 sec  T/O =  0  PRV =  0
+SBY 22:34:53 [axi4lite_prove] engine_0: 5 : 0 144 133 318 65 62 ~292                                             6   625      0.35 sec  T/O =  0  PRV =  0
+SBY 22:34:53 [axi4lite_prove] engine_0: 5 : 0 144 133 325 89 96 ~292                                             6   633      0.36 sec  T/O =  0  PRV =  0
+SBY 22:34:53 [axi4lite_prove] engine_0: 5 : 0 144 133 334 109 130 ~292                                           6   645      0.38 sec  T/O =  0  PRV =  0
+SBY 22:34:53 [axi4lite_prove] engine_0: 5 : 0 144 133 344 126 163 ~292                                           6   657      0.40 sec  T/O =  0  PRV =  0
+SBY 22:34:53 [axi4lite_prove] engine_0: 5 : 0 144 133 353 150 195 ~292                                           6   677      0.42 sec  T/O =  0  PRV =  0
+SBY 22:34:53 [axi4lite_prove] engine_0: 5 : 0 144 133 361 171 229 ~292                                           6   693      0.43 sec  T/O =  0  PRV =  0
+SBY 22:34:53 [axi4lite_prove] engine_0: 5 : 0 144 133 372 186 263 ~292                                           6   693      0.45 sec  T/O =  0  PRV =  0
+SBY 22:34:53 [axi4lite_prove] engine_0: 5 : 0 144 133 382 206 297 ~292                                           6   709      0.47 sec  T/O =  0  PRV =  0
+SBY 22:34:53 [axi4lite_prove] engine_0: 5 : 0 144 133 393 222 329 ~292                                           6   717      0.48 sec  T/O =  0  PRV =  0
+SBY 22:34:53 [axi4lite_prove] engine_0: 5 : 0 144 133 393 224 329 ~292                                           4   721      0.48 sec  T/O =  0  PRV =  0
+SBY 22:34:53 [axi4lite_prove] engine_0: Timing out on output  0 in frame 5 (retrying in next anytime pass).
+SBY 22:34:53 [axi4lite_prove] engine_0: 5 : 0 144 133 410 240 361 ~292                                           3   721      0.50 sec  T/O =  1  PRV =  0
+SBY 22:34:53 [axi4lite_prove] engine_0: 5 : 0 144 133 425 258 394 ~292                                           4   721      0.52 sec  T/O =  1  PRV =  0
+SBY 22:34:53 [axi4lite_prove] engine_0: 5 : 0 144 133 436 278 427 ~292                                           6   737      0.54 sec  T/O =  1  PRV =  0
+SBY 22:34:53 [axi4lite_prove] engine_0: 5 : 0 144 133 449 294 460 ~292                                           6   741      0.56 sec  T/O =  1  PRV =  0
+SBY 22:34:53 [axi4lite_prove] engine_0: 5 : 0 144 133 460 311 494 ~292                                           6   745      0.58 sec  T/O =  1  PRV =  0
+SBY 22:34:53 [axi4lite_prove] engine_0: 5 : 0 144 133 472 326 527 ~292                                           6   745      0.59 sec  T/O =  1  PRV =  0
+SBY 22:34:53 [axi4lite_prove] engine_0: 5 : 0 144 133 496 351 581 ~292                                           6   745      0.62 sec  T/O =  1  PRV =  0
+SBY 22:34:53 [axi4lite_prove] engine_0: 5 : 0 144 133 512 368 615 ~292                                           3   745      0.64 sec  T/O =  1  PRV =  0
+SBY 22:34:53 [axi4lite_prove] engine_0: 5 : 0 144 133 529 385 648 ~292                                           3   745      0.66 sec  T/O =  1  PRV =  0
+SBY 22:34:53 [axi4lite_prove] engine_0: 5 : 0 144 133 560 415 710 ~292                                           3   745      0.70 sec  T/O =  1  PRV =  0
+SBY 22:34:53 [axi4lite_prove] engine_0: 5 : 0 144 133 576 432 744 ~292                                           3   745      0.72 sec  T/O =  1  PRV =  0
+SBY 22:34:53 [axi4lite_prove] engine_0: 5 : 0 144 133 593 449 777 ~292                                           3   745      0.74 sec  T/O =  1  PRV =  0
+SBY 22:34:53 [axi4lite_prove] engine_0: 5 : 0 144 133 610 485 851 ~292                                           4   785      0.79 sec  T/O =  1  PRV =  0
+SBY 22:34:53 [axi4lite_prove] engine_0: 5 : 0 144 133 620 503 887 ~292                                           4   811      0.81 sec  T/O =  1  PRV =  0
+SBY 22:34:53 [axi4lite_prove] engine_0: 5 : 0 144 133 628 521 925 ~292                                           4   839      0.84 sec  T/O =  1  PRV =  0
+SBY 22:34:53 [axi4lite_prove] engine_0: 5 : 0 144 133 639 539 960 ~292                                           4   864      0.86 sec  T/O =  1  PRV =  0
+SBY 22:34:53 [axi4lite_prove] engine_0: 5 : 0 144 133 650 569 1095 ~292                                          5   945      0.94 sec  T/O =  1  PRV =  0
+SBY 22:34:53 [axi4lite_prove] engine_0: 5 : 0 144 133 650 569 1145 ~292                                          3   962      0.96 sec  T/O =  1  PRV =  0
+SBY 22:34:53 [axi4lite_prove] engine_0: 5 : 0 144 133 650 569 1194 ~292                                          3   975      0.98 sec  T/O =  1  PRV =  0
+SBY 22:34:54 [axi4lite_prove] engine_0: Proved output 6 in frame 5.
+SBY 22:34:54 [axi4lite_prove] engine_0: Proved output 8 in frame 5.
+SBY 22:34:54 [axi4lite_prove] engine_0: Proved output 9 in frame 5.
+SBY 22:34:54 [axi4lite_prove] engine_0: Proved output 15 in frame 5.
+SBY 22:34:54 [axi4lite_prove] engine_0: Proved output 16 in frame 5.
+SBY 22:34:54 [axi4lite_prove] engine_0: Proved output 17 in frame 5.
+SBY 22:34:54 [axi4lite_prove] engine_0: Proved output 18 in frame 5.
+SBY 22:34:54 [axi4lite_prove] engine_0: Proved output 19 in frame 5.
+SBY 22:34:54 [axi4lite_prove] engine_0: Proved output 20 in frame 5.
+SBY 22:34:54 [axi4lite_prove] engine_0: Proved output 28 in frame 5.
+SBY 22:34:54 [axi4lite_prove] engine_0: Proved output 36 in frame 5.
+SBY 22:34:54 [axi4lite_prove] engine_0: Proved output 37 in frame 5.
+SBY 22:34:54 [axi4lite_prove] engine_0: Proved output 38 in frame 5.
+SBY 22:34:54 [axi4lite_prove] engine_0: Proved output 39 in frame 5.
+SBY 22:34:54 [axi4lite_prove] engine_0: Proved output 42 in frame 5.
+SBY 22:34:54 [axi4lite_prove] engine_0: Proved output 43 in frame 5.
+SBY 22:34:54 [axi4lite_prove] engine_0: 6 : 0 144 133 355 420 666 146 ~733                                       1   975      1.19 sec  T/O =  1  PRV = 16
+SBY 22:34:54 [axi4lite_prove] engine_0: 7 : 0 144 133 358 422 675 115 9 ~759                                    14   975      1.38 sec  T/O =  1  PRV = 16
+SBY 22:34:54 [axi4lite_prove] engine_0: 7 : 0 144 133 358 422 686 138 38 ~759                                    6   975      1.40 sec  T/O =  1  PRV = 16
+SBY 22:34:54 [axi4lite_prove] engine_0: 7 : 0 144 133 358 422 688 156 57 ~759                                    6   975      1.41 sec  T/O =  1  PRV = 16
+SBY 22:34:54 [axi4lite_prove] engine_0: Timing out on output  1 in frame 7 (retrying in next anytime pass).
+SBY 22:34:54 [axi4lite_prove] engine_0: 7 : 0 144 133 358 422 698 180 84 ~759                                    6   975      1.43 sec  T/O =  2  PRV = 16
+SBY 22:34:54 [axi4lite_prove] engine_0: 7 : 0 144 133 358 422 703 208 114 ~759                                   6   975      1.45 sec  T/O =  2  PRV = 16
+SBY 22:34:54 [axi4lite_prove] engine_0: 7 : 0 144 133 358 422 714 230 143 ~759                                   6   975      1.47 sec  T/O =  2  PRV = 16
+SBY 22:34:54 [axi4lite_prove] engine_0: 7 : 0 144 133 358 422 722 255 172 ~759                                   6   975      1.49 sec  T/O =  2  PRV = 16
+SBY 22:34:54 [axi4lite_prove] engine_0: 7 : 0 144 133 358 422 730 270 192 ~759                                   6   975      1.50 sec  T/O =  2  PRV = 16
+SBY 22:34:54 [axi4lite_prove] engine_0: Timing out on output  2 in frame 7 (retrying in next anytime pass).
+SBY 22:34:54 [axi4lite_prove] engine_0: 7 : 0 144 133 358 422 741 292 218 ~759                                   6   975      1.52 sec  T/O =  3  PRV = 16
+SBY 22:34:54 [axi4lite_prove] engine_0: 7 : 0 144 133 358 422 750 316 248 ~759                                   6   975      1.54 sec  T/O =  3  PRV = 16
+SBY 22:34:54 [axi4lite_prove] engine_0: 7 : 0 144 133 358 422 750 349 282 ~759                                   3   975      1.55 sec  T/O =  3  PRV = 16
+SBY 22:34:54 [axi4lite_prove] engine_0: 7 : 0 144 133 358 422 750 377 434 ~759                                   3   977      1.60 sec  T/O =  3  PRV = 16
+SBY 22:34:54 [axi4lite_prove] engine_0: 7 : 0 144 133 359 424 754 384 502 ~759                                   7   980      1.63 sec  T/O =  3  PRV = 16
+SBY 22:34:54 [axi4lite_prove] engine_0: Proved output 5 in frame 7.
+SBY 22:34:54 [axi4lite_prove] engine_0: Proved output 10 in frame 7.
+SBY 22:34:54 [axi4lite_prove] engine_0: Proved output 11 in frame 7.
+SBY 22:34:54 [axi4lite_prove] engine_0: Proved output 12 in frame 7.
+SBY 22:34:54 [axi4lite_prove] engine_0: Proved output 13 in frame 7.
+SBY 22:34:54 [axi4lite_prove] engine_0: Proved output 14 in frame 7.
+SBY 22:34:54 [axi4lite_prove] engine_0: Proved output 22 in frame 7.
+SBY 22:34:54 [axi4lite_prove] engine_0: Proved output 40 in frame 7.
+SBY 22:34:54 [axi4lite_prove] engine_0: Proved output 41 in frame 7.
+SBY 22:34:54 [axi4lite_prove] engine_0: 8 : 0 144 133 355 421 576 310 109 249 ~942                               7   980      1.84 sec  T/O =  3  PRV = 25
+SBY 22:34:54 [axi4lite_prove] engine_0: Timing out on output  3 in frame 8 (retrying in next anytime pass).
+SBY 22:34:54 [axi4lite_prove] engine_0: 8 : 0 144 133 355 421 580 325 127 273 ~942                               9   980      1.87 sec  T/O =  4  PRV = 25
+SBY 22:34:54 [axi4lite_prove] engine_0: 8 : 0 144 133 355 421 588 342 146 294 ~942                              12   980      1.89 sec  T/O =  4  PRV = 25
+SBY 22:34:54 [axi4lite_prove] engine_0: 8 : 0 144 133 355 421 588 347 164 318 ~942                              10   980      1.91 sec  T/O =  4  PRV = 25
+SBY 22:34:54 [axi4lite_prove] engine_0: Timing out on output  7 in frame 8 (retrying in next anytime pass).
+SBY 22:34:54 [axi4lite_prove] engine_0: 8 : 0 144 133 355 421 588 347 164 318 ~942                               0   980      1.91 sec  T/O =  5  PRV = 25
+SBY 22:34:55 [axi4lite_prove] engine_0: Proved output 4 in frame 8.
+SBY 22:34:55 [axi4lite_prove] engine_0: Proved output 24 in frame 8.
+SBY 22:34:55 [axi4lite_prove] engine_0: Proved output 25 in frame 8.
+SBY 22:34:55 [axi4lite_prove] engine_0: Proved output 30 in frame 8.
+SBY 22:34:55 [axi4lite_prove] engine_0: Proved output 32 in frame 8.
+SBY 22:34:55 [axi4lite_prove] engine_0: Proved output 35 in frame 8.
+SBY 22:34:55 [axi4lite_prove] engine_0: 9 : 0 144 133 355 421 579 315 132 98 65 ~1114                            0   980      2.12 sec  T/O =  5  PRV = 31
+SBY 22:34:55 [axi4lite_prove] engine_0: 10 : 0 144 133 355 421 579 315 132 98 62 1 ~1114                          1   980      2.33 sec  T/O =  5  PRV = 31
+SBY 22:34:55 [axi4lite_prove] engine_0: 11 : 0 144 133 355 421 579 316 133 101 64 26 -31 ~1124             9   980      2.56 sec  T/O =  5  PRV = 31
+SBY 22:34:55 [axi4lite_prove] engine_0: 12 : 0 144 133 355 421 578 314 130 95 53 13 0 -23 ~1115            0   980      2.78 sec  T/O =  5  PRV = 31
+SBY 22:34:55 [axi4lite_prove] engine_0: Proved output 21 in frame 7 (converged).
+SBY 22:34:55 [axi4lite_prove] engine_0: Proved output 23 in frame 7 (converged).
+SBY 22:34:55 [axi4lite_prove] engine_0: Proved output 26 in frame 7 (converged).
+SBY 22:34:55 [axi4lite_prove] engine_0: Proved output 27 in frame 7 (converged).
+SBY 22:34:55 [axi4lite_prove] engine_0: Proved output 29 in frame 7 (converged).
+SBY 22:34:55 [axi4lite_prove] engine_0: Proved output 31 in frame 7 (converged).
+SBY 22:34:55 [axi4lite_prove] engine_0: Proved output 33 in frame 7 (converged).
+SBY 22:34:55 [axi4lite_prove] engine_0: Proved output 34 in frame 7 (converged).
+SBY 22:34:55 [axi4lite_prove] engine_0: Starting new anytime pass, reusing clauses.
+SBY 22:34:55 [axi4lite_prove] engine_0: Frame Clauses                                                     Max Queue Flops Time
+SBY 22:34:55 [axi4lite_prove] engine_0: 1 : 0 1807 ~1141                                                         0     0      0.27 sec  T/O =  0  PRV = 39
+SBY 22:34:55 [axi4lite_prove] engine_0: 2 : 0 143 1664 ~1141                                                     0     0      0.28 sec  T/O =  0  PRV = 39
+SBY 22:34:56 [axi4lite_prove] engine_0: 3 : 0 143 131 1533 ~1141                                                 0     0      0.31 sec  T/O =  0  PRV = 39
+SBY 22:34:56 [axi4lite_prove] engine_0: 4 : 0 143 131 190 1343 ~1141                                             0     0      0.36 sec  T/O =  0  PRV = 39
+SBY 22:34:56 [axi4lite_prove] engine_0: 5 : 0 143 131 190 292 1051 ~1141                                         0     0      0.41 sec  T/O =  0  PRV = 39
+SBY 22:34:56 [axi4lite_prove] engine_0: 6 : 0 143 131 190 292 505 546 ~1141                                      0     0      0.52 sec  T/O =  0  PRV = 39
+SBY 22:34:56 [axi4lite_prove] engine_0: 7 : 0 143 131 190 292 516 332 263 ~1141                                  6    35      0.67 sec  T/O =  0  PRV = 39
+SBY 22:34:56 [axi4lite_prove] engine_0: 7 : 0 143 131 190 292 527 353 292 ~1141                                  6    55      0.70 sec  T/O =  0  PRV = 39
+SBY 22:34:56 [axi4lite_prove] engine_0: 7 : 0 143 131 190 292 538 376 318 ~1141                                  6    81      0.72 sec  T/O =  0  PRV = 39
+SBY 22:34:56 [axi4lite_prove] engine_0: 7 : 0 143 131 190 292 549 394 351 ~1141                                  6   103      0.74 sec  T/O =  0  PRV = 39
+SBY 22:34:56 [axi4lite_prove] engine_0: 7 : 0 143 131 190 292 559 414 381 ~1141                                  6   123      0.77 sec  T/O =  0  PRV = 39
+SBY 22:34:56 [axi4lite_prove] engine_0: 7 : 0 143 131 190 292 571 439 427 ~1141                                  6   152      0.80 sec  T/O =  0  PRV = 39
+SBY 22:34:56 [axi4lite_prove] engine_0: 7 : 0 143 131 190 292 583 462 453 ~1141                                  6   174      0.83 sec  T/O =  0  PRV = 39
+SBY 22:34:56 [axi4lite_prove] engine_0: 7 : 0 143 131 190 292 591 478 488 ~1141                                  6   200      0.85 sec  T/O =  0  PRV = 39
+SBY 22:34:56 [axi4lite_prove] engine_0: 7 : 0 143 131 190 292 601 500 516 ~1141                                  6   216      0.88 sec  T/O =  0  PRV = 39
+SBY 22:34:56 [axi4lite_prove] engine_0: 7 : 0 143 131 190 292 613 522 557 ~1141                                  6   247      0.91 sec  T/O =  0  PRV = 39
+SBY 22:34:56 [axi4lite_prove] engine_0: 7 : 0 143 131 190 292 623 542 587 ~1141                                  6   269      0.94 sec  T/O =  0  PRV = 39
+SBY 22:34:56 [axi4lite_prove] engine_0: 7 : 0 143 131 190 292 625 546 600 ~1141                                  6   274      0.95 sec  T/O =  0  PRV = 39
+SBY 22:34:56 [axi4lite_prove] engine_0: 8 : 0 143 131 190 292 575 435 263 443 ~1139                              7   300      1.22 sec  T/O =  0  PRV = 39
+SBY 22:34:56 [axi4lite_prove] engine_0: 8 : 0 143 131 190 292 585 450 278 463 ~1139                              7   322      1.24 sec  T/O =  0  PRV = 39
+SBY 22:34:56 [axi4lite_prove] engine_0: 8 : 0 143 131 190 292 595 465 293 483 ~1139                              7   342      1.26 sec  T/O =  0  PRV = 39
+SBY 22:34:57 [axi4lite_prove] engine_0: 8 : 0 143 131 190 292 605 494 336 532 ~1139                              7   405      1.31 sec  T/O =  0  PRV = 39
+SBY 22:34:57 [axi4lite_prove] engine_0: 8 : 0 143 131 190 292 605 509 364 560 ~1139                              3   445      1.35 sec  T/O =  0  PRV = 39
+SBY 22:34:57 [axi4lite_prove] engine_0: 8 : 0 143 131 190 292 605 513 374 571 ~1139                              3   451      1.36 sec  T/O =  0  PRV = 39
+SBY 22:34:57 [axi4lite_prove] engine_0: 9 : 0 143 131 190 292 585 457 317 274 209 ~1292                          3   475      1.74 sec  T/O =  0  PRV = 39
+SBY 22:34:57 [axi4lite_prove] engine_0: 10 : 0 143 131 190 292 585 457 316 255 165 11 ~1322                       1   475      2.03 sec  T/O =  0  PRV = 39
+SBY 22:34:58 [axi4lite_prove] engine_0: 11 : 0 143 131 190 292 585 457 316 263 180 81 -34 ~1316            5   478      2.31 sec  T/O =  0  PRV = 39
+SBY 22:34:58 [axi4lite_prove] engine_0: 11 : 0 143 131 190 292 585 457 316 268 190 92 -10 ~1316            5   478      2.33 sec  T/O =  0  PRV = 39
+SBY 22:34:58 [axi4lite_prove] engine_0: Timing out on output  0 in frame 11 (retrying in next anytime pass).
+SBY 22:34:58 [axi4lite_prove] engine_0: 11 : 0 143 131 190 292 585 457 316 276 206 107 18 ~1316                   5   480      2.36 sec  T/O =  1  PRV = 39
+SBY 22:34:58 [axi4lite_prove] engine_0: 11 : 0 143 131 190 292 585 457 316 284 220 122 50 ~1316                   5   485      2.39 sec  T/O =  1  PRV = 39
+SBY 22:34:58 [axi4lite_prove] engine_0: 11 : 0 143 131 190 292 585 457 316 291 236 137 78 ~1316                   5   497      2.42 sec  T/O =  1  PRV = 39
+SBY 22:34:58 [axi4lite_prove] engine_0: Timing out on output  1 in frame 11 (retrying in next anytime pass).
+SBY 22:34:58 [axi4lite_prove] engine_0: 11 : 0 143 131 190 292 585 457 316 299 252 152 106 ~1316                  5   501      2.44 sec  T/O =  2  PRV = 39
+SBY 22:34:58 [axi4lite_prove] engine_0: 11 : 0 143 131 190 292 585 457 316 307 266 167 138 ~1316                  5   525      2.47 sec  T/O =  2  PRV = 39
+SBY 22:34:58 [axi4lite_prove] engine_0: 11 : 0 143 131 190 292 585 457 316 314 282 183 170 ~1316                  5   547      2.50 sec  T/O =  2  PRV = 39
+SBY 22:34:58 [axi4lite_prove] engine_0: 11 : 0 143 131 190 292 585 457 316 322 298 199 198 ~1316                  5   569      2.53 sec  T/O =  2  PRV = 39
+SBY 22:34:58 [axi4lite_prove] engine_0: 11 : 0 143 131 190 292 585 457 316 331 316 216 235 ~1316                  5   602      2.57 sec  T/O =  2  PRV = 39
+SBY 22:34:58 [axi4lite_prove] engine_0: 11 : 0 143 131 190 292 585 457 316 333 320 221 249 ~1316                  5   611      2.58 sec  T/O =  2  PRV = 39
+SBY 22:34:58 [axi4lite_prove] engine_0: Proved output 2 in frame 11.
+SBY 22:34:58 [axi4lite_prove] engine_0: 12 : 0 143 131 190 292 585 457 316 255 80 70 29 187 ~1622                 5   611      2.93 sec  T/O =  2  PRV = 40
+SBY 22:34:58 [axi4lite_prove] engine_0: 12 : 0 143 131 190 292 585 457 316 255 86 76 41 210 ~1622                 5   611      2.95 sec  T/O =  2  PRV = 40
+SBY 22:34:58 [axi4lite_prove] engine_0: Timing out on output  3 in frame 12 (retrying in next anytime pass).
+SBY 22:34:58 [axi4lite_prove] engine_0: 12 : 0 143 131 190 292 585 457 316 259 96 91 55 234 ~1622                 9   619      2.98 sec  T/O =  3  PRV = 40
+SBY 22:34:58 [axi4lite_prove] engine_0: 12 : 0 143 131 190 292 585 457 316 263 106 104 70 260 ~1622               9   619      3.01 sec  T/O =  3  PRV = 40
+SBY 22:34:58 [axi4lite_prove] engine_0: 12 : 0 143 131 190 292 585 457 316 265 111 110 76 267 ~1622              10   619      3.02 sec  T/O =  3  PRV = 40
+SBY 22:34:58 [axi4lite_prove] engine_0: Timing out on output  7 in frame 12 (retrying in next anytime pass).
+SBY 22:34:58 [axi4lite_prove] engine_0: 12 : 0 143 131 190 292 585 457 316 265 111 110 76 267 ~1622               0   619      3.02 sec  T/O =  4  PRV = 40
+SBY 22:34:58 [axi4lite_prove] engine_0: 13 : ... 143 131 190 292 585 457 316 255 38 35 10 1 -174 ~1943      0   619      3.27 sec  T/O =  4  PRV = 40
+SBY 22:34:59 [axi4lite_prove] engine_0: All outputs solved or timed out in frame 13.
+SBY 22:34:59 [axi4lite_prove] engine_0: Starting new anytime pass, reusing clauses.
+SBY 22:34:59 [axi4lite_prove] engine_0: Frame Clauses                                                     Max Queue Flops Time
+SBY 22:34:59 [axi4lite_prove] engine_0: 1 : 0 1981 ~1811                                                         0     0      0.32 sec  T/O =  0  PRV = 40
+SBY 22:34:59 [axi4lite_prove] engine_0: 2 : 0 143 1838 ~1811                                                     0     0      0.33 sec  T/O =  0  PRV = 40
+SBY 22:34:59 [axi4lite_prove] engine_0: 3 : 0 143 131 1707 ~1811                                                 0     0      0.37 sec  T/O =  0  PRV = 40
+SBY 22:34:59 [axi4lite_prove] engine_0: 4 : 0 143 131 190 1517 ~1811                                             0     0      0.42 sec  T/O =  0  PRV = 40
+SBY 22:34:59 [axi4lite_prove] engine_0: 5 : 0 143 131 190 292 1225 ~1811                                         0     0      0.48 sec  T/O =  0  PRV = 40
+SBY 22:34:59 [axi4lite_prove] engine_0: 6 : 0 143 131 190 292 495 730 ~1811                                      0     0      0.63 sec  T/O =  0  PRV = 40
+SBY 22:34:59 [axi4lite_prove] engine_0: 7 : 0 143 131 190 292 495 430 300 ~1811                                  0     0      0.79 sec  T/O =  0  PRV = 40
+SBY 22:34:59 [axi4lite_prove] engine_0: 8 : 0 143 131 190 292 495 430 289 11 ~1811                               0     0      0.96 sec  T/O =  0  PRV = 40
+SBY 22:35:00 [axi4lite_prove] engine_0: 9 : 0 143 131 190 292 495 430 289 255 -244 ~1811                   0     0      1.14 sec  T/O =  0  PRV = 40
+SBY 22:35:00 [axi4lite_prove] engine_0: 10 : 0 143 131 190 292 495 430 289 255 38 -282 ~1811                0     0      1.32 sec  T/O =  0  PRV = 40
+SBY 22:35:00 [axi4lite_prove] engine_0: 11 : 0 143 131 190 292 495 430 289 267 59 57 -271 ~1811             5    63      1.53 sec  T/O =  0  PRV = 40
+SBY 22:35:00 [axi4lite_prove] engine_0: 12 : 0 143 131 190 292 495 430 288 256 30 44 45 -234 ~1787          5   124      1.87 sec  T/O =  0  PRV = 40
+SBY 22:35:01 [axi4lite_prove] engine_0: Proved output 0 in frame 12.
+SBY 22:35:01 [axi4lite_prove] engine_0: Proved output 3 in frame 12.
+SBY 22:35:01 [axi4lite_prove] engine_0: 13 : 0 143 131 190 292 495 430 288 256 2 2 4 5 -289 ~1878           5   128      2.14 sec  T/O =  0  PRV = 42
+SBY 22:35:01 [axi4lite_prove] engine_0: Proved output 1 in frame 13.
+SBY 22:35:01 [axi4lite_prove] engine_0: 14 : ... 143 131 190 292 495 430 288 256 0 0 0 0 0 -384 ~1910       0   128      2.33 sec  T/O =  0  PRV = 43
+SBY 22:35:01 [axi4lite_prove] engine_0: Proved output 7 in frame 27820032 (converged).
+SBY 22:35:01 [axi4lite_prove] engine_0: Block =  204  Oblig = 10328  Clause =  6506  Call =105176 (sat=80.2%)  Cex =   0  Start = 330
+SBY 22:35:01 [axi4lite_prove] engine_0: SAT solving =     5.60 sec ( 66.70 %)
+SBY 22:35:01 [axi4lite_prove] engine_0: unsat     =     0.18 sec (  2.20 %)
+SBY 22:35:01 [axi4lite_prove] engine_0: sat       =     5.41 sec ( 64.50 %)
+SBY 22:35:01 [axi4lite_prove] engine_0: Generalize  =     1.48 sec ( 17.64 %)
+SBY 22:35:01 [axi4lite_prove] engine_0: Push clause =     4.63 sec ( 55.15 %)
+SBY 22:35:01 [axi4lite_prove] engine_0: Ternary sim =     0.05 sec (  0.62 %)
+SBY 22:35:01 [axi4lite_prove] engine_0: Containment =     0.02 sec (  0.28 %)
+SBY 22:35:01 [axi4lite_prove] engine_0: CNF compute =     0.40 sec (  4.78 %)
+SBY 22:35:01 [axi4lite_prove] engine_0: Refinement  =     0.00 sec (  0.00 %)
+SBY 22:35:01 [axi4lite_prove] engine_0: TOTAL       =     8.39 sec (100.00 %)
+SBY 22:35:01 [axi4lite_prove] engine_0: Property proved.  Time =     8.39 sec
+SBY 22:35:01 [axi4lite_prove] engine_0: Counter-example is not available.
+SBY 22:35:01 [axi4lite_prove] engine_0: finished (returncode=0)
+SBY 22:35:01 [axi4lite_prove] engine_0: Status returned by engine: PASS
+SBY 22:35:01 [axi4lite_prove] summary: Elapsed clock time [H:MM:SS (secs)]: 0:00:08 (8)
+SBY 22:35:01 [axi4lite_prove] summary: Elapsed process time [H:MM:SS (secs)]: 0:00:08 (8)
+SBY 22:35:01 [axi4lite_prove] summary: engine_0 (abc pdr) returned PASS
+SBY 22:35:01 [axi4lite_prove] summary: engine_0 did not produce any traces
+SBY 22:35:01 [axi4lite_prove] DONE (PASS, rc=0)
+cd formal && sby -f axi4lite.sby cover
+SBY 22:35:01 [axi4lite_cover] Removing directory '/Users/harsha/Desktop/untitled folder 2/axi4lite-formal/formal/axi4lite_cover'.
+SBY 22:35:01 [axi4lite_cover] Copy '/Users/harsha/Desktop/untitled folder 2/axi4lite-formal/formal/axi4lite_functional.sv' to '/Users/harsha/Desktop/untitled folder 2/axi4lite-formal/formal/axi4lite_cover/src/axi4lite_functional.sv'.
+SBY 22:35:01 [axi4lite_cover] Copy '/Users/harsha/Desktop/untitled folder 2/axi4lite-formal/formal/../rtl/axi4lite_regs.sv' to '/Users/harsha/Desktop/untitled folder 2/axi4lite-formal/formal/axi4lite_cover/src/axi4lite_regs.sv'.
+SBY 22:35:01 [axi4lite_cover] Copy '/Users/harsha/Desktop/untitled folder 2/axi4lite-formal/formal/axi4lite_properties.sv' to '/Users/harsha/Desktop/untitled folder 2/axi4lite-formal/formal/axi4lite_cover/src/axi4lite_properties.sv'.
+SBY 22:35:01 [axi4lite_cover] Copy '/Users/harsha/Desktop/untitled folder 2/axi4lite-formal/formal/axi4lite_formal.sv' to '/Users/harsha/Desktop/untitled folder 2/axi4lite-formal/formal/axi4lite_cover/src/axi4lite_formal.sv'.
+SBY 22:35:01 [axi4lite_cover] engine_0: smtbmc boolector
+SBY 22:35:01 [axi4lite_cover] base: starting process "cd axi4lite_cover/src; yosys -ql ../model/design.log ../model/design.ys"
+SBY 22:35:01 [axi4lite_cover] base: finished (returncode=0)
+SBY 22:35:01 [axi4lite_cover] prep: starting process "cd axi4lite_cover/model; yosys -ql design_prep.log design_prep.ys"
+SBY 22:35:01 [axi4lite_cover] prep: finished (returncode=0)
+SBY 22:35:01 [axi4lite_cover] smt2: starting process "cd axi4lite_cover/model; yosys -ql design_smt2.log design_smt2.ys"
+SBY 22:35:01 [axi4lite_cover] smt2: finished (returncode=0)
+SBY 22:35:01 [axi4lite_cover] engine_0: starting process "cd axi4lite_cover; yosys-smtbmc -s boolector --presat --unroll -c --noprogress -t 30  --append 0 --dump-vcd engine_0/trace%.vcd --dump-yw engine_0/trace%.yw --dump-vlogtb engine_0/trace%_tb.v --dump-smtc engine_0/trace%.smtc model/design_smt2.smt2"
+SBY 22:35:01 [axi4lite_cover] engine_0: ##   0:00:00  Solver: boolector
+SBY 22:35:01 [axi4lite_cover] engine_0: ##   0:00:00  Checking cover reachability in step 0..
+SBY 22:35:01 [axi4lite_cover] engine_0: ##   0:00:00  Checking cover reachability in step 1..
+SBY 22:35:01 [axi4lite_cover] engine_0: ##   0:00:00  Checking cover reachability in step 2..
+SBY 22:35:01 [axi4lite_cover] engine_0: ##   0:00:00  Checking cover reachability in step 3..
+SBY 22:35:01 [axi4lite_cover] engine_0: ##   0:00:00  Reached cover statement in step 3 at axi4lite_formal: axi4lite_formal.sv:106.9-106.39 (_witness_.check_cover_axi4lite_formal_sv_106_35)
+SBY 22:35:01 [axi4lite_cover] engine_0: ##   0:00:00  Reached cover statement in step 3 at axi4lite_formal.properties: axi4lite_properties.sv:289.13-289.27 (_witness_.check_cover_axi4lite_properties_sv_289_141)
+SBY 22:35:01 [axi4lite_cover] engine_0: ##   0:00:00  Reached cover statement in step 3 at axi4lite_formal.properties: axi4lite_properties.sv:290.13-290.26 (_witness_.check_cover_axi4lite_properties_sv_290_142)
+SBY 22:35:01 [axi4lite_cover] engine_0: ##   0:00:00  Reached cover statement in step 3 at axi4lite_formal.properties: axi4lite_properties.sv:292.13-292.27 (_witness_.check_cover_axi4lite_properties_sv_292_144)
+SBY 22:35:01 [axi4lite_cover] engine_0: ##   0:00:00  Reached cover statement in step 3 at axi4lite_formal.properties: axi4lite_properties.sv:303.13-303.37 (_witness_.check_cover_axi4lite_properties_sv_303_161)
+SBY 22:35:01 [axi4lite_cover] engine_0: ##   0:00:00  Writing trace to VCD file: engine_0/trace0.vcd
+SBY 22:35:01 [axi4lite_cover] engine_0: ##   0:00:00  Writing trace to Verilog testbench: engine_0/trace0_tb.v
+SBY 22:35:01 [axi4lite_cover] engine_0: ##   0:00:00  Writing trace to constraints file: engine_0/trace0.smtc
+SBY 22:35:01 [axi4lite_cover] engine_0: ##   0:00:00  Writing trace to Yosys witness file: engine_0/trace0.yw
+SBY 22:35:01 [axi4lite_cover] engine_0: ##   0:00:00  Checking cover reachability in step 3..
+SBY 22:35:01 [axi4lite_cover] engine_0: ##   0:00:00  Reached cover statement in step 3 at axi4lite_formal.properties: axi4lite_properties.sv:308.13-312.14 (_witness_.check_cover_axi4lite_properties_sv_308_167)
+SBY 22:35:01 [axi4lite_cover] engine_0: ##   0:00:00  Writing trace to VCD file: engine_0/trace1.vcd
+SBY 22:35:01 [axi4lite_cover] engine_0: ##   0:00:00  Writing trace to Verilog testbench: engine_0/trace1_tb.v
+SBY 22:35:01 [axi4lite_cover] engine_0: ##   0:00:00  Writing trace to constraints file: engine_0/trace1.smtc
+SBY 22:35:01 [axi4lite_cover] engine_0: ##   0:00:00  Writing trace to Yosys witness file: engine_0/trace1.yw
+SBY 22:35:01 [axi4lite_cover] engine_0: ##   0:00:00  Checking cover reachability in step 3..
+SBY 22:35:01 [axi4lite_cover] engine_0: ##   0:00:00  Checking cover reachability in step 4..
+SBY 22:35:01 [axi4lite_cover] engine_0: ##   0:00:00  Checking cover reachability in step 5..
+SBY 22:35:01 [axi4lite_cover] engine_0: ##   0:00:00  Reached cover statement in step 5 at axi4lite_formal.properties: axi4lite_properties.sv:305.13-305.37 (_witness_.check_cover_axi4lite_properties_sv_305_165)
+SBY 22:35:01 [axi4lite_cover] engine_0: ##   0:00:00  Writing trace to VCD file: engine_0/trace2.vcd
+SBY 22:35:01 [axi4lite_cover] engine_0: ##   0:00:00  Writing trace to Verilog testbench: engine_0/trace2_tb.v
+SBY 22:35:01 [axi4lite_cover] engine_0: ##   0:00:00  Writing trace to constraints file: engine_0/trace2.smtc
+SBY 22:35:01 [axi4lite_cover] engine_0: ##   0:00:00  Writing trace to Yosys witness file: engine_0/trace2.yw
+SBY 22:35:01 [axi4lite_cover] engine_0: ##   0:00:00  Checking cover reachability in step 5..
+SBY 22:35:01 [axi4lite_cover] engine_0: ##   0:00:00  Reached cover statement in step 5 at axi4lite_formal.properties: axi4lite_properties.sv:304.13-304.37 (_witness_.check_cover_axi4lite_properties_sv_304_163)
+SBY 22:35:01 [axi4lite_cover] engine_0: ##   0:00:00  Writing trace to VCD file: engine_0/trace3.vcd
+SBY 22:35:01 [axi4lite_cover] engine_0: ##   0:00:00  Writing trace to Verilog testbench: engine_0/trace3_tb.v
+SBY 22:35:01 [axi4lite_cover] engine_0: ##   0:00:00  Writing trace to constraints file: engine_0/trace3.smtc
+SBY 22:35:01 [axi4lite_cover] engine_0: ##   0:00:00  Writing trace to Yosys witness file: engine_0/trace3.yw
+SBY 22:35:01 [axi4lite_cover] engine_0: ##   0:00:00  Checking cover reachability in step 5..
+SBY 22:35:01 [axi4lite_cover] engine_0: ##   0:00:00  Reached cover statement in step 5 at axi4lite_formal.properties: axi4lite_properties.sv:300.13-300.50 (_witness_.check_cover_axi4lite_properties_sv_300_158)
+SBY 22:35:01 [axi4lite_cover] engine_0: ##   0:00:00  Writing trace to VCD file: engine_0/trace4.vcd
+SBY 22:35:01 [axi4lite_cover] engine_0: ##   0:00:00  Writing trace to Verilog testbench: engine_0/trace4_tb.v
+SBY 22:35:01 [axi4lite_cover] engine_0: ##   0:00:00  Writing trace to constraints file: engine_0/trace4.smtc
+SBY 22:35:01 [axi4lite_cover] engine_0: ##   0:00:00  Writing trace to Yosys witness file: engine_0/trace4.yw
+SBY 22:35:01 [axi4lite_cover] engine_0: ##   0:00:00  Checking cover reachability in step 5..
+SBY 22:35:01 [axi4lite_cover] engine_0: ##   0:00:00  Reached cover statement in step 5 at axi4lite_formal.properties: axi4lite_properties.sv:299.13-299.51 (_witness_.check_cover_axi4lite_properties_sv_299_155)
+SBY 22:35:01 [axi4lite_cover] engine_0: ##   0:00:00  Writing trace to VCD file: engine_0/trace5.vcd
+SBY 22:35:01 [axi4lite_cover] engine_0: ##   0:00:00  Writing trace to Verilog testbench: engine_0/trace5_tb.v
+SBY 22:35:01 [axi4lite_cover] engine_0: ##   0:00:00  Writing trace to constraints file: engine_0/trace5.smtc
+SBY 22:35:01 [axi4lite_cover] engine_0: ##   0:00:00  Writing trace to Yosys witness file: engine_0/trace5.yw
+SBY 22:35:01 [axi4lite_cover] engine_0: ##   0:00:00  Checking cover reachability in step 5..
+SBY 22:35:01 [axi4lite_cover] engine_0: ##   0:00:00  Reached cover statement in step 5 at axi4lite_formal.properties: axi4lite_properties.sv:297.13-297.50 (_witness_.check_cover_axi4lite_properties_sv_297_149)
+SBY 22:35:01 [axi4lite_cover] engine_0: ##   0:00:00  Writing trace to VCD file: engine_0/trace6.vcd
+SBY 22:35:01 [axi4lite_cover] engine_0: ##   0:00:00  Writing trace to Verilog testbench: engine_0/trace6_tb.v
+SBY 22:35:01 [axi4lite_cover] engine_0: ##   0:00:00  Writing trace to constraints file: engine_0/trace6.smtc
+SBY 22:35:01 [axi4lite_cover] engine_0: ##   0:00:00  Writing trace to Yosys witness file: engine_0/trace6.yw
+SBY 22:35:01 [axi4lite_cover] engine_0: ##   0:00:00  Checking cover reachability in step 5..
+SBY 22:35:01 [axi4lite_cover] engine_0: ##   0:00:00  Reached cover statement in step 5 at axi4lite_formal.properties: axi4lite_properties.sv:296.13-296.51 (_witness_.check_cover_axi4lite_properties_sv_296_146)
+SBY 22:35:01 [axi4lite_cover] engine_0: ##   0:00:00  Writing trace to VCD file: engine_0/trace7.vcd
+SBY 22:35:01 [axi4lite_cover] engine_0: ##   0:00:00  Writing trace to Verilog testbench: engine_0/trace7_tb.v
+SBY 22:35:01 [axi4lite_cover] engine_0: ##   0:00:00  Writing trace to constraints file: engine_0/trace7.smtc
+SBY 22:35:01 [axi4lite_cover] engine_0: ##   0:00:00  Writing trace to Yosys witness file: engine_0/trace7.yw
+SBY 22:35:01 [axi4lite_cover] engine_0: ##   0:00:00  Checking cover reachability in step 5..
+SBY 22:35:01 [axi4lite_cover] engine_0: ##   0:00:00  Reached cover statement in step 5 at axi4lite_formal.properties: axi4lite_properties.sv:293.13-293.26 (_witness_.check_cover_axi4lite_properties_sv_293_145)
+SBY 22:35:01 [axi4lite_cover] engine_0: ##   0:00:00  Writing trace to VCD file: engine_0/trace8.vcd
+SBY 22:35:01 [axi4lite_cover] engine_0: ##   0:00:00  Writing trace to Verilog testbench: engine_0/trace8_tb.v
+SBY 22:35:01 [axi4lite_cover] engine_0: ##   0:00:00  Writing trace to constraints file: engine_0/trace8.smtc
+SBY 22:35:01 [axi4lite_cover] engine_0: ##   0:00:00  Writing trace to Yosys witness file: engine_0/trace8.yw
+SBY 22:35:01 [axi4lite_cover] engine_0: ##   0:00:00  Checking cover reachability in step 5..
+SBY 22:35:01 [axi4lite_cover] engine_0: ##   0:00:00  Reached cover statement in step 5 at axi4lite_formal.properties: axi4lite_properties.sv:316.13-316.57 (_witness_.check_cover_axi4lite_properties_sv_316_175)
+SBY 22:35:01 [axi4lite_cover] engine_0: ##   0:00:00  Writing trace to VCD file: engine_0/trace9.vcd
+SBY 22:35:01 [axi4lite_cover] engine_0: ##   0:00:00  Writing trace to Verilog testbench: engine_0/trace9_tb.v
+SBY 22:35:01 [axi4lite_cover] engine_0: ##   0:00:00  Writing trace to constraints file: engine_0/trace9.smtc
+SBY 22:35:01 [axi4lite_cover] engine_0: ##   0:00:00  Writing trace to Yosys witness file: engine_0/trace9.yw
+SBY 22:35:01 [axi4lite_cover] engine_0: ##   0:00:00  Checking cover reachability in step 5..
+SBY 22:35:01 [axi4lite_cover] engine_0: ##   0:00:00  Checking cover reachability in step 6..
+SBY 22:35:01 [axi4lite_cover] engine_0: ##   0:00:00  Checking cover reachability in step 7..
+SBY 22:35:01 [axi4lite_cover] engine_0: ##   0:00:00  Reached cover statement in step 7 at axi4lite_formal.properties: axi4lite_properties.sv:291.13-291.26 (_witness_.check_cover_axi4lite_properties_sv_291_143)
+SBY 22:35:01 [axi4lite_cover] engine_0: ##   0:00:00  Reached cover statement in step 7 at axi4lite_formal.properties: axi4lite_properties.sv:315.13-315.57 (_witness_.check_cover_axi4lite_properties_sv_315_172)
+SBY 22:35:01 [axi4lite_cover] engine_0: ##   0:00:00  Writing trace to VCD file: engine_0/trace10.vcd
+SBY 22:35:01 [axi4lite_cover] engine_0: ##   0:00:00  Writing trace to Verilog testbench: engine_0/trace10_tb.v
+SBY 22:35:01 [axi4lite_cover] engine_0: ##   0:00:00  Writing trace to constraints file: engine_0/trace10.smtc
+SBY 22:35:01 [axi4lite_cover] engine_0: ##   0:00:00  Writing trace to Yosys witness file: engine_0/trace10.yw
+SBY 22:35:01 [axi4lite_cover] engine_0: ##   0:00:00  Checking cover reachability in step 7..
+SBY 22:35:01 [axi4lite_cover] engine_0: ##   0:00:00  Reached cover statement in step 7 at axi4lite_formal.properties: axi4lite_properties.sv:298.13-298.50 (_witness_.check_cover_axi4lite_properties_sv_298_152)
+SBY 22:35:01 [axi4lite_cover] engine_0: ##   0:00:00  Writing trace to VCD file: engine_0/trace11.vcd
+SBY 22:35:01 [axi4lite_cover] engine_0: ##   0:00:00  Writing trace to Verilog testbench: engine_0/trace11_tb.v
+SBY 22:35:01 [axi4lite_cover] engine_0: ##   0:00:00  Writing trace to constraints file: engine_0/trace11.smtc
+SBY 22:35:01 [axi4lite_cover] engine_0: ##   0:00:00  Writing trace to Yosys witness file: engine_0/trace11.yw
+SBY 22:35:01 [axi4lite_cover] engine_0: ##   0:00:00  Status: passed
+SBY 22:35:01 [axi4lite_cover] engine_0: finished (returncode=0)
+SBY 22:35:01 [axi4lite_cover] engine_0: Status returned by engine: pass
+SBY 22:35:01 [axi4lite_cover] summary: Elapsed clock time [H:MM:SS (secs)]: 0:00:00 (0)
+SBY 22:35:01 [axi4lite_cover] summary: Elapsed process time [H:MM:SS (secs)]: 0:00:00 (0)
+SBY 22:35:01 [axi4lite_cover] summary: engine_0 (smtbmc boolector) returned pass
+SBY 22:35:01 [axi4lite_cover] summary: cover trace: axi4lite_cover/engine_0/trace0.vcd
+SBY 22:35:01 [axi4lite_cover] summary:   reached cover statement axi4lite_formal._witness_.check_cover_axi4lite_formal_sv_106_35 at axi4lite_formal.sv:106.9-106.39 step 3
+SBY 22:35:01 [axi4lite_cover] summary:   reached cover statement axi4lite_formal.properties._witness_.check_cover_axi4lite_properties_sv_289_141 at axi4lite_properties.sv:289.13-289.27 step 3
+SBY 22:35:01 [axi4lite_cover] summary:   reached cover statement axi4lite_formal.properties._witness_.check_cover_axi4lite_properties_sv_290_142 at axi4lite_properties.sv:290.13-290.26 step 3
+SBY 22:35:01 [axi4lite_cover] summary:   reached cover statement axi4lite_formal.properties._witness_.check_cover_axi4lite_properties_sv_292_144 at axi4lite_properties.sv:292.13-292.27 step 3
+SBY 22:35:01 [axi4lite_cover] summary:   reached cover statement axi4lite_formal.properties._witness_.check_cover_axi4lite_properties_sv_303_161 at axi4lite_properties.sv:303.13-303.37 step 3
+SBY 22:35:01 [axi4lite_cover] summary: cover trace: axi4lite_cover/engine_0/trace1.vcd
+SBY 22:35:01 [axi4lite_cover] summary:   reached cover statement axi4lite_formal.properties._witness_.check_cover_axi4lite_properties_sv_308_167 at axi4lite_properties.sv:308.13-312.14 step 3
+SBY 22:35:01 [axi4lite_cover] summary: cover trace: axi4lite_cover/engine_0/trace10.vcd
+SBY 22:35:01 [axi4lite_cover] summary:   reached cover statement axi4lite_formal.properties._witness_.check_cover_axi4lite_properties_sv_291_143 at axi4lite_properties.sv:291.13-291.26 step 7
+SBY 22:35:01 [axi4lite_cover] summary:   reached cover statement axi4lite_formal.properties._witness_.check_cover_axi4lite_properties_sv_315_172 at axi4lite_properties.sv:315.13-315.57 step 7
+SBY 22:35:01 [axi4lite_cover] summary: cover trace: axi4lite_cover/engine_0/trace11.vcd
+SBY 22:35:01 [axi4lite_cover] summary:   reached cover statement axi4lite_formal.properties._witness_.check_cover_axi4lite_properties_sv_298_152 at axi4lite_properties.sv:298.13-298.50 step 7
+SBY 22:35:01 [axi4lite_cover] summary: cover trace: axi4lite_cover/engine_0/trace2.vcd
+SBY 22:35:01 [axi4lite_cover] summary:   reached cover statement axi4lite_formal.properties._witness_.check_cover_axi4lite_properties_sv_305_165 at axi4lite_properties.sv:305.13-305.37 step 5
+SBY 22:35:01 [axi4lite_cover] summary: and 7 further traces
+SBY 22:35:01 [axi4lite_cover] summary: see axi4lite_cover/PASS for a complete summary
+SBY 22:35:01 [axi4lite_cover] DONE (PASS, rc=0)
