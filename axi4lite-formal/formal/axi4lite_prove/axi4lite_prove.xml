@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+<testsuite timestamp="2026-07-14T16:51:44" hostname="Harshas-MacBook-Air.local" package="axi4lite" id="0" name="prove" tests="18" errors="0" failures="0" time="0" skipped="11">
+<properties>
+<property name="os" value="Darwin"/>
+<property name="expect" value="PASS"/>
+<property name="status" value="PASS"/>
+</properties>
+<testcase classname="prove" name="build execution" time="0">
+</testcase>
+<testcase classname="prove" name="Property ASSERT in axi4lite_formal at axi4lite_formal.sv:101.13-101.34" time="0" type="ASSERT" location="axi4lite_formal.sv:101.13-101.34" id="_witness_.check_assert_axi4lite_formal_sv_101_30">
+</testcase>
+<testcase classname="prove" name="Property ASSERT in axi4lite_formal at axi4lite_formal.sv:102.13-102.34" time="0" type="ASSERT" location="axi4lite_formal.sv:102.13-102.34" id="_witness_.check_assert_axi4lite_formal_sv_102_32">
+</testcase>
+<testcase classname="prove" name="Property COVER in axi4lite_formal at axi4lite_formal.sv:106.9-106.39" time="0" type="COVER" location="axi4lite_formal.sv:106.9-106.39" id="_witness_.check_cover_axi4lite_formal_sv_106_34">
+<skipped />
+</testcase>
+<testcase classname="prove" name="Property ASSERT in axi4lite_formal/properties at axi4lite_properties.sv:58.17-58.37" time="0" type="ASSERT" location="axi4lite_properties.sv:58.17-58.37" id="_witness_.check_assert_axi4lite_properties_sv_58_77">
+</testcase>
+<testcase classname="prove" name="Property ASSERT in axi4lite_formal/properties at axi4lite_properties.sv:59.17-59.58" time="0" type="ASSERT" location="axi4lite_properties.sv:59.17-59.58" id="_witness_.check_assert_axi4lite_properties_sv_59_78">
+</testcase>
+<testcase classname="prove" name="Property ASSERT in axi4lite_formal/properties at axi4lite_properties.sv:64.17-64.37" time="0" type="ASSERT" location="axi4lite_properties.sv:64.17-64.37" id="_witness_.check_assert_axi4lite_properties_sv_64_80">
+</testcase>
+<testcase classname="prove" name="Property ASSERT in axi4lite_formal/properties at axi4lite_properties.sv:65.17-65.58" time="0" type="ASSERT" location="axi4lite_properties.sv:65.17-65.58" id="_witness_.check_assert_axi4lite_properties_sv_65_81">
+</testcase>
+<testcase classname="prove" name="Property ASSERT in axi4lite_formal/properties at axi4lite_properties.sv:66.17-66.58" time="0" type="ASSERT" location="axi4lite_properties.sv:66.17-66.58" id="_witness_.check_assert_axi4lite_properties_sv_66_83">
+</testcase>
+<testcase classname="prove" name="Property COVER in axi4lite_formal/properties at axi4lite_properties.sv:72.13-72.50" time="0" type="COVER" location="axi4lite_properties.sv:72.13-72.50" id="_witness_.check_cover_axi4lite_properties_sv_72_85">
+<skipped />
+</testcase>
+<testcase classname="prove" name="Property COVER in axi4lite_formal/properties at axi4lite_properties.sv:73.13-73.49" time="0" type="COVER" location="axi4lite_properties.sv:73.13-73.49" id="_witness_.check_cover_axi4lite_properties_sv_73_87">
+<skipped />
+</testcase>
+<testcase classname="prove" name="Property COVER in axi4lite_formal/properties at axi4lite_properties.sv:74.13-74.49" time="0" type="COVER" location="axi4lite_properties.sv:74.13-74.49" id="_witness_.check_cover_axi4lite_properties_sv_74_89">
+<skipped />
+</testcase>
+<testcase classname="prove" name="Property COVER in axi4lite_formal/properties at axi4lite_properties.sv:75.13-75.50" time="0" type="COVER" location="axi4lite_properties.sv:75.13-75.50" id="_witness_.check_cover_axi4lite_properties_sv_75_91">
+<skipped />
+</testcase>
+<testcase classname="prove" name="Property COVER in axi4lite_formal/properties at axi4lite_properties.sv:76.13-76.49" time="0" type="COVER" location="axi4lite_properties.sv:76.13-76.49" id="_witness_.check_cover_axi4lite_properties_sv_76_93">
+<skipped />
+</testcase>
+<testcase classname="prove" name="Property COVER in axi4lite_formal/properties at axi4lite_properties.sv:78.13-78.51" time="0" type="COVER" location="axi4lite_properties.sv:78.13-78.51" id="_witness_.check_cover_axi4lite_properties_sv_78_95">
+<skipped />
+</testcase>
+<testcase classname="prove" name="Property COVER in axi4lite_formal/properties at axi4lite_properties.sv:79.13-79.50" time="0" type="COVER" location="axi4lite_properties.sv:79.13-79.50" id="_witness_.check_cover_axi4lite_properties_sv_79_98">
+<skipped />
+</testcase>
+<testcase classname="prove" name="Property COVER in axi4lite_formal/properties at axi4lite_properties.sv:80.13-80.50" time="0" type="COVER" location="axi4lite_properties.sv:80.13-80.50" id="_witness_.check_cover_axi4lite_properties_sv_80_101">
+<skipped />
+</testcase>
+<testcase classname="prove" name="Property COVER in axi4lite_formal/properties at axi4lite_properties.sv:81.13-81.51" time="0" type="COVER" location="axi4lite_properties.sv:81.13-81.51" id="_witness_.check_cover_axi4lite_properties_sv_81_104">
+<skipped />
+</testcase>
+<testcase classname="prove" name="Property COVER in axi4lite_formal/properties at axi4lite_properties.sv:82.13-82.50" time="0" type="COVER" location="axi4lite_properties.sv:82.13-82.50" id="_witness_.check_cover_axi4lite_properties_sv_82_107">
+<skipped />
+</testcase>
+<system-out>SBY 16:51:43 [axi4lite_prove] Removing directory '/Users/harsha/Desktop/untitled folder 2/axi4lite-formal/formal/axi4lite_prove'.
+SBY 16:51:43 [axi4lite_prove] Copy '/Users/harsha/Desktop/untitled folder 2/axi4lite-formal/formal/../rtl/axi4lite_regs.sv' to '/Users/harsha/Desktop/untitled folder 2/axi4lite-formal/formal/axi4lite_prove/src/axi4lite_regs.sv'.
+SBY 16:51:43 [axi4lite_prove] Copy '/Users/harsha/Desktop/untitled folder 2/axi4lite-formal/formal/axi4lite_properties.sv' to '/Users/harsha/Desktop/untitled folder 2/axi4lite-formal/formal/axi4lite_prove/src/axi4lite_properties.sv'.
+SBY 16:51:43 [axi4lite_prove] Copy '/Users/harsha/Desktop/untitled folder 2/axi4lite-formal/formal/axi4lite_formal.sv' to '/Users/harsha/Desktop/untitled folder 2/axi4lite-formal/formal/axi4lite_prove/src/axi4lite_formal.sv'.
+SBY 16:51:43 [axi4lite_prove] engine_0: smtbmc boolector
+SBY 16:51:43 [axi4lite_prove] base: starting process &quot;cd axi4lite_prove/src; yosys -ql ../model/design.log ../model/design.ys&quot;
+SBY 16:51:43 [axi4lite_prove] base: finished (returncode=0)
+SBY 16:51:43 [axi4lite_prove] prep: starting process &quot;cd axi4lite_prove/model; yosys -ql design_prep.log design_prep.ys&quot;
+SBY 16:51:43 [axi4lite_prove] prep: finished (returncode=0)
+SBY 16:51:43 [axi4lite_prove] smt2: starting process &quot;cd axi4lite_prove/model; yosys -ql design_smt2.log design_smt2.ys&quot;
+SBY 16:51:43 [axi4lite_prove] smt2: finished (returncode=0)
+SBY 16:51:43 [axi4lite_prove] engine_0.basecase: starting process &quot;cd axi4lite_prove; yosys-smtbmc -s boolector --presat --unroll --noprogress -t 30  --append 0 --dump-vcd engine_0/trace.vcd --dump-yw engine_0/trace.yw --dump-vlogtb engine_0/trace_tb.v --dump-smtc engine_0/trace.smtc model/design_smt2.smt2&quot;
+SBY 16:51:43 [axi4lite_prove] engine_0.induction: starting process &quot;cd axi4lite_prove; yosys-smtbmc -s boolector --presat --unroll -i --noprogress -t 30  --append 0 --dump-vcd engine_0/trace_induct.vcd --dump-yw engine_0/trace_induct.yw --dump-vlogtb engine_0/trace_induct_tb.v --dump-smtc engine_0/trace_induct.smtc model/design_smt2.smt2&quot;
+SBY 16:51:43 [axi4lite_prove] engine_0.basecase: ##   0:00:00  Solver: boolector
+SBY 16:51:43 [axi4lite_prove] engine_0.induction: ##   0:00:00  Solver: boolector
+SBY 16:51:43 [axi4lite_prove] engine_0.induction: ##   0:00:00  Trying induction in step 30..
+SBY 16:51:43 [axi4lite_prove] engine_0.basecase: ##   0:00:00  Checking assumptions in step 0..
+SBY 16:51:43 [axi4lite_prove] engine_0.basecase: ##   0:00:00  Checking assertions in step 0..
+SBY 16:51:43 [axi4lite_prove] engine_0.induction: ##   0:00:00  Trying induction in step 29..
+SBY 16:51:43 [axi4lite_prove] engine_0.basecase: ##   0:00:00  Checking assumptions in step 1..
+SBY 16:51:43 [axi4lite_prove] engine_0.basecase: ##   0:00:00  Checking assertions in step 1..
+SBY 16:51:43 [axi4lite_prove] engine_0.basecase: ##   0:00:00  Checking assumptions in step 2..
+SBY 16:51:43 [axi4lite_prove] engine_0.induction: ##   0:00:00  Trying induction in step 28..
+SBY 16:51:43 [axi4lite_prove] engine_0.basecase: ##   0:00:00  Checking assertions in step 2..
+SBY 16:51:43 [axi4lite_prove] engine_0.basecase: ##   0:00:00  Checking assumptions in step 3..
+SBY 16:51:43 [axi4lite_prove] engine_0.basecase: ##   0:00:00  Checking assertions in step 3..
+SBY 16:51:43 [axi4lite_prove] engine_0.induction: ##   0:00:00  Trying induction in step 27..
+SBY 16:51:43 [axi4lite_prove] engine_0.basecase: ##   0:00:00  Checking assumptions in step 4..
+SBY 16:51:43 [axi4lite_prove] engine_0.basecase: ##   0:00:00  Checking assertions in step 4..
+SBY 16:51:43 [axi4lite_prove] engine_0.induction: ##   0:00:00  Temporal induction successful.
+SBY 16:51:43 [axi4lite_prove] engine_0.induction: ##   0:00:00  Status: passed
+SBY 16:51:43 [axi4lite_prove] engine_0.basecase: ##   0:00:00  Checking assumptions in step 5..
+SBY 16:51:43 [axi4lite_prove] engine_0.basecase: ##   0:00:00  Checking assertions in step 5..
+SBY 16:51:43 [axi4lite_prove] engine_0.induction: finished (returncode=0)
+SBY 16:51:43 [axi4lite_prove] engine_0.induction: Status returned by engine for induction: pass
+SBY 16:51:43 [axi4lite_prove] engine_0.basecase: ##   0:00:00  Checking assumptions in step 6..
+SBY 16:51:43 [axi4lite_prove] engine_0.basecase: ##   0:00:00  Checking assertions in step 6..
+SBY 16:51:43 [axi4lite_prove] engine_0.basecase: ##   0:00:00  Checking assumptions in step 7..
+SBY 16:51:43 [axi4lite_prove] engine_0.basecase: ##   0:00:00  Checking assertions in step 7..
+SBY 16:51:43 [axi4lite_prove] engine_0.basecase: ##   0:00:00  Checking assumptions in step 8..
+SBY 16:51:43 [axi4lite_prove] engine_0.basecase: ##   0:00:00  Checking assertions in step 8..
+SBY 16:51:43 [axi4lite_prove] engine_0.basecase: ##   0:00:00  Checking assumptions in step 9..
+SBY 16:51:43 [axi4lite_prove] engine_0.basecase: ##   0:00:00  Checking assertions in step 9..
+SBY 16:51:43 [axi4lite_prove] engine_0.basecase: ##   0:00:00  Checking assumptions in step 10..
+SBY 16:51:43 [axi4lite_prove] engine_0.basecase: ##   0:00:00  Checking assertions in step 10..
+SBY 16:51:43 [axi4lite_prove] engine_0.basecase: ##   0:00:00  Checking assumptions in step 11..
+SBY 16:51:43 [axi4lite_prove] engine_0.basecase: ##   0:00:00  Checking assertions in step 11..
+SBY 16:51:43 [axi4lite_prove] engine_0.basecase: ##   0:00:00  Checking assumptions in step 12..
+SBY 16:51:43 [axi4lite_prove] engine_0.basecase: ##   0:00:00  Checking assertions in step 12..
+SBY 16:51:43 [axi4lite_prove] engine_0.basecase: ##   0:00:00  Checking assumptions in step 13..
+SBY 16:51:43 [axi4lite_prove] engine_0.basecase: ##   0:00:00  Checking assertions in step 13..
+SBY 16:51:43 [axi4lite_prove] engine_0.basecase: ##   0:00:00  Checking assumptions in step 14..
+SBY 16:51:43 [axi4lite_prove] engine_0.basecase: ##   0:00:00  Checking assertions in step 14..
+SBY 16:51:43 [axi4lite_prove] engine_0.basecase: ##   0:00:00  Checking assumptions in step 15..
+SBY 16:51:43 [axi4lite_prove] engine_0.basecase: ##   0:00:00  Checking assertions in step 15..
+SBY 16:51:43 [axi4lite_prove] engine_0.basecase: ##   0:00:00  Checking assumptions in step 16..
+SBY 16:51:43 [axi4lite_prove] engine_0.basecase: ##   0:00:00  Checking assertions in step 16..
+SBY 16:51:43 [axi4lite_prove] engine_0.basecase: ##   0:00:00  Checking assumptions in step 17..
+SBY 16:51:43 [axi4lite_prove] engine_0.basecase: ##   0:00:00  Checking assertions in step 17..
+SBY 16:51:43 [axi4lite_prove] engine_0.basecase: ##   0:00:00  Checking assumptions in step 18..
+SBY 16:51:43 [axi4lite_prove] engine_0.basecase: ##   0:00:00  Checking assertions in step 18..
+SBY 16:51:43 [axi4lite_prove] engine_0.basecase: ##   0:00:00  Checking assumptions in step 19..
+SBY 16:51:43 [axi4lite_prove] engine_0.basecase: ##   0:00:00  Checking assertions in step 19..
+SBY 16:51:43 [axi4lite_prove] engine_0.basecase: ##   0:00:00  Checking assumptions in step 20..
+SBY 16:51:43 [axi4lite_prove] engine_0.basecase: ##   0:00:00  Checking assertions in step 20..
+SBY 16:51:43 [axi4lite_prove] engine_0.basecase: ##   0:00:00  Checking assumptions in step 21..
+SBY 16:51:43 [axi4lite_prove] engine_0.basecase: ##   0:00:00  Checking assertions in step 21..
+SBY 16:51:43 [axi4lite_prove] engine_0.basecase: ##   0:00:00  Checking assumptions in step 22..
+SBY 16:51:43 [axi4lite_prove] engine_0.basecase: ##   0:00:00  Checking assertions in step 22..
+SBY 16:51:43 [axi4lite_prove] engine_0.basecase: ##   0:00:00  Checking assumptions in step 23..
+SBY 16:51:43 [axi4lite_prove] engine_0.basecase: ##   0:00:00  Checking assertions in step 23..
+SBY 16:51:43 [axi4lite_prove] engine_0.basecase: ##   0:00:00  Checking assumptions in step 24..
+SBY 16:51:43 [axi4lite_prove] engine_0.basecase: ##   0:00:00  Checking assertions in step 24..
+SBY 16:51:43 [axi4lite_prove] engine_0.basecase: ##   0:00:00  Checking assumptions in step 25..
+SBY 16:51:43 [axi4lite_prove] engine_0.basecase: ##   0:00:00  Checking assertions in step 25..
+SBY 16:51:43 [axi4lite_prove] engine_0.basecase: ##   0:00:00  Checking assumptions in step 26..
+SBY 16:51:44 [axi4lite_prove] engine_0.basecase: ##   0:00:00  Checking assertions in step 26..
+SBY 16:51:44 [axi4lite_prove] engine_0.basecase: ##   0:00:00  Checking assumptions in step 27..
+SBY 16:51:44 [axi4lite_prove] engine_0.basecase: ##   0:00:00  Checking assertions in step 27..
+SBY 16:51:44 [axi4lite_prove] engine_0.basecase: ##   0:00:00  Checking assumptions in step 28..
+SBY 16:51:44 [axi4lite_prove] engine_0.basecase: ##   0:00:00  Checking assertions in step 28..
+SBY 16:51:44 [axi4lite_prove] engine_0.basecase: ##   0:00:00  Checking assumptions in step 29..
+SBY 16:51:44 [axi4lite_prove] engine_0.basecase: ##   0:00:00  Checking assertions in step 29..
+SBY 16:51:44 [axi4lite_prove] engine_0.basecase: ##   0:00:00  Status: passed
+SBY 16:51:44 [axi4lite_prove] engine_0.basecase: finished (returncode=0)
+SBY 16:51:44 [axi4lite_prove] engine_0.basecase: Status returned by engine for basecase: pass
+SBY 16:51:44 [axi4lite_prove] summary: Elapsed clock time [H:MM:SS (secs)]: 0:00:00 (0)
+SBY 16:51:44 [axi4lite_prove] summary: Elapsed process time [H:MM:SS (secs)]: 0:00:00 (0)
+SBY 16:51:44 [axi4lite_prove] summary: engine_0 (smtbmc boolector) returned pass for basecase
+SBY 16:51:44 [axi4lite_prove] summary: engine_0 (smtbmc boolector) returned pass for induction
+SBY 16:51:44 [axi4lite_prove] summary: engine_0 did not produce any traces
+SBY 16:51:44 [axi4lite_prove] summary: successful proof by k-induction.
+SBY 16:51:44 [axi4lite_prove] DONE (PASS, rc=0)
+</system-out>
+<system-err>
+</system-err>
+</testsuite>
+</testsuites>

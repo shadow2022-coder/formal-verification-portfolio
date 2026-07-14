@@ -1,0 +1,572 @@
+
+ /----------------------------------------------------------------------------\
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |  Copyright (C) 2012 - 2026  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |  Distributed under an ISC-like license, type "license" to see terms        |
+ \----------------------------------------------------------------------------/
+ Yosys 0.67+31 (git sha1 22c15a7ec-dirty, Release, Clang /usr/local/osxcross/target/bin/aarch64-apple-darwin23.5-clang++ 18.1.8)
+
+-- Executing script file `../model/design.ys' --
+
+1. Executing Verilog-2005 frontend: axi4lite_regs.sv
+Parsing formal SystemVerilog input from `axi4lite_regs.sv' to AST representation.
+Storing AST representation for module `$abstract\axi4lite_regs'.
+Successfully finished Verilog frontend.
+
+2. Executing Verilog-2005 frontend: axi4lite_properties.sv
+Parsing formal SystemVerilog input from `axi4lite_properties.sv' to AST representation.
+Storing AST representation for module `$abstract\axi4lite_properties'.
+Successfully finished Verilog frontend.
+
+3. Executing Verilog-2005 frontend: axi4lite_formal.sv
+Parsing formal SystemVerilog input from `axi4lite_formal.sv' to AST representation.
+Storing AST representation for module `$abstract\axi4lite_formal'.
+Successfully finished Verilog frontend.
+
+4. Executing PREP pass.
+
+4.1. Executing HIERARCHY pass (managing design hierarchy).
+
+4.2. Executing AST frontend in derive mode using pre-parsed AST for module `\axi4lite_formal'.
+Generating RTLIL representation for module `\axi4lite_formal'.
+
+4.2.1. Analyzing design hierarchy..
+Top module:  \axi4lite_formal
+
+4.2.2. Executing AST frontend in derive mode using pre-parsed AST for module `\axi4lite_properties'.
+Generating RTLIL representation for module `\axi4lite_properties'.
+
+4.2.3. Executing AST frontend in derive mode using pre-parsed AST for module `\axi4lite_regs'.
+Generating RTLIL representation for module `\axi4lite_regs'.
+
+4.2.4. Analyzing design hierarchy..
+Top module:  \axi4lite_formal
+Used module:     \axi4lite_properties
+Used module:     \axi4lite_regs
+
+4.2.5. Analyzing design hierarchy..
+Top module:  \axi4lite_formal
+Used module:     \axi4lite_properties
+Used module:     \axi4lite_regs
+Removing unused module `$abstract\axi4lite_formal'.
+Removing unused module `$abstract\axi4lite_properties'.
+Removing unused module `$abstract\axi4lite_regs'.
+Removed 3 unused modules.
+Module axi4lite_properties directly or indirectly contains formal properties -> setting "keep" attribute.
+Module axi4lite_formal directly or indirectly contains formal properties -> setting "keep" attribute.
+
+4.3. Executing PROC pass (convert processes to netlists).
+
+4.3.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+4.3.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Marked 3 switch rules as full_case in process $proc$axi4lite_regs.sv:256$155 in module axi4lite_regs.
+Marked 3 switch rules as full_case in process $proc$axi4lite_regs.sv:147$129 in module axi4lite_regs.
+Marked 1 switch rules as full_case in process $proc$axi4lite_formal.sv:90$22 in module axi4lite_formal.
+Removed a total of 0 dead cases.
+
+4.3.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 1 redundant assignment.
+Promoted 25 assignments to connections.
+
+4.3.4. Executing PROC_INIT pass (extract init attributes).
+Found init rule in `\axi4lite_properties.$proc$axi4lite_properties.sv:28$120'.
+  Set init value: \f_past_valid = 1'0
+Found init rule in `\axi4lite_formal.$proc$axi4lite_formal.sv:88$37'.
+  Set init value: \f_past_valid = 1'0
+Found init rule in `\axi4lite_formal.$proc$axi4lite_formal.sv:4$36'.
+  Set init value: \aclk = 1'0
+
+4.3.5. Executing PROC_ARST pass (detect async resets in processes).
+
+4.3.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+<suppressed ~35 debug messages>
+
+4.3.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `\axi4lite_regs.$proc$axi4lite_regs.sv:256$155'.
+     1/3: $0\s_axi_rvalid[0:0]
+     2/3: $0\s_axi_rresp[1:0]
+     3/3: $0\s_axi_rdata[31:0]
+Creating decoders for process `\axi4lite_regs.$proc$axi4lite_regs.sv:147$129'.
+     1/35: $0\data1_reg[31:0] [31:24]
+     2/35: $0\data1_reg[31:0] [23:16]
+     3/35: $0\data1_reg[31:0] [15:8]
+     4/35: $0\data1_reg[31:0] [7:0]
+     5/35: $0\data0_reg[31:0] [23:16]
+     6/35: $0\data0_reg[31:0] [15:8]
+     7/35: $0\data0_reg[31:0] [7:0]
+     8/35: $0\status_reg[31:0] [23:16]
+     9/35: $0\status_reg[31:0] [15:8]
+    10/35: $0\status_reg[31:0] [7:0]
+    11/35: $0\control_reg[31:0] [23:16]
+    12/35: $0\control_reg[31:0] [15:8]
+    13/35: $0\control_reg[31:0] [7:0]
+    14/35: $3$fordecl_block$7.byte_index[31:0]$151
+    15/35: $3$fordecl_block$5.byte_index[31:0]$150
+    16/35: $3$fordecl_block$3.byte_index[31:0]$149
+    17/35: $2$fordecl_block$7.byte_index[31:0]$147
+    18/35: $2$fordecl_block$5.byte_index[31:0]$146
+    19/35: $2$fordecl_block$3.byte_index[31:0]$145
+    20/35: $2$fordecl_block$1.byte_index[31:0]$144
+    21/35: $1$fordecl_block$7.byte_index[31:0]$138
+    22/35: $1$fordecl_block$5.byte_index[31:0]$137
+    23/35: $1$fordecl_block$3.byte_index[31:0]$136
+    24/35: $1$fordecl_block$1.byte_index[31:0]$135
+    25/35: $0\wstrb_hold[3:0]
+    26/35: $0\wdata_hold[31:0]
+    27/35: $0\w_pending[0:0]
+    28/35: $0\awaddr_hold[3:0]
+    29/35: $0\aw_pending[0:0]
+    30/35: $0\data0_reg[31:0] [31:24]
+    31/35: $0\status_reg[31:0] [31:24]
+    32/35: $0\control_reg[31:0] [31:24]
+    33/35: $3$fordecl_block$1.byte_index[31:0]$148
+    34/35: $0\s_axi_bvalid[0:0]
+    35/35: $0\s_axi_bresp[1:0]
+Creating decoders for process `\axi4lite_properties.$proc$axi4lite_properties.sv:28$120'.
+Creating decoders for process `\axi4lite_properties.$proc$axi4lite_properties.sv:30$51'.
+     1/22: $cover$axi4lite_properties.sv:82$107_EN
+     2/22: $cover$axi4lite_properties.sv:81$104_EN
+     3/22: $cover$axi4lite_properties.sv:80$101_EN
+     4/22: $cover$axi4lite_properties.sv:79$98_EN
+     5/22: $cover$axi4lite_properties.sv:78$95_EN
+     6/22: $cover$axi4lite_properties.sv:76$93_EN
+     7/22: $cover$axi4lite_properties.sv:75$91_EN
+     8/22: $cover$axi4lite_properties.sv:74$89_EN
+     9/22: $cover$axi4lite_properties.sv:73$87_EN
+    10/22: $cover$axi4lite_properties.sv:72$85_EN
+    11/22: $assert$axi4lite_properties.sv:66$83_EN
+    12/22: $assert$axi4lite_properties.sv:65$81_EN
+    13/22: $assert$axi4lite_properties.sv:64$80_EN
+    14/22: $assert$axi4lite_properties.sv:59$78_EN
+    15/22: $assert$axi4lite_properties.sv:58$77_EN
+    16/22: $assume$axi4lite_properties.sv:52$75_EN
+    17/22: $assume$axi4lite_properties.sv:51$74_EN
+    18/22: $assume$axi4lite_properties.sv:46$72_EN
+    19/22: $assume$axi4lite_properties.sv:45$70_EN
+    20/22: $assume$axi4lite_properties.sv:44$69_EN
+    21/22: $assume$axi4lite_properties.sv:39$67_EN
+    22/22: $assume$axi4lite_properties.sv:38$66_EN
+Creating decoders for process `\axi4lite_formal.$proc$axi4lite_formal.sv:88$37'.
+Creating decoders for process `\axi4lite_formal.$proc$axi4lite_formal.sv:4$36'.
+Creating decoders for process `\axi4lite_formal.$proc$axi4lite_formal.sv:90$22'.
+     1/4: $assert$axi4lite_formal.sv:102$32_EN
+     2/4: $assert$axi4lite_formal.sv:101$30_EN
+     3/4: $assume$axi4lite_formal.sv:97$27_EN
+     4/4: $assume$axi4lite_formal.sv:95$25_EN
+Creating decoders for process `\axi4lite_formal.$proc$axi4lite_formal.sv:6$10'.
+
+4.3.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+
+4.3.9. Executing PROC_DFF pass (convert process syncs to FFs).
+Creating register for signal `\axi4lite_regs.\s_axi_rdata' using process `\axi4lite_regs.$proc$axi4lite_regs.sv:256$155'.
+  created $dff cell `$procdff$598' with positive edge clock.
+Creating register for signal `\axi4lite_regs.\s_axi_rresp' using process `\axi4lite_regs.$proc$axi4lite_regs.sv:256$155'.
+  created $dff cell `$procdff$599' with positive edge clock.
+Creating register for signal `\axi4lite_regs.\s_axi_rvalid' using process `\axi4lite_regs.$proc$axi4lite_regs.sv:256$155'.
+  created $dff cell `$procdff$600' with positive edge clock.
+Creating register for signal `\axi4lite_regs.\s_axi_bresp' using process `\axi4lite_regs.$proc$axi4lite_regs.sv:147$129'.
+  created $dff cell `$procdff$601' with positive edge clock.
+Creating register for signal `\axi4lite_regs.\s_axi_bvalid' using process `\axi4lite_regs.$proc$axi4lite_regs.sv:147$129'.
+  created $dff cell `$procdff$602' with positive edge clock.
+Creating register for signal `\axi4lite_regs.\control_reg' using process `\axi4lite_regs.$proc$axi4lite_regs.sv:147$129'.
+  created $dff cell `$procdff$603' with positive edge clock.
+Creating register for signal `\axi4lite_regs.\status_reg' using process `\axi4lite_regs.$proc$axi4lite_regs.sv:147$129'.
+  created $dff cell `$procdff$604' with positive edge clock.
+Creating register for signal `\axi4lite_regs.\data0_reg' using process `\axi4lite_regs.$proc$axi4lite_regs.sv:147$129'.
+  created $dff cell `$procdff$605' with positive edge clock.
+Creating register for signal `\axi4lite_regs.\data1_reg' using process `\axi4lite_regs.$proc$axi4lite_regs.sv:147$129'.
+  created $dff cell `$procdff$606' with positive edge clock.
+Creating register for signal `\axi4lite_regs.\aw_pending' using process `\axi4lite_regs.$proc$axi4lite_regs.sv:147$129'.
+  created $dff cell `$procdff$607' with positive edge clock.
+Creating register for signal `\axi4lite_regs.\awaddr_hold' using process `\axi4lite_regs.$proc$axi4lite_regs.sv:147$129'.
+  created $dff cell `$procdff$608' with positive edge clock.
+Creating register for signal `\axi4lite_regs.\w_pending' using process `\axi4lite_regs.$proc$axi4lite_regs.sv:147$129'.
+  created $dff cell `$procdff$609' with positive edge clock.
+Creating register for signal `\axi4lite_regs.\wdata_hold' using process `\axi4lite_regs.$proc$axi4lite_regs.sv:147$129'.
+  created $dff cell `$procdff$610' with positive edge clock.
+Creating register for signal `\axi4lite_regs.\wstrb_hold' using process `\axi4lite_regs.$proc$axi4lite_regs.sv:147$129'.
+  created $dff cell `$procdff$611' with positive edge clock.
+Creating register for signal `\axi4lite_regs.$fordecl_block$1.byte_index' using process `\axi4lite_regs.$proc$axi4lite_regs.sv:147$129'.
+  created $dff cell `$procdff$612' with positive edge clock.
+Creating register for signal `\axi4lite_regs.$fordecl_block$3.byte_index' using process `\axi4lite_regs.$proc$axi4lite_regs.sv:147$129'.
+  created $dff cell `$procdff$613' with positive edge clock.
+Creating register for signal `\axi4lite_regs.$fordecl_block$5.byte_index' using process `\axi4lite_regs.$proc$axi4lite_regs.sv:147$129'.
+  created $dff cell `$procdff$614' with positive edge clock.
+Creating register for signal `\axi4lite_regs.$fordecl_block$7.byte_index' using process `\axi4lite_regs.$proc$axi4lite_regs.sv:147$129'.
+  created $dff cell `$procdff$615' with positive edge clock.
+Creating register for signal `\axi4lite_properties.\f_past_valid' using process `\axi4lite_properties.$proc$axi4lite_properties.sv:30$51'.
+  created $dff cell `$procdff$616' with positive edge clock.
+Creating register for signal `\axi4lite_properties.$past$axi4lite_properties.sv:33$38$0' using process `\axi4lite_properties.$proc$axi4lite_properties.sv:30$51'.
+  created $dff cell `$procdff$617' with positive edge clock.
+Creating register for signal `\axi4lite_properties.$past$axi4lite_properties.sv:37$39$0' using process `\axi4lite_properties.$proc$axi4lite_properties.sv:30$51'.
+  created $dff cell `$procdff$618' with positive edge clock.
+Creating register for signal `\axi4lite_properties.$past$axi4lite_properties.sv:39$40$0' using process `\axi4lite_properties.$proc$axi4lite_properties.sv:30$51'.
+  created $dff cell `$procdff$619' with positive edge clock.
+Creating register for signal `\axi4lite_properties.$past$axi4lite_properties.sv:43$41$0' using process `\axi4lite_properties.$proc$axi4lite_properties.sv:30$51'.
+  created $dff cell `$procdff$620' with positive edge clock.
+Creating register for signal `\axi4lite_properties.$past$axi4lite_properties.sv:45$42$0' using process `\axi4lite_properties.$proc$axi4lite_properties.sv:30$51'.
+  created $dff cell `$procdff$621' with positive edge clock.
+Creating register for signal `\axi4lite_properties.$past$axi4lite_properties.sv:46$43$0' using process `\axi4lite_properties.$proc$axi4lite_properties.sv:30$51'.
+  created $dff cell `$procdff$622' with positive edge clock.
+Creating register for signal `\axi4lite_properties.$past$axi4lite_properties.sv:50$44$0' using process `\axi4lite_properties.$proc$axi4lite_properties.sv:30$51'.
+  created $dff cell `$procdff$623' with positive edge clock.
+Creating register for signal `\axi4lite_properties.$past$axi4lite_properties.sv:52$45$0' using process `\axi4lite_properties.$proc$axi4lite_properties.sv:30$51'.
+  created $dff cell `$procdff$624' with positive edge clock.
+Creating register for signal `\axi4lite_properties.$past$axi4lite_properties.sv:57$46$0' using process `\axi4lite_properties.$proc$axi4lite_properties.sv:30$51'.
+  created $dff cell `$procdff$625' with positive edge clock.
+Creating register for signal `\axi4lite_properties.$past$axi4lite_properties.sv:59$47$0' using process `\axi4lite_properties.$proc$axi4lite_properties.sv:30$51'.
+  created $dff cell `$procdff$626' with positive edge clock.
+Creating register for signal `\axi4lite_properties.$past$axi4lite_properties.sv:63$48$0' using process `\axi4lite_properties.$proc$axi4lite_properties.sv:30$51'.
+  created $dff cell `$procdff$627' with positive edge clock.
+Creating register for signal `\axi4lite_properties.$past$axi4lite_properties.sv:65$49$0' using process `\axi4lite_properties.$proc$axi4lite_properties.sv:30$51'.
+  created $dff cell `$procdff$628' with positive edge clock.
+Creating register for signal `\axi4lite_properties.$past$axi4lite_properties.sv:66$50$0' using process `\axi4lite_properties.$proc$axi4lite_properties.sv:30$51'.
+  created $dff cell `$procdff$629' with positive edge clock.
+Creating register for signal `\axi4lite_formal.\f_past_valid' using process `\axi4lite_formal.$proc$axi4lite_formal.sv:90$22'.
+  created $dff cell `$procdff$630' with positive edge clock.
+Creating register for signal `\axi4lite_formal.$past$axi4lite_formal.sv:100$9$0' using process `\axi4lite_formal.$proc$axi4lite_formal.sv:90$22'.
+  created $dff cell `$procdff$631' with positive edge clock.
+Creating register for signal `\axi4lite_formal.\aclk' using process `\axi4lite_formal.$proc$axi4lite_formal.sv:6$10'.
+  created $ff cell `$procdff$632' with global clock.
+
+4.3.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+4.3.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Found and cleaned up 4 empty switches in `\axi4lite_regs.$proc$axi4lite_regs.sv:256$155'.
+Removing empty process `axi4lite_regs.$proc$axi4lite_regs.sv:256$155'.
+Found and cleaned up 22 empty switches in `\axi4lite_regs.$proc$axi4lite_regs.sv:147$129'.
+Removing empty process `axi4lite_regs.$proc$axi4lite_regs.sv:147$129'.
+Removing empty process `axi4lite_properties.$proc$axi4lite_properties.sv:28$120'.
+Found and cleaned up 7 empty switches in `\axi4lite_properties.$proc$axi4lite_properties.sv:30$51'.
+Removing empty process `axi4lite_properties.$proc$axi4lite_properties.sv:30$51'.
+Removing empty process `axi4lite_formal.$proc$axi4lite_formal.sv:88$37'.
+Removing empty process `axi4lite_formal.$proc$axi4lite_formal.sv:4$36'.
+Found and cleaned up 2 empty switches in `\axi4lite_formal.$proc$axi4lite_formal.sv:90$22'.
+Removing empty process `axi4lite_formal.$proc$axi4lite_formal.sv:90$22'.
+Removing empty process `axi4lite_formal.$proc$axi4lite_formal.sv:6$10'.
+Cleaned up 35 empty switches.
+
+4.3.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module axi4lite_regs.
+<suppressed ~46 debug messages>
+Optimizing module axi4lite_properties.
+Optimizing module axi4lite_formal.
+<suppressed ~2 debug messages>
+
+4.4. Executing FUTURE pass.
+
+4.5. Executing OPT_EXPR pass (perform const folding).
+Optimizing module axi4lite_regs.
+Optimizing module axi4lite_properties.
+Optimizing module axi4lite_formal.
+
+4.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \axi4lite_regs..
+Finding unused cells or wires in module \axi4lite_properties..
+Finding unused cells or wires in module \axi4lite_formal..
+Removed 35 unused cells and 267 unused wires.
+<suppressed ~38 debug messages>
+
+4.7. Executing CHECK pass (checking for obvious problems).
+Checking module axi4lite_regs...
+Checking module axi4lite_properties...
+Checking module axi4lite_formal...
+Found and reported 0 problems.
+
+4.8. Executing OPT pass (performing simple optimizations).
+
+4.8.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module axi4lite_regs.
+Optimizing module axi4lite_properties.
+Optimizing module axi4lite_formal.
+
+4.8.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\axi4lite_regs'.
+Computing hashes of 151 cells of `\axi4lite_regs'.
+Finding duplicate cells in `\axi4lite_regs'.
+Computing hashes of 129 cells of `\axi4lite_regs'.
+Finding duplicate cells in `\axi4lite_regs'.
+<suppressed ~66 debug messages>
+Finding identical cells in module `\axi4lite_properties'.
+Computing hashes of 103 cells of `\axi4lite_properties'.
+Finding duplicate cells in `\axi4lite_properties'.
+Computing hashes of 98 cells of `\axi4lite_properties'.
+Finding duplicate cells in `\axi4lite_properties'.
+Computing hashes of 93 cells of `\axi4lite_properties'.
+Finding duplicate cells in `\axi4lite_properties'.
+<suppressed ~30 debug messages>
+Finding identical cells in module `\axi4lite_formal'.
+Computing hashes of 31 cells of `\axi4lite_formal'.
+Finding duplicate cells in `\axi4lite_formal'.
+Removed a total of 32 cells.
+
+4.8.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \axi4lite_regs..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \axi4lite_properties..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \axi4lite_formal..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~181 debug messages>
+
+4.8.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \axi4lite_regs.
+    New ctrl vector for $pmux cell $procmux$510: $auto$opt_reduce.cc:137:opt_pmux$634
+    New ctrl vector for $pmux cell $procmux$169: $auto$opt_reduce.cc:137:opt_pmux$636
+  Optimizing cells in module \axi4lite_regs.
+  Optimizing cells in module \axi4lite_properties.
+  Optimizing cells in module \axi4lite_formal.
+Performed a total of 2 changes.
+
+4.8.5. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\axi4lite_regs'.
+Computing hashes of 131 cells of `\axi4lite_regs'.
+Finding duplicate cells in `\axi4lite_regs'.
+Finding identical cells in module `\axi4lite_properties'.
+Computing hashes of 93 cells of `\axi4lite_properties'.
+Finding duplicate cells in `\axi4lite_properties'.
+Computing hashes of 77 cells of `\axi4lite_properties'.
+Finding duplicate cells in `\axi4lite_properties'.
+Computing hashes of 70 cells of `\axi4lite_properties'.
+Finding duplicate cells in `\axi4lite_properties'.
+<suppressed ~69 debug messages>
+Finding identical cells in module `\axi4lite_formal'.
+Computing hashes of 31 cells of `\axi4lite_formal'.
+Finding duplicate cells in `\axi4lite_formal'.
+Computing hashes of 30 cells of `\axi4lite_formal'.
+Finding duplicate cells in `\axi4lite_formal'.
+<suppressed ~3 debug messages>
+Removed a total of 24 cells.
+
+4.8.6. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \axi4lite_regs..
+Finding unused cells or wires in module \axi4lite_properties..
+Finding unused cells or wires in module \axi4lite_formal..
+Removed 0 unused cells and 56 unused wires.
+<suppressed ~3 debug messages>
+
+4.8.7. Executing OPT_EXPR pass (perform const folding).
+Optimizing module axi4lite_regs.
+Optimizing module axi4lite_properties.
+Optimizing module axi4lite_formal.
+
+4.8.8. Rerunning OPT passes. (Maybe there is more to do..)
+
+4.8.9. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \axi4lite_regs..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \axi4lite_properties..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Running muxtree optimizer on module \axi4lite_formal..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~140 debug messages>
+
+4.8.10. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \axi4lite_regs.
+  Optimizing cells in module \axi4lite_properties.
+  Optimizing cells in module \axi4lite_formal.
+Performed a total of 0 changes.
+
+4.8.11. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\axi4lite_regs'.
+Computing hashes of 131 cells of `\axi4lite_regs'.
+Finding duplicate cells in `\axi4lite_regs'.
+Finding identical cells in module `\axi4lite_properties'.
+Computing hashes of 70 cells of `\axi4lite_properties'.
+Finding duplicate cells in `\axi4lite_properties'.
+Finding identical cells in module `\axi4lite_formal'.
+Computing hashes of 30 cells of `\axi4lite_formal'.
+Finding duplicate cells in `\axi4lite_formal'.
+Removed a total of 0 cells.
+
+4.8.12. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \axi4lite_regs..
+Finding unused cells or wires in module \axi4lite_properties..
+Finding unused cells or wires in module \axi4lite_formal..
+
+4.8.13. Executing OPT_EXPR pass (perform const folding).
+Optimizing module axi4lite_regs.
+Optimizing module axi4lite_properties.
+Optimizing module axi4lite_formal.
+
+4.8.14. Finished fast OPT passes. (There is nothing left to do.)
+
+4.9. Executing WREDUCE pass (reducing word size of cells).
+Removed top 1 bits (of 4) from port B of cell axi4lite_regs.$procmux$184_CMP0 ($eq).
+Removed top 1 bits (of 4) from port B of cell axi4lite_regs.$procmux$468_CMP0 ($eq).
+
+4.10. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \axi4lite_regs..
+Finding unused cells or wires in module \axi4lite_properties..
+Finding unused cells or wires in module \axi4lite_formal..
+
+4.11. Executing MEMORY_COLLECT pass (generating $mem cells).
+
+4.12. Executing OPT pass (performing simple optimizations).
+
+4.12.1. Executing OPT_EXPR pass (perform const folding).
+Optimizing module axi4lite_regs.
+Optimizing module axi4lite_properties.
+Optimizing module axi4lite_formal.
+
+4.12.2. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\axi4lite_regs'.
+Computing hashes of 131 cells of `\axi4lite_regs'.
+Finding duplicate cells in `\axi4lite_regs'.
+Finding identical cells in module `\axi4lite_properties'.
+Computing hashes of 70 cells of `\axi4lite_properties'.
+Finding duplicate cells in `\axi4lite_properties'.
+Finding identical cells in module `\axi4lite_formal'.
+Computing hashes of 30 cells of `\axi4lite_formal'.
+Finding duplicate cells in `\axi4lite_formal'.
+Removed a total of 0 cells.
+
+4.12.3. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \axi4lite_regs..
+Finding unused cells or wires in module \axi4lite_properties..
+Finding unused cells or wires in module \axi4lite_formal..
+
+4.12.4. Finished fast OPT passes.
+
+4.13. Executing SORT pass.
+
+4.14. Printing statistics.
+
+=== axi4lite_formal ===
+
+        +----------Local Count, excluding submodules.
+        | 
+       31 wires
+      104 wire bits
+       20 public wires
+       93 public wire bits
+       28 cells
+       10   $anyseq
+        5   $check
+        2   $dff
+        1   $ff
+        2   $logic_and
+        5   $logic_not
+        3   $mux
+        2 submodules
+        1   axi4lite_properties
+        1   axi4lite_regs
+
+=== axi4lite_properties ===
+
+        +----------Local Count, excluding submodules.
+        | 
+       67 wires
+      213 wire bits
+       20 public wires
+       93 public wire bits
+       19 ports
+       92 port bits
+       70 cells
+       22   $check
+       14   $dff
+        7   $eq
+       11   $logic_and
+        5   $logic_not
+       11   $mux
+
+=== axi4lite_regs ===
+
+        +----------Local Count, excluding submodules.
+        | 
+      130 wires
+      997 wire bits
+       28 public wires
+      262 public wire bits
+       19 ports
+       92 port bits
+      131 cells
+       14   $dff
+        6   $eq
+       12   $logic_and
+        6   $logic_not
+       90   $mux
+        1   $pmux
+        2   $reduce_or
+
+=== design hierarchy ===
+
+        +----------Count including submodules.
+        | 
+      229 axi4lite_formal
+       70 axi4lite_properties
+      131 axi4lite_regs
+
+        +----------Count including submodules.
+        | 
+      228 wires
+     1314 wire bits
+       68 public wires
+      448 public wire bits
+       38 ports
+      184 port bits
+        - memories
+        - memory bits
+        - processes
+      229 cells
+       10   $anyseq
+       27   $check
+       30   $dff
+       13   $eq
+        1   $ff
+       25   $logic_and
+       16   $logic_not
+      104   $mux
+        1   $pmux
+        2   $reduce_or
+        2 submodules
+        1   axi4lite_properties
+        1   axi4lite_regs
+
+4.15. Executing CHECK pass (checking for obvious problems).
+Checking module axi4lite_formal...
+Checking module axi4lite_properties...
+Checking module axi4lite_regs...
+Found and reported 0 problems.
+
+5. Executing HIERARCHY pass (managing design hierarchy).
+Attribute `top' found on module `axi4lite_formal'. Setting top module to axi4lite_formal.
+
+5.1. Analyzing design hierarchy..
+Top module:  \axi4lite_formal
+Used module:     \axi4lite_regs
+Used module:     \axi4lite_properties
+
+5.2. Analyzing design hierarchy..
+Top module:  \axi4lite_formal
+Used module:     \axi4lite_regs
+Used module:     \axi4lite_properties
+Removed 0 unused modules.
+Module axi4lite_formal directly or indirectly contains formal properties -> setting "keep" attribute.
+Module axi4lite_properties directly or indirectly contains formal properties -> setting "keep" attribute.
+
+6. Executing jny backend.
+
+7. Executing RTLIL backend.
+Output filename: ../model/design.il
+
+End of script. Logfile hash: 20661a235b, time: 0.02s, user: 0.02s, system: 0.00s, MEM: 22.73 MB peak
+Yosys 0.67+31 (git sha1 22c15a7ec-dirty, Release, Clang /usr/local/osxcross/target/bin/aarch64-apple-darwin23.5-clang++ 18.1.8)
+Time spent: 17% 5x opt_clean (0 sec), 15% 2x hierarchy (0 sec), ...

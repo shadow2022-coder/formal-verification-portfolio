@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+<testsuite timestamp="2026-07-14T16:51:51" hostname="Harshas-MacBook-Air.local" package="axi4lite" id="0" name="cover" tests="18" errors="0" failures="0" time="0" skipped="7">
+<properties>
+<property name="os" value="Darwin"/>
+<property name="expect" value="PASS"/>
+<property name="status" value="PASS"/>
+</properties>
+<testcase classname="cover" name="build execution" time="0">
+</testcase>
+<testcase classname="cover" name="Property ASSERT in axi4lite_formal at axi4lite_formal.sv:101.13-101.34" time="0" type="ASSERT" location="axi4lite_formal.sv:101.13-101.34" id="_witness_.check_assert_axi4lite_formal_sv_101_30">
+<skipped />
+</testcase>
+<testcase classname="cover" name="Property ASSERT in axi4lite_formal at axi4lite_formal.sv:102.13-102.34" time="0" type="ASSERT" location="axi4lite_formal.sv:102.13-102.34" id="_witness_.check_assert_axi4lite_formal_sv_102_32">
+<skipped />
+</testcase>
+<testcase classname="cover" name="Property COVER in axi4lite_formal at axi4lite_formal.sv:106.9-106.39" time="0" type="COVER" location="axi4lite_formal.sv:106.9-106.39" id="_witness_.check_cover_axi4lite_formal_sv_106_34" tracefile="engine_0/trace0.vcd">
+</testcase>
+<testcase classname="cover" name="Property ASSERT in axi4lite_formal/properties at axi4lite_properties.sv:58.17-58.37" time="0" type="ASSERT" location="axi4lite_properties.sv:58.17-58.37" id="_witness_.check_assert_axi4lite_properties_sv_58_77">
+<skipped />
+</testcase>
+<testcase classname="cover" name="Property ASSERT in axi4lite_formal/properties at axi4lite_properties.sv:59.17-59.58" time="0" type="ASSERT" location="axi4lite_properties.sv:59.17-59.58" id="_witness_.check_assert_axi4lite_properties_sv_59_78">
+<skipped />
+</testcase>
+<testcase classname="cover" name="Property ASSERT in axi4lite_formal/properties at axi4lite_properties.sv:64.17-64.37" time="0" type="ASSERT" location="axi4lite_properties.sv:64.17-64.37" id="_witness_.check_assert_axi4lite_properties_sv_64_80">
+<skipped />
+</testcase>
+<testcase classname="cover" name="Property ASSERT in axi4lite_formal/properties at axi4lite_properties.sv:65.17-65.58" time="0" type="ASSERT" location="axi4lite_properties.sv:65.17-65.58" id="_witness_.check_assert_axi4lite_properties_sv_65_81">
+<skipped />
+</testcase>
+<testcase classname="cover" name="Property ASSERT in axi4lite_formal/properties at axi4lite_properties.sv:66.17-66.58" time="0" type="ASSERT" location="axi4lite_properties.sv:66.17-66.58" id="_witness_.check_assert_axi4lite_properties_sv_66_83">
+<skipped />
+</testcase>
+<testcase classname="cover" name="Property COVER in axi4lite_formal/properties at axi4lite_properties.sv:72.13-72.50" time="0" type="COVER" location="axi4lite_properties.sv:72.13-72.50" id="_witness_.check_cover_axi4lite_properties_sv_72_85" tracefile="engine_0/trace2.vcd">
+</testcase>
+<testcase classname="cover" name="Property COVER in axi4lite_formal/properties at axi4lite_properties.sv:73.13-73.49" time="0" type="COVER" location="axi4lite_properties.sv:73.13-73.49" id="_witness_.check_cover_axi4lite_properties_sv_73_87" tracefile="engine_0/trace3.vcd">
+</testcase>
+<testcase classname="cover" name="Property COVER in axi4lite_formal/properties at axi4lite_properties.sv:74.13-74.49" time="0" type="COVER" location="axi4lite_properties.sv:74.13-74.49" id="_witness_.check_cover_axi4lite_properties_sv_74_89" tracefile="engine_0/trace10.vcd">
+</testcase>
+<testcase classname="cover" name="Property COVER in axi4lite_formal/properties at axi4lite_properties.sv:75.13-75.50" time="0" type="COVER" location="axi4lite_properties.sv:75.13-75.50" id="_witness_.check_cover_axi4lite_properties_sv_75_91" tracefile="engine_0/trace1.vcd">
+</testcase>
+<testcase classname="cover" name="Property COVER in axi4lite_formal/properties at axi4lite_properties.sv:76.13-76.49" time="0" type="COVER" location="axi4lite_properties.sv:76.13-76.49" id="_witness_.check_cover_axi4lite_properties_sv_76_93" tracefile="engine_0/trace7.vcd">
+</testcase>
+<testcase classname="cover" name="Property COVER in axi4lite_formal/properties at axi4lite_properties.sv:78.13-78.51" time="0" type="COVER" location="axi4lite_properties.sv:78.13-78.51" id="_witness_.check_cover_axi4lite_properties_sv_78_95" tracefile="engine_0/trace8.vcd">
+</testcase>
+<testcase classname="cover" name="Property COVER in axi4lite_formal/properties at axi4lite_properties.sv:79.13-79.50" time="0" type="COVER" location="axi4lite_properties.sv:79.13-79.50" id="_witness_.check_cover_axi4lite_properties_sv_79_98" tracefile="engine_0/trace6.vcd">
+</testcase>
+<testcase classname="cover" name="Property COVER in axi4lite_formal/properties at axi4lite_properties.sv:80.13-80.50" time="0" type="COVER" location="axi4lite_properties.sv:80.13-80.50" id="_witness_.check_cover_axi4lite_properties_sv_80_101" tracefile="engine_0/trace9.vcd">
+</testcase>
+<testcase classname="cover" name="Property COVER in axi4lite_formal/properties at axi4lite_properties.sv:81.13-81.51" time="0" type="COVER" location="axi4lite_properties.sv:81.13-81.51" id="_witness_.check_cover_axi4lite_properties_sv_81_104" tracefile="engine_0/trace5.vcd">
+</testcase>
+<testcase classname="cover" name="Property COVER in axi4lite_formal/properties at axi4lite_properties.sv:82.13-82.50" time="0" type="COVER" location="axi4lite_properties.sv:82.13-82.50" id="_witness_.check_cover_axi4lite_properties_sv_82_107" tracefile="engine_0/trace4.vcd">
+</testcase>
+<system-out>SBY 16:51:51 [axi4lite_cover] Removing directory '/Users/harsha/Desktop/untitled folder 2/axi4lite-formal/formal/axi4lite_cover'.
+SBY 16:51:51 [axi4lite_cover] Copy '/Users/harsha/Desktop/untitled folder 2/axi4lite-formal/formal/../rtl/axi4lite_regs.sv' to '/Users/harsha/Desktop/untitled folder 2/axi4lite-formal/formal/axi4lite_cover/src/axi4lite_regs.sv'.
+SBY 16:51:51 [axi4lite_cover] Copy '/Users/harsha/Desktop/untitled folder 2/axi4lite-formal/formal/axi4lite_properties.sv' to '/Users/harsha/Desktop/untitled folder 2/axi4lite-formal/formal/axi4lite_cover/src/axi4lite_properties.sv'.
+SBY 16:51:51 [axi4lite_cover] Copy '/Users/harsha/Desktop/untitled folder 2/axi4lite-formal/formal/axi4lite_formal.sv' to '/Users/harsha/Desktop/untitled folder 2/axi4lite-formal/formal/axi4lite_cover/src/axi4lite_formal.sv'.
+SBY 16:51:51 [axi4lite_cover] engine_0: smtbmc boolector
+SBY 16:51:51 [axi4lite_cover] base: starting process &quot;cd axi4lite_cover/src; yosys -ql ../model/design.log ../model/design.ys&quot;
+SBY 16:51:51 [axi4lite_cover] base: finished (returncode=0)
+SBY 16:51:51 [axi4lite_cover] prep: starting process &quot;cd axi4lite_cover/model; yosys -ql design_prep.log design_prep.ys&quot;
+SBY 16:51:51 [axi4lite_cover] prep: finished (returncode=0)
+SBY 16:51:51 [axi4lite_cover] smt2: starting process &quot;cd axi4lite_cover/model; yosys -ql design_smt2.log design_smt2.ys&quot;
+SBY 16:51:51 [axi4lite_cover] smt2: finished (returncode=0)
+SBY 16:51:51 [axi4lite_cover] engine_0: starting process &quot;cd axi4lite_cover; yosys-smtbmc -s boolector --presat --unroll -c --noprogress -t 30  --append 0 --dump-vcd engine_0/trace%.vcd --dump-yw engine_0/trace%.yw --dump-vlogtb engine_0/trace%_tb.v --dump-smtc engine_0/trace%.smtc model/design_smt2.smt2&quot;
+SBY 16:51:51 [axi4lite_cover] engine_0: ##   0:00:00  Solver: boolector
+SBY 16:51:51 [axi4lite_cover] engine_0: ##   0:00:00  Checking cover reachability in step 0..
+SBY 16:51:51 [axi4lite_cover] engine_0: ##   0:00:00  Checking cover reachability in step 1..
+SBY 16:51:51 [axi4lite_cover] engine_0: ##   0:00:00  Checking cover reachability in step 2..
+SBY 16:51:51 [axi4lite_cover] engine_0: ##   0:00:00  Checking cover reachability in step 3..
+SBY 16:51:51 [axi4lite_cover] engine_0: ##   0:00:00  Reached cover statement in step 3 at axi4lite_formal: axi4lite_formal.sv:106.9-106.39 (_witness_.check_cover_axi4lite_formal_sv_106_34)
+SBY 16:51:51 [axi4lite_cover] engine_0: ##   0:00:00  Writing trace to VCD file: engine_0/trace0.vcd
+SBY 16:51:51 [axi4lite_cover] engine_0: ##   0:00:00  Writing trace to Verilog testbench: engine_0/trace0_tb.v
+SBY 16:51:51 [axi4lite_cover] engine_0: ##   0:00:00  Writing trace to constraints file: engine_0/trace0.smtc
+SBY 16:51:51 [axi4lite_cover] engine_0: ##   0:00:00  Writing trace to Yosys witness file: engine_0/trace0.yw
+SBY 16:51:51 [axi4lite_cover] engine_0: ##   0:00:00  Checking cover reachability in step 3..
+SBY 16:51:51 [axi4lite_cover] engine_0: ##   0:00:00  Reached cover statement in step 3 at axi4lite_formal.properties: axi4lite_properties.sv:75.13-75.50 (_witness_.check_cover_axi4lite_properties_sv_75_91)
+SBY 16:51:51 [axi4lite_cover] engine_0: ##   0:00:00  Writing trace to VCD file: engine_0/trace1.vcd
+SBY 16:51:51 [axi4lite_cover] engine_0: ##   0:00:00  Writing trace to Verilog testbench: engine_0/trace1_tb.v
+SBY 16:51:51 [axi4lite_cover] engine_0: ##   0:00:00  Writing trace to constraints file: engine_0/trace1.smtc
+SBY 16:51:51 [axi4lite_cover] engine_0: ##   0:00:00  Writing trace to Yosys witness file: engine_0/trace1.yw
+SBY 16:51:51 [axi4lite_cover] engine_0: ##   0:00:00  Checking cover reachability in step 3..
+SBY 16:51:51 [axi4lite_cover] engine_0: ##   0:00:00  Reached cover statement in step 3 at axi4lite_formal.properties: axi4lite_properties.sv:72.13-72.50 (_witness_.check_cover_axi4lite_properties_sv_72_85)
+SBY 16:51:51 [axi4lite_cover] engine_0: ##   0:00:00  Writing trace to VCD file: engine_0/trace2.vcd
+SBY 16:51:51 [axi4lite_cover] engine_0: ##   0:00:00  Writing trace to Verilog testbench: engine_0/trace2_tb.v
+SBY 16:51:51 [axi4lite_cover] engine_0: ##   0:00:00  Writing trace to constraints file: engine_0/trace2.smtc
+SBY 16:51:51 [axi4lite_cover] engine_0: ##   0:00:00  Writing trace to Yosys witness file: engine_0/trace2.yw
+SBY 16:51:51 [axi4lite_cover] engine_0: ##   0:00:00  Checking cover reachability in step 3..
+SBY 16:51:51 [axi4lite_cover] engine_0: ##   0:00:00  Reached cover statement in step 3 at axi4lite_formal.properties: axi4lite_properties.sv:73.13-73.49 (_witness_.check_cover_axi4lite_properties_sv_73_87)
+SBY 16:51:51 [axi4lite_cover] engine_0: ##   0:00:00  Writing trace to VCD file: engine_0/trace3.vcd
+SBY 16:51:51 [axi4lite_cover] engine_0: ##   0:00:00  Writing trace to Verilog testbench: engine_0/trace3_tb.v
+SBY 16:51:51 [axi4lite_cover] engine_0: ##   0:00:00  Writing trace to constraints file: engine_0/trace3.smtc
+SBY 16:51:51 [axi4lite_cover] engine_0: ##   0:00:00  Writing trace to Yosys witness file: engine_0/trace3.yw
+SBY 16:51:51 [axi4lite_cover] engine_0: ##   0:00:00  Checking cover reachability in step 3..
+SBY 16:51:51 [axi4lite_cover] engine_0: ##   0:00:00  Checking cover reachability in step 4..
+SBY 16:51:51 [axi4lite_cover] engine_0: ##   0:00:00  Checking cover reachability in step 5..
+SBY 16:51:51 [axi4lite_cover] engine_0: ##   0:00:00  Reached cover statement in step 5 at axi4lite_formal.properties: axi4lite_properties.sv:82.13-82.50 (_witness_.check_cover_axi4lite_properties_sv_82_107)
+SBY 16:51:51 [axi4lite_cover] engine_0: ##   0:00:00  Writing trace to VCD file: engine_0/trace4.vcd
+SBY 16:51:51 [axi4lite_cover] engine_0: ##   0:00:00  Writing trace to Verilog testbench: engine_0/trace4_tb.v
+SBY 16:51:51 [axi4lite_cover] engine_0: ##   0:00:00  Writing trace to constraints file: engine_0/trace4.smtc
+SBY 16:51:51 [axi4lite_cover] engine_0: ##   0:00:00  Writing trace to Yosys witness file: engine_0/trace4.yw
+SBY 16:51:51 [axi4lite_cover] engine_0: ##   0:00:00  Checking cover reachability in step 5..
+SBY 16:51:51 [axi4lite_cover] engine_0: ##   0:00:00  Reached cover statement in step 5 at axi4lite_formal.properties: axi4lite_properties.sv:81.13-81.51 (_witness_.check_cover_axi4lite_properties_sv_81_104)
+SBY 16:51:51 [axi4lite_cover] engine_0: ##   0:00:00  Writing trace to VCD file: engine_0/trace5.vcd
+SBY 16:51:51 [axi4lite_cover] engine_0: ##   0:00:00  Writing trace to Verilog testbench: engine_0/trace5_tb.v
+SBY 16:51:51 [axi4lite_cover] engine_0: ##   0:00:00  Writing trace to constraints file: engine_0/trace5.smtc
+SBY 16:51:51 [axi4lite_cover] engine_0: ##   0:00:00  Writing trace to Yosys witness file: engine_0/trace5.yw
+SBY 16:51:51 [axi4lite_cover] engine_0: ##   0:00:00  Checking cover reachability in step 5..
+SBY 16:51:51 [axi4lite_cover] engine_0: ##   0:00:00  Reached cover statement in step 5 at axi4lite_formal.properties: axi4lite_properties.sv:79.13-79.50 (_witness_.check_cover_axi4lite_properties_sv_79_98)
+SBY 16:51:51 [axi4lite_cover] engine_0: ##   0:00:00  Writing trace to VCD file: engine_0/trace6.vcd
+SBY 16:51:51 [axi4lite_cover] engine_0: ##   0:00:00  Writing trace to Verilog testbench: engine_0/trace6_tb.v
+SBY 16:51:51 [axi4lite_cover] engine_0: ##   0:00:00  Writing trace to constraints file: engine_0/trace6.smtc
+SBY 16:51:51 [axi4lite_cover] engine_0: ##   0:00:00  Writing trace to Yosys witness file: engine_0/trace6.yw
+SBY 16:51:51 [axi4lite_cover] engine_0: ##   0:00:00  Checking cover reachability in step 5..
+SBY 16:51:51 [axi4lite_cover] engine_0: ##   0:00:00  Reached cover statement in step 5 at axi4lite_formal.properties: axi4lite_properties.sv:76.13-76.49 (_witness_.check_cover_axi4lite_properties_sv_76_93)
+SBY 16:51:51 [axi4lite_cover] engine_0: ##   0:00:00  Writing trace to VCD file: engine_0/trace7.vcd
+SBY 16:51:51 [axi4lite_cover] engine_0: ##   0:00:00  Writing trace to Verilog testbench: engine_0/trace7_tb.v
+SBY 16:51:51 [axi4lite_cover] engine_0: ##   0:00:00  Writing trace to constraints file: engine_0/trace7.smtc
+SBY 16:51:51 [axi4lite_cover] engine_0: ##   0:00:00  Writing trace to Yosys witness file: engine_0/trace7.yw
+SBY 16:51:51 [axi4lite_cover] engine_0: ##   0:00:00  Checking cover reachability in step 5..
+SBY 16:51:51 [axi4lite_cover] engine_0: ##   0:00:00  Reached cover statement in step 5 at axi4lite_formal.properties: axi4lite_properties.sv:78.13-78.51 (_witness_.check_cover_axi4lite_properties_sv_78_95)
+SBY 16:51:51 [axi4lite_cover] engine_0: ##   0:00:00  Writing trace to VCD file: engine_0/trace8.vcd
+SBY 16:51:51 [axi4lite_cover] engine_0: ##   0:00:00  Writing trace to Verilog testbench: engine_0/trace8_tb.v
+SBY 16:51:51 [axi4lite_cover] engine_0: ##   0:00:00  Writing trace to constraints file: engine_0/trace8.smtc
+SBY 16:51:51 [axi4lite_cover] engine_0: ##   0:00:00  Writing trace to Yosys witness file: engine_0/trace8.yw
+SBY 16:51:51 [axi4lite_cover] engine_0: ##   0:00:00  Checking cover reachability in step 5..
+SBY 16:51:51 [axi4lite_cover] engine_0: ##   0:00:00  Checking cover reachability in step 6..
+SBY 16:51:51 [axi4lite_cover] engine_0: ##   0:00:00  Checking cover reachability in step 7..
+SBY 16:51:51 [axi4lite_cover] engine_0: ##   0:00:00  Reached cover statement in step 7 at axi4lite_formal.properties: axi4lite_properties.sv:80.13-80.50 (_witness_.check_cover_axi4lite_properties_sv_80_101)
+SBY 16:51:51 [axi4lite_cover] engine_0: ##   0:00:00  Writing trace to VCD file: engine_0/trace9.vcd
+SBY 16:51:51 [axi4lite_cover] engine_0: ##   0:00:00  Writing trace to Verilog testbench: engine_0/trace9_tb.v
+SBY 16:51:51 [axi4lite_cover] engine_0: ##   0:00:00  Writing trace to constraints file: engine_0/trace9.smtc
+SBY 16:51:51 [axi4lite_cover] engine_0: ##   0:00:00  Writing trace to Yosys witness file: engine_0/trace9.yw
+SBY 16:51:51 [axi4lite_cover] engine_0: ##   0:00:00  Checking cover reachability in step 7..
+SBY 16:51:51 [axi4lite_cover] engine_0: ##   0:00:00  Reached cover statement in step 7 at axi4lite_formal.properties: axi4lite_properties.sv:74.13-74.49 (_witness_.check_cover_axi4lite_properties_sv_74_89)
+SBY 16:51:51 [axi4lite_cover] engine_0: ##   0:00:00  Writing trace to VCD file: engine_0/trace10.vcd
+SBY 16:51:51 [axi4lite_cover] engine_0: ##   0:00:00  Writing trace to Verilog testbench: engine_0/trace10_tb.v
+SBY 16:51:51 [axi4lite_cover] engine_0: ##   0:00:00  Writing trace to constraints file: engine_0/trace10.smtc
+SBY 16:51:51 [axi4lite_cover] engine_0: ##   0:00:00  Writing trace to Yosys witness file: engine_0/trace10.yw
+SBY 16:51:51 [axi4lite_cover] engine_0: ##   0:00:00  Status: passed
+SBY 16:51:51 [axi4lite_cover] engine_0: finished (returncode=0)
+SBY 16:51:51 [axi4lite_cover] engine_0: Status returned by engine: pass
+SBY 16:51:51 [axi4lite_cover] summary: Elapsed clock time [H:MM:SS (secs)]: 0:00:00 (0)
+SBY 16:51:51 [axi4lite_cover] summary: Elapsed process time [H:MM:SS (secs)]: 0:00:00 (0)
+SBY 16:51:51 [axi4lite_cover] summary: engine_0 (smtbmc boolector) returned pass
+SBY 16:51:51 [axi4lite_cover] summary: cover trace: axi4lite_cover/engine_0/trace0.vcd
+SBY 16:51:51 [axi4lite_cover] summary:   reached cover statement axi4lite_formal._witness_.check_cover_axi4lite_formal_sv_106_34 at axi4lite_formal.sv:106.9-106.39 step 3
+SBY 16:51:51 [axi4lite_cover] summary: cover trace: axi4lite_cover/engine_0/trace1.vcd
+SBY 16:51:51 [axi4lite_cover] summary:   reached cover statement axi4lite_formal.properties._witness_.check_cover_axi4lite_properties_sv_75_91 at axi4lite_properties.sv:75.13-75.50 step 3
+SBY 16:51:51 [axi4lite_cover] summary: cover trace: axi4lite_cover/engine_0/trace10.vcd
+SBY 16:51:51 [axi4lite_cover] summary:   reached cover statement axi4lite_formal.properties._witness_.check_cover_axi4lite_properties_sv_74_89 at axi4lite_properties.sv:74.13-74.49 step 7
+SBY 16:51:51 [axi4lite_cover] summary: cover trace: axi4lite_cover/engine_0/trace2.vcd
+SBY 16:51:51 [axi4lite_cover] summary:   reached cover statement axi4lite_formal.properties._witness_.check_cover_axi4lite_properties_sv_72_85 at axi4lite_properties.sv:72.13-72.50 step 3
+SBY 16:51:51 [axi4lite_cover] summary: cover trace: axi4lite_cover/engine_0/trace3.vcd
+SBY 16:51:51 [axi4lite_cover] summary:   reached cover statement axi4lite_formal.properties._witness_.check_cover_axi4lite_properties_sv_73_87 at axi4lite_properties.sv:73.13-73.49 step 3
+SBY 16:51:51 [axi4lite_cover] summary: and 6 further traces
+SBY 16:51:51 [axi4lite_cover] summary: see axi4lite_cover/PASS for a complete summary
+SBY 16:51:51 [axi4lite_cover] DONE (PASS, rc=0)
+</system-out>
+<system-err>
+</system-err>
+</testsuite>
+</testsuites>

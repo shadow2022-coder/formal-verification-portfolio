@@ -1,0 +1,36 @@
+Elapsed clock time [H:MM:SS (secs)]: 0:00:00 (0)
+Elapsed process time [H:MM:SS (secs)]: 0:00:00 (0)
+engine_0 (smtbmc boolector) returned pass
+cover trace: engine_0/trace0.vcd
+cover trace: engine_0/trace0.yw
+  reached cover statement axi4lite_formal._witness_.check_cover_axi4lite_formal_sv_106_34 at axi4lite_formal.sv:106.9-106.39 step 3
+cover trace: engine_0/trace1.vcd
+cover trace: engine_0/trace1.yw
+  reached cover statement axi4lite_formal.properties._witness_.check_cover_axi4lite_properties_sv_75_91 at axi4lite_properties.sv:75.13-75.50 step 3
+cover trace: engine_0/trace10.vcd
+cover trace: engine_0/trace10.yw
+  reached cover statement axi4lite_formal.properties._witness_.check_cover_axi4lite_properties_sv_74_89 at axi4lite_properties.sv:74.13-74.49 step 7
+cover trace: engine_0/trace2.vcd
+cover trace: engine_0/trace2.yw
+  reached cover statement axi4lite_formal.properties._witness_.check_cover_axi4lite_properties_sv_72_85 at axi4lite_properties.sv:72.13-72.50 step 3
+cover trace: engine_0/trace3.vcd
+cover trace: engine_0/trace3.yw
+  reached cover statement axi4lite_formal.properties._witness_.check_cover_axi4lite_properties_sv_73_87 at axi4lite_properties.sv:73.13-73.49 step 3
+cover trace: engine_0/trace4.vcd
+cover trace: engine_0/trace4.yw
+  reached cover statement axi4lite_formal.properties._witness_.check_cover_axi4lite_properties_sv_82_107 at axi4lite_properties.sv:82.13-82.50 step 5
+cover trace: engine_0/trace5.vcd
+cover trace: engine_0/trace5.yw
+  reached cover statement axi4lite_formal.properties._witness_.check_cover_axi4lite_properties_sv_81_104 at axi4lite_properties.sv:81.13-81.51 step 5
+cover trace: engine_0/trace6.vcd
+cover trace: engine_0/trace6.yw
+  reached cover statement axi4lite_formal.properties._witness_.check_cover_axi4lite_properties_sv_79_98 at axi4lite_properties.sv:79.13-79.50 step 5
+cover trace: engine_0/trace7.vcd
+cover trace: engine_0/trace7.yw
+  reached cover statement axi4lite_formal.properties._witness_.check_cover_axi4lite_properties_sv_76_93 at axi4lite_properties.sv:76.13-76.49 step 5
+cover trace: engine_0/trace8.vcd
+cover trace: engine_0/trace8.yw
+  reached cover statement axi4lite_formal.properties._witness_.check_cover_axi4lite_properties_sv_78_95 at axi4lite_properties.sv:78.13-78.51 step 5
+cover trace: engine_0/trace9.vcd
+cover trace: engine_0/trace9.yw
+  reached cover statement axi4lite_formal.properties._witness_.check_cover_axi4lite_properties_sv_80_101 at axi4lite_properties.sv:80.13-80.50 step 7
