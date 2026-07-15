@@ -439,4 +439,184 @@ module cache_properties #(
         end
     end
 
+
+    `ifdef COVER
+
+    logic c_any_refill_completed;
+
+    logic c_dirty_miss_seen;
+    logic c_writeback_accept_seen;
+    logic c_writeback_ack_seen;
+    logic c_refill_accept_seen;
+    logic c_dirty_refill_seen;
+
+    // -------------------------------------------------------------------------
+    // Cover-sequence monitors
+    // -------------------------------------------------------------------------
+
+    always_ff @(posedge clk or negedge rst_n) begin
+        if (!rst_n) begin
+            c_any_refill_completed <= 1'b0;
+
+            c_dirty_miss_seen       <= 1'b0;
+            c_writeback_accept_seen <= 1'b0;
+            c_writeback_ack_seen    <= 1'b0;
+            c_refill_accept_seen    <= 1'b0;
+            c_dirty_refill_seen     <= 1'b0;
+        end else begin
+
+            // Remember that at least one refill has completed.
+            if (
+                (state == ST_REFILL_WAIT) &&
+                mem_rsp_valid &&
+                mem_rsp_ready
+            ) begin
+                c_any_refill_completed <= 1'b1;
+            end
+
+            // Begin tracking a new CPU transaction.
+            if (cpu_req_valid && cpu_req_ready) begin
+                c_dirty_miss_seen       <= 1'b0;
+                c_writeback_accept_seen <= 1'b0;
+                c_writeback_ack_seen    <= 1'b0;
+                c_refill_accept_seen    <= 1'b0;
+                c_dirty_refill_seen     <= 1'b0;
+            end
+
+            // Dirty conflicting line detected.
+            if (
+                (state == ST_LOOKUP) &&
+                !cache_hit &&
+                selected_valid &&
+                selected_dirty
+            ) begin
+                c_dirty_miss_seen <= 1'b1;
+            end
+
+            // Dirty victim writeback accepted.
+            if (
+                c_dirty_miss_seen &&
+                (state == ST_WRITEBACK_REQ) &&
+                mem_req_valid &&
+                mem_req_ready
+            ) begin
+                c_writeback_accept_seen <= 1'b1;
+            end
+
+            // Writeback acknowledgement accepted.
+            if (
+                c_writeback_accept_seen &&
+                (state == ST_WRITEBACK_WAIT) &&
+                mem_rsp_valid &&
+                mem_rsp_ready
+            ) begin
+                c_writeback_ack_seen <= 1'b1;
+            end
+
+            // Refill request accepted after writeback.
+            if (
+                c_writeback_ack_seen &&
+                (state == ST_REFILL_REQ) &&
+                mem_req_valid &&
+                mem_req_ready
+            ) begin
+                c_refill_accept_seen <= 1'b1;
+            end
+
+            // Refill response accepted.
+            if (
+                c_refill_accept_seen &&
+                (state == ST_REFILL_WAIT) &&
+                mem_rsp_valid &&
+                mem_rsp_ready
+            ) begin
+                c_dirty_refill_seen <= 1'b1;
+            end
+        end
+    end
+
+    // -------------------------------------------------------------------------
+    // Required cover properties
+    // -------------------------------------------------------------------------
+
+    always_ff @(posedge clk) begin
+        if (rst_n) begin
+
+            // Cold miss: selected line is invalid.
+            C_MISS_01: cover (
+                (state == ST_LOOKUP) &&
+                !cache_hit &&
+                !selected_valid &&
+                !req_write_reg
+            );
+
+            // A refill response is accepted.
+            C_REFILL_01: cover (
+                (state == ST_REFILL_WAIT) &&
+                mem_rsp_valid &&
+                mem_rsp_ready
+            );
+
+            // Read hit after at least one refill has completed.
+            C_HIT_01: cover (
+                c_any_refill_completed &&
+                (state == ST_LOOKUP) &&
+                cache_hit &&
+                !req_write_reg
+            );
+
+            // Write hit.
+            C_WRITE_01: cover (
+                (state == ST_LOOKUP) &&
+                cache_hit &&
+                req_write_reg
+            );
+
+            // Partial-byte write hit.
+            C_WRITE_02: cover (
+                (state == ST_LOOKUP) &&
+                cache_hit &&
+                req_write_reg &&
+                (|req_wstrb_reg) &&
+                !(&req_wstrb_reg)
+            );
+
+            // Clean conflict miss.
+            C_MISS_02: cover (
+                (state == ST_LOOKUP) &&
+                !cache_hit &&
+                selected_valid &&
+                !selected_dirty
+            );
+
+            // Dirty conflict miss.
+            C_EVICT_01: cover (
+                (state == ST_LOOKUP) &&
+                !cache_hit &&
+                selected_valid &&
+                selected_dirty
+            );
+
+            // Memory-request backpressure.
+            C_BACKPRESSURE_01: cover (
+                mem_req_valid &&
+                !mem_req_ready
+            );
+
+            // CPU-response backpressure.
+            C_BACKPRESSURE_02: cover (
+                cpu_rsp_valid &&
+                !cpu_rsp_ready
+            );
+
+            // Complete central dirty-eviction path.
+            C_EVICT_02: cover (
+                c_dirty_refill_seen &&
+                cpu_rsp_valid
+            );
+        end
+    end
+
+`endif
+
 endmodule
