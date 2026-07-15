@@ -85,7 +85,7 @@ module cache_controller #(
 
     logic [DATA_WIDTH-1:0] rsp_rdata_reg;
 
-        // -------------------------------------------------------------------------
+    // -------------------------------------------------------------------------
     // Lookup signals derived from the captured CPU request
     // -------------------------------------------------------------------------
 
@@ -93,18 +93,50 @@ module cache_controller #(
     logic [TAG_WIDTH-1:0]   req_tag;
     logic                   cache_hit;
 
-    assign req_index = req_addr_reg[OFFSET_WIDTH + INDEX_WIDTH - 1
-                                    : OFFSET_WIDTH];
+    assign req_index =
+        req_addr_reg[OFFSET_WIDTH + INDEX_WIDTH - 1 : OFFSET_WIDTH];
 
-    assign req_tag = req_addr_reg[ADDR_WIDTH-1
-                                  : OFFSET_WIDTH + INDEX_WIDTH];
+    assign req_tag =
+        req_addr_reg[ADDR_WIDTH - 1 : OFFSET_WIDTH + INDEX_WIDTH];
 
     assign cache_hit =
         valid_array[req_index] &&
         (tag_array[req_index] == req_tag);
 
     // -------------------------------------------------------------------------
-    // Sequential state and request storage
+    // WSTRB byte-mask function
+    //
+    // wstrb[0] controls bits [7:0]
+    // wstrb[1] controls bits [15:8]
+    // wstrb[2] controls bits [23:16]
+    // wstrb[3] controls bits [31:24]
+    // -------------------------------------------------------------------------
+
+    function automatic logic [DATA_WIDTH-1:0] apply_wstrb (
+        input logic [DATA_WIDTH-1:0] old_data,
+        input logic [DATA_WIDTH-1:0] new_data,
+        input logic [BYTE_LANES-1:0] wstrb
+    );
+        integer byte_index;
+
+        begin
+            apply_wstrb = old_data;
+
+            for (
+                byte_index = 0;
+                byte_index < BYTE_LANES;
+                byte_index = byte_index + 1
+            ) begin
+                if (wstrb[byte_index]) begin
+                    apply_wstrb[byte_index*8 +: 8] =
+                        new_data[byte_index*8 +: 8];
+                end
+            end
+        end
+    endfunction
+
+    // -------------------------------------------------------------------------
+    // Sequential state, request storage and cache updates
     // -------------------------------------------------------------------------
 
     always_ff @(posedge clk or negedge rst_n) begin
@@ -123,6 +155,7 @@ module cache_controller #(
         end else begin
             state <= next_state;
 
+            // Capture a new CPU request.
             if (cpu_req_valid && cpu_req_ready) begin
                 req_write_reg <= cpu_req_write;
                 req_addr_reg  <= cpu_req_addr;
@@ -130,13 +163,21 @@ module cache_controller #(
                 req_wstrb_reg <= cpu_req_wstrb;
             end
 
-            if ((state == LOOKUP) &&
-                cache_hit &&
-                !req_write_reg) begin
-                rsp_rdata_reg <= data_array[req_index];
+            // Complete read-hit or write-hit operation.
+            if ((state == LOOKUP) && cache_hit) begin
+                if (req_write_reg) begin
+                    data_array[req_index] <= apply_wstrb(
+                        data_array[req_index],
+                        req_wdata_reg,
+                        req_wstrb_reg
+                    );
+
+                    dirty_array[req_index] <= 1'b1;
+                    rsp_rdata_reg          <= '0;
+                end else begin
+                    rsp_rdata_reg <= data_array[req_index];
+                end
             end
-
-
         end
     end
 
@@ -159,7 +200,7 @@ module cache_controller #(
 
         mem_rsp_ready = 1'b0;
 
-                case (state)
+        case (state)
             IDLE: begin
                 cpu_req_ready = 1'b1;
 
@@ -169,7 +210,7 @@ module cache_controller #(
             end
 
             LOOKUP: begin
-                if (cache_hit && !req_write_reg) begin
+                if (cache_hit) begin
                     next_state = RESPOND;
                 end
             end
