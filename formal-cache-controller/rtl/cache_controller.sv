@@ -85,6 +85,24 @@ module cache_controller #(
 
     logic [DATA_WIDTH-1:0] rsp_rdata_reg;
 
+        // -------------------------------------------------------------------------
+    // Lookup signals derived from the captured CPU request
+    // -------------------------------------------------------------------------
+
+    logic [INDEX_WIDTH-1:0] req_index;
+    logic [TAG_WIDTH-1:0]   req_tag;
+    logic                   cache_hit;
+
+    assign req_index = req_addr_reg[OFFSET_WIDTH + INDEX_WIDTH - 1
+                                    : OFFSET_WIDTH];
+
+    assign req_tag = req_addr_reg[ADDR_WIDTH-1
+                                  : OFFSET_WIDTH + INDEX_WIDTH];
+
+    assign cache_hit =
+        valid_array[req_index] &&
+        (tag_array[req_index] == req_tag);
+
     // -------------------------------------------------------------------------
     // Sequential state and request storage
     // -------------------------------------------------------------------------
@@ -111,6 +129,14 @@ module cache_controller #(
                 req_wdata_reg <= cpu_req_wdata;
                 req_wstrb_reg <= cpu_req_wstrb;
             end
+
+            if ((state == LOOKUP) &&
+                cache_hit &&
+                !req_write_reg) begin
+                rsp_rdata_reg <= data_array[req_index];
+            end
+
+
         end
     end
 
@@ -133,12 +159,26 @@ module cache_controller #(
 
         mem_rsp_ready = 1'b0;
 
-        case (state)
+                case (state)
             IDLE: begin
                 cpu_req_ready = 1'b1;
 
                 if (cpu_req_valid && cpu_req_ready) begin
                     next_state = LOOKUP;
+                end
+            end
+
+            LOOKUP: begin
+                if (cache_hit && !req_write_reg) begin
+                    next_state = RESPOND;
+                end
+            end
+
+            RESPOND: begin
+                cpu_rsp_valid = 1'b1;
+
+                if (cpu_rsp_ready) begin
+                    next_state = IDLE;
                 end
             end
 

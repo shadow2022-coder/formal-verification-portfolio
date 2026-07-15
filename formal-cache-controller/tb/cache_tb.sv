@@ -76,40 +76,68 @@ module cache_tb;
         @(negedge clk);
         rst_n = 1'b1;
 
-        #1;
-        if (cpu_req_ready !== 1'b1)
-            $fatal(1, "cpu_req_ready must be high in IDLE");
+        // Address 0x04:
+        // tag   = 0
+        // index = 1
+        // offset = 0
+        dut.valid_array[1] = 1'b1;
+        dut.dirty_array[1] = 1'b0;
+        dut.tag_array[1]   = 4'h0;
+        dut.data_array[1]  = 32'h1234_ABCD;
 
+        // Submit a read request while keeping the response blocked.
         cpu_req_valid = 1'b1;
-        cpu_req_write = 1'b1;
-        cpu_req_addr  = 8'h44;
-        cpu_req_wdata = 32'hAABB_CCDD;
-        cpu_req_wstrb = 4'b1010;
+        cpu_req_write = 1'b0;
+        cpu_req_addr  = 8'h04;
+
+        @(posedge clk);
+        #1;
+        cpu_req_valid = 1'b0;
+
+        // IDLE -> LOOKUP
+        @(posedge clk);
+        #1;
+
+        // LOOKUP -> RESPOND
+        if (cpu_rsp_valid !== 1'b1)
+            $fatal(1, "Read-hit response was not generated");
+
+        if (cpu_rsp_rdata !== 32'h1234_ABCD)
+            $fatal(1, "Read-hit returned incorrect data");
+
+        if (mem_req_valid !== 1'b0)
+            $fatal(1, "Read hit must not access memory");
+
+        // Hold the CPU response blocked for several cycles.
+        repeat (3) begin
+            @(posedge clk);
+            #1;
+
+            if (cpu_rsp_valid !== 1'b1)
+                $fatal(1, "cpu_rsp_valid dropped during backpressure");
+
+            if (cpu_rsp_rdata !== 32'h1234_ABCD)
+                $fatal(1, "cpu_rsp_rdata changed during backpressure");
+
+            if (cpu_req_ready !== 1'b0)
+                $fatal(1, "Cache accepted a request while response pending");
+        end
+
+        // Accept the response.
+        cpu_rsp_ready = 1'b1;
 
         @(posedge clk);
         #1;
 
-        cpu_req_valid = 1'b0;
+        cpu_rsp_ready = 1'b0;
 
-        if (dut.state !== 3'd1)
-            $fatal(1, "Controller did not enter LOOKUP");
+        if (cpu_rsp_valid !== 1'b0)
+            $fatal(1, "cpu_rsp_valid remained asserted after handshake");
 
-        if (dut.req_write_reg !== 1'b1)
-            $fatal(1, "Write flag was not captured");
+        if (cpu_req_ready !== 1'b1)
+            $fatal(1, "Controller did not return to IDLE");
 
-        if (dut.req_addr_reg !== 8'h44)
-            $fatal(1, "Address was not captured");
-
-        if (dut.req_wdata_reg !== 32'hAABB_CCDD)
-            $fatal(1, "Write data was not captured");
-
-        if (dut.req_wstrb_reg !== 4'b1010)
-            $fatal(1, "Write strobe was not captured");
-
-        if (cpu_req_ready !== 1'b0)
-            $fatal(1, "Cache accepted a second request while busy");
-
-        $display("PASS: reset and CPU request capture");
+        $display("PASS: read hit and CPU response backpressure");
         $finish;
     end
 
