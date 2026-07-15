@@ -306,5 +306,18 @@ module cache_controller #(
         endcase
     end
 
+    `ifdef FORMAL
+
+        cache_properties #(
+            .NUM_LINES(NUM_LINES)
+        ) formal_properties (
+            .clk         (clk),
+            .rst_n       (rst_n),
+            .valid_array (valid_array),
+            .dirty_array (dirty_array)
+        );
+
+    `endif
+
 endmodule
 
