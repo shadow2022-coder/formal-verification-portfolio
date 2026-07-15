@@ -1,4 +1,3 @@
-
 module cache_controller #(
     parameter int unsigned ADDR_WIDTH = 8,
     parameter int unsigned DATA_WIDTH = 32,
@@ -222,7 +221,7 @@ module cache_controller #(
 
         mem_rsp_ready = 1'b0;
 
-                case (state)
+        case (state)
             IDLE: begin
                 cpu_req_ready = 1'b1;
 
@@ -306,7 +305,13 @@ module cache_controller #(
         endcase
     end
 
-    `ifdef FORMAL
+`ifdef FORMAL
+
+`ifndef FORMAL_DATA
+
+    // -------------------------------------------------------------------------
+    // Main assertion module
+    // -------------------------------------------------------------------------
 
     logic                  formal_selected_valid;
     logic                  formal_selected_dirty;
@@ -328,7 +333,6 @@ module cache_controller #(
     ) formal_properties (
         .clk             (clk),
         .rst_n           (rst_n),
-
         .state           (state),
 
         .valid_array     (valid_array),
@@ -366,7 +370,257 @@ module cache_controller #(
         .req_wstrb_reg   (req_wstrb_reg)
     );
 
-`endif
+    `endif  // !FORMAL_DATA
+
+`ifdef FORMAL_DATA
+
+    // =========================================================================
+    // Symbolic tracked-address data-integrity model
+    // =========================================================================
+
+    (* anyconst *) logic [ADDR_WIDTH-1:0] f_addr_symbol;
+    (* anyconst *) logic [DATA_WIDTH-1:0] f_initial_memory_data;
+
+    wire [ADDR_WIDTH-1:0] f_tracked_addr = {
+        f_addr_symbol[ADDR_WIDTH-1:OFFSET_WIDTH],
+        {OFFSET_WIDTH{1'b0}}
+    };
+
+    wire [INDEX_WIDTH-1:0] f_tracked_index =
+        f_tracked_addr[OFFSET_WIDTH + INDEX_WIDTH - 1 : OFFSET_WIDTH];
+
+    wire [TAG_WIDTH-1:0] f_tracked_tag =
+        f_tracked_addr[ADDR_WIDTH-1 : OFFSET_WIDTH + INDEX_WIDTH];
+
+    wire f_tracked_resident =
+        valid_array[f_tracked_index] &&
+        (tag_array[f_tracked_index] == f_tracked_tag);
+
+    // Architectural value expected for the tracked address.
+    logic [DATA_WIDTH-1:0] f_expected_value;
+
+    // Expected value captured when a tracked read is accepted.
+    logic                  f_pending_tracked_read;
+    logic [DATA_WIDTH-1:0] f_read_expected;
+
+    // Abstract one-address backing-memory model.
+    logic                  f_mem_outstanding;
+    logic                  f_mem_write;
+    logic [ADDR_WIDTH-1:0] f_mem_addr;
+    logic [DATA_WIDTH-1:0] f_mem_wdata;
+    logic [DATA_WIDTH-1:0] f_memory_value;
+
+    always_ff @(posedge clk or negedge rst_n) begin
+        if (!rst_n) begin
+            f_expected_value       <= f_initial_memory_data;
+            f_pending_tracked_read <= 1'b0;
+            f_read_expected        <= '0;
+
+            f_mem_outstanding      <= 1'b0;
+            f_mem_write            <= 1'b0;
+            f_mem_addr             <= '0;
+            f_mem_wdata            <= '0;
+            f_memory_value         <= f_initial_memory_data;
+        end else begin
+
+            // -------------------------------------------------------------
+            // CPU architectural-value model
+            // -------------------------------------------------------------
+
+            if (cpu_req_valid && cpu_req_ready) begin
+                f_pending_tracked_read <=
+                    (cpu_req_addr == f_tracked_addr) &&
+                    !cpu_req_write;
+
+                if (
+                    (cpu_req_addr == f_tracked_addr) &&
+                    !cpu_req_write
+                ) begin
+                    f_read_expected <= f_expected_value;
+                end
+
+                if (
+                    (cpu_req_addr == f_tracked_addr) &&
+                    cpu_req_write
+                ) begin
+                    f_expected_value <= apply_wstrb(
+                        f_expected_value,
+                        cpu_req_wdata,
+                        cpu_req_wstrb
+                    );
+                end
+            end else if (cpu_rsp_valid && cpu_rsp_ready) begin
+                f_pending_tracked_read <= 1'b0;
+            end
+
+            // -------------------------------------------------------------
+            // Symbolic backing-memory model
+            // -------------------------------------------------------------
+
+            if (mem_req_valid && mem_req_ready) begin
+                f_mem_outstanding <= 1'b1;
+                f_mem_write       <= mem_req_write;
+                f_mem_addr        <= mem_req_addr;
+                f_mem_wdata       <= mem_req_wdata;
+            end
+
+            if (mem_rsp_valid && mem_rsp_ready) begin
+                // A completed tracked-address writeback updates memory.
+                if (
+                    f_mem_write &&
+                    (f_mem_addr == f_tracked_addr)
+                ) begin
+                    f_memory_value <= f_mem_wdata;
+                end
+
+                f_mem_outstanding <= 1'b0;
+            end
+        end
+    end
+
+    // Keep assumptions in a synchronous block. This avoids the Yosys
+    // async2sync error caused by $check cells in async-reset processes.
+    always_ff @(posedge clk) begin
+        if (rst_n) begin
+
+            // Data-only proof abstraction:
+            // protocol backpressure is proved separately.
+            F_DATA_FAST_01: assume (mem_req_ready);
+            F_DATA_FAST_02: assume (cpu_rsp_ready);
+            F_DATA_FAST_03: assume (mem_rsp_valid);
+
+            F_DATA_ASSUME_01: assume (
+                !(mem_req_valid && mem_req_ready) ||
+                !f_mem_outstanding
+            );
+
+            F_DATA_ASSUME_02: assume (
+                !(mem_rsp_valid && mem_rsp_ready) ||
+                f_mem_outstanding
+            );
+
+            F_DATA_ASSUME_03: assume (
+                !(
+                    mem_rsp_valid &&
+                    mem_rsp_ready &&
+                    f_mem_outstanding &&
+                    !f_mem_write &&
+                    (f_mem_addr == f_tracked_addr)
+                ) ||
+                (mem_rsp_rdata == f_memory_value)
+            );
+        end
+    end
+
+    always_ff @(posedge clk) begin
+        if (rst_n) begin
+
+            // Every completed tracked read returns the architectural value.
+            F_DATA_01: assert (
+                !f_pending_tracked_read ||
+                !cpu_rsp_valid ||
+                (cpu_rsp_rdata == f_read_expected)
+            );
+
+            // At stable transaction boundaries, a resident tracked line
+            // contains the latest architectural value.
+            F_DATA_02: assert (
+                !(
+                    ((state == IDLE) || (state == RESPOND)) &&
+                    f_tracked_resident
+                ) ||
+                (data_array[f_tracked_index] == f_expected_value)
+            );
+
+            // Dirty eviction of the tracked address writes back the latest
+            // complete value, including partial-byte updates.
+            F_DATA_03: assert (
+                !(
+                    mem_req_valid &&
+                    mem_req_write &&
+                    (mem_req_addr == f_tracked_addr)
+                ) ||
+                (mem_req_wdata == f_expected_value)
+            );
+        end
+    end
+
+`ifdef COVER
+
+    logic [2:0] f_data_cover_phase;
+
+    always_ff @(posedge clk or negedge rst_n) begin
+        if (!rst_n) begin
+            f_data_cover_phase <= 3'd0;
+        end else begin
+            case (f_data_cover_phase)
+
+                // Symbolic partial write to tracked address.
+                3'd0: begin
+                    if (
+                        cpu_req_valid &&
+                        cpu_req_ready &&
+                        cpu_req_write &&
+                        (cpu_req_addr == f_tracked_addr) &&
+                        (|cpu_req_wstrb) &&
+                        !(&cpu_req_wstrb)
+                    ) begin
+                        f_data_cover_phase <= 3'd1;
+                    end
+                end
+
+                // Dirty tracked line is written back.
+                3'd1: begin
+                    if (
+                        mem_req_valid &&
+                        mem_req_ready &&
+                        mem_req_write &&
+                        (mem_req_addr == f_tracked_addr)
+                    ) begin
+                        f_data_cover_phase <= 3'd2;
+                    end
+                end
+
+                // Tracked address is requested again.
+                3'd2: begin
+                    if (
+                        cpu_req_valid &&
+                        cpu_req_ready &&
+                        !cpu_req_write &&
+                        (cpu_req_addr == f_tracked_addr)
+                    ) begin
+                        f_data_cover_phase <= 3'd3;
+                    end
+                end
+
+                // Read response completes.
+                3'd3: begin
+                    if (cpu_rsp_valid && cpu_rsp_ready) begin
+                        f_data_cover_phase <= 3'd4;
+                    end
+                end
+
+                default: begin
+                    f_data_cover_phase <= f_data_cover_phase;
+                end
+            endcase
+        end
+    end
+
+    always_ff @(posedge clk) begin
+        if (rst_n) begin
+            C_DATA_01: cover (
+                (f_data_cover_phase == 3'd3) &&
+                cpu_rsp_valid &&
+                (cpu_rsp_rdata == f_read_expected)
+            );
+        end
+    end
+
+`endif  // COVER
+
+`endif  // FORMAL_DATA
+
+`endif  // FORMAL
 
 endmodule
-

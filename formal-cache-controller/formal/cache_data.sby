@@ -1,0 +1,17 @@
+[options]
+mode bmc
+depth 22
+
+[engines]
+abc bmc3
+
+[script]
+read -formal -sv cache_properties.sv
+read -formal -D FORMAL -D FORMAL_DATA -sv cache_controller.sv
+read -formal -sv cache_formal_top.sv
+prep -top cache_formal_top
+
+[files]
+../rtl/cache_controller.sv
+cache_properties.sv
+cache_formal_top.sv
