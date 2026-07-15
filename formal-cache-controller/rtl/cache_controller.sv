@@ -308,16 +308,42 @@ module cache_controller #(
 
     `ifdef FORMAL
 
-        cache_properties #(
-            .NUM_LINES(NUM_LINES)
-        ) formal_properties (
-            .clk         (clk),
-            .rst_n       (rst_n),
-            .valid_array (valid_array),
-            .dirty_array (dirty_array)
-        );
+    cache_properties #(
+        .ADDR_WIDTH (ADDR_WIDTH),
+        .DATA_WIDTH (DATA_WIDTH),
+        .NUM_LINES  (NUM_LINES)
+    ) formal_properties (
+        .clk             (clk),
+        .rst_n           (rst_n),
 
-    `endif
+        .state           (state),
+
+        .valid_array     (valid_array),
+        .dirty_array     (dirty_array),
+
+        .cpu_req_valid   (cpu_req_valid),
+        .cpu_req_ready   (cpu_req_ready),
+
+        .cpu_rsp_valid   (cpu_rsp_valid),
+        .cpu_rsp_ready   (cpu_rsp_ready),
+        .cpu_rsp_rdata   (cpu_rsp_rdata),
+
+        .mem_req_valid   (mem_req_valid),
+        .mem_req_ready   (mem_req_ready),
+        .mem_req_write   (mem_req_write),
+        .mem_req_addr    (mem_req_addr),
+        .mem_req_wdata   (mem_req_wdata),
+
+        .mem_rsp_valid   (mem_rsp_valid),
+        .mem_rsp_ready   (mem_rsp_ready),
+
+        .req_write_reg   (req_write_reg),
+        .req_addr_reg    (req_addr_reg),
+        .req_wdata_reg   (req_wdata_reg),
+        .req_wstrb_reg   (req_wstrb_reg)
+    );
+
+`endif
 
 endmodule
 
