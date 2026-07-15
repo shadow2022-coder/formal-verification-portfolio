@@ -308,10 +308,23 @@ module cache_controller #(
 
     `ifdef FORMAL
 
+    logic                      formal_selected_valid;
+    logic                      formal_selected_dirty;
+    logic [TAG_WIDTH-1:0]      formal_selected_tag;
+    logic [DATA_WIDTH-1:0]     formal_selected_data;
+
+    assign formal_selected_valid = valid_array[req_index];
+    assign formal_selected_dirty = dirty_array[req_index];
+    assign formal_selected_tag   = tag_array[req_index];
+    assign formal_selected_data  = data_array[req_index];
+
     cache_properties #(
-        .ADDR_WIDTH (ADDR_WIDTH),
-        .DATA_WIDTH (DATA_WIDTH),
-        .NUM_LINES  (NUM_LINES)
+        .ADDR_WIDTH  (ADDR_WIDTH),
+        .DATA_WIDTH  (DATA_WIDTH),
+        .NUM_LINES   (NUM_LINES),
+        .BYTE_LANES  (BYTE_LANES),
+        .INDEX_WIDTH (INDEX_WIDTH),
+        .TAG_WIDTH   (TAG_WIDTH)
     ) formal_properties (
         .clk             (clk),
         .rst_n           (rst_n),
@@ -320,6 +333,15 @@ module cache_controller #(
 
         .valid_array     (valid_array),
         .dirty_array     (dirty_array),
+
+        .req_index       (req_index),
+        .req_tag         (req_tag),
+        .cache_hit       (cache_hit),
+
+        .selected_valid  (formal_selected_valid),
+        .selected_dirty  (formal_selected_dirty),
+        .selected_tag    (formal_selected_tag),
+        .selected_data   (formal_selected_data),
 
         .cpu_req_valid   (cpu_req_valid),
         .cpu_req_ready   (cpu_req_ready),
