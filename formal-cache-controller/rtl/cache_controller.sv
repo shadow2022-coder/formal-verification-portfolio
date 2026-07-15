@@ -308,10 +308,10 @@ module cache_controller #(
 
     `ifdef FORMAL
 
-    logic                      formal_selected_valid;
-    logic                      formal_selected_dirty;
-    logic [TAG_WIDTH-1:0]      formal_selected_tag;
-    logic [DATA_WIDTH-1:0]     formal_selected_data;
+    logic                  formal_selected_valid;
+    logic                  formal_selected_dirty;
+    logic [TAG_WIDTH-1:0]  formal_selected_tag;
+    logic [DATA_WIDTH-1:0] formal_selected_data;
 
     assign formal_selected_valid = valid_array[req_index];
     assign formal_selected_dirty = dirty_array[req_index];
@@ -358,6 +358,7 @@ module cache_controller #(
 
         .mem_rsp_valid   (mem_rsp_valid),
         .mem_rsp_ready   (mem_rsp_ready),
+        .mem_rsp_rdata   (mem_rsp_rdata),
 
         .req_write_reg   (req_write_reg),
         .req_addr_reg    (req_addr_reg),
