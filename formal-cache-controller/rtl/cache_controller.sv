@@ -178,6 +178,18 @@ module cache_controller #(
                     rsp_rdata_reg <= data_array[req_index];
                 end
             end
+            // Install data returned by memory for a read miss.
+            if ((state == REFILL_WAIT) &&
+                mem_rsp_valid &&
+                mem_rsp_ready) begin
+
+                data_array[req_index]  <= mem_rsp_rdata;
+                tag_array[req_index]   <= req_tag;
+                valid_array[req_index] <= 1'b1;
+                dirty_array[req_index] <= 1'b0;
+
+                rsp_rdata_reg <= mem_rsp_rdata;
+            end
         end
     end
 
@@ -200,7 +212,7 @@ module cache_controller #(
 
         mem_rsp_ready = 1'b0;
 
-        case (state)
+                case (state)
             IDLE: begin
                 cpu_req_ready = 1'b1;
 
@@ -211,6 +223,31 @@ module cache_controller #(
 
             LOOKUP: begin
                 if (cache_hit) begin
+                    next_state = RESPOND;
+                end else if (
+                    !req_write_reg &&
+                    (!valid_array[req_index] ||
+                     !dirty_array[req_index])
+                ) begin
+                    next_state = REFILL_REQ;
+                end
+            end
+
+            REFILL_REQ: begin
+                mem_req_valid = 1'b1;
+                mem_req_write = 1'b0;
+                mem_req_addr  = req_addr_reg;
+                mem_req_wdata = '0;
+
+                if (mem_req_ready) begin
+                    next_state = REFILL_WAIT;
+                end
+            end
+
+            REFILL_WAIT: begin
+                mem_rsp_ready = 1'b1;
+
+                if (mem_rsp_valid) begin
                     next_state = RESPOND;
                 end
             end

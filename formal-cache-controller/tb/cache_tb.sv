@@ -51,38 +51,134 @@ module cache_tb;
     );
 
     initial begin
-        rst_n          = 0;
-        cpu_req_valid  = 0;
-        cpu_req_write  = 0;
-        cpu_req_addr   = 0;
-        cpu_req_wdata  = 0;
-        cpu_req_wstrb  = 0;
-        cpu_rsp_ready  = 0;
+        rst_n         = 0;
+        cpu_req_valid = 0;
+        cpu_req_write = 0;
+        cpu_req_addr  = 0;
+        cpu_req_wdata = 0;
+        cpu_req_wstrb = 0;
+        cpu_rsp_ready = 0;
 
-        mem_req_ready  = 0;
-        mem_rsp_valid  = 0;
-        mem_rsp_rdata  = 0;
+        mem_req_ready = 0;
+        mem_rsp_valid = 0;
+        mem_rsp_rdata = 0;
 
         repeat (2) @(posedge clk);
         @(negedge clk);
         rst_n = 1;
 
-        // Address 0x04: tag 0, index 1.
-        dut.valid_array[1] = 1'b1;
-        dut.dirty_array[1] = 1'b0;
-        dut.tag_array[1]   = 4'h0;
-        dut.data_array[1]  = 32'h1122_3344;
-
-        // Partial write hit:
-        // old   = 11 22 33 44
-        // new   = AA BB CC DD
-        // wstrb = 1  0  1  0
-        // result= AA 22 CC 44
+        // Cold read miss:
+        // 0x44 = tag 4, index 1, offset 0.
         cpu_req_valid = 1;
-        cpu_req_write = 1;
-        cpu_req_addr  = 8'h04;
-        cpu_req_wdata = 32'hAABB_CCDD;
-        cpu_req_wstrb = 4'b1010;
+        cpu_req_write = 0;
+        cpu_req_addr  = 8'h44;
+
+        @(posedge clk);
+        #1;
+        cpu_req_valid = 0;
+
+        // LOOKUP detects invalid-line miss.
+        @(posedge clk);
+        #1;
+
+        if (mem_req_valid !== 1'b1)
+            $fatal(1, "Refill request was not generated");
+
+        if (mem_req_write !== 1'b0)
+            $fatal(1, "Refill request incorrectly marked as write");
+
+        if (mem_req_addr !== 8'h44)
+            $fatal(1, "Refill request used incorrect address");
+
+        // Memory-request backpressure.
+        repeat (2) begin
+            @(posedge clk);
+            #1;
+
+            if (mem_req_valid !== 1'b1)
+                $fatal(1, "Memory request dropped while stalled");
+
+            if (mem_req_write !== 1'b0)
+                $fatal(1, "Memory request type changed while stalled");
+
+            if (mem_req_addr !== 8'h44)
+                $fatal(1, "Memory request address changed while stalled");
+        end
+
+        // Accept refill request.
+        @(negedge clk);
+        mem_req_ready = 1;
+
+        @(posedge clk);
+        #1;
+        mem_req_ready = 0;
+
+        if (mem_rsp_ready !== 1'b1)
+            $fatal(1, "Cache is not ready for refill response");
+
+        // Delayed memory response.
+        repeat (2) begin
+            @(posedge clk);
+            #1;
+
+            if (cpu_rsp_valid !== 1'b0)
+                $fatal(1, "CPU response occurred before refill");
+        end
+
+        // Return refill data.
+        @(negedge clk);
+        mem_rsp_valid = 1;
+        mem_rsp_rdata = 32'hCAFE_BABE;
+
+        @(posedge clk);
+        #1;
+        mem_rsp_valid = 0;
+
+        if (cpu_rsp_valid !== 1'b1)
+            $fatal(1, "CPU response missing after refill");
+
+        if (cpu_rsp_rdata !== 32'hCAFE_BABE)
+            $fatal(1, "Incorrect read-miss response data");
+
+        if (dut.valid_array[1] !== 1'b1)
+            $fatal(1, "Refill did not set valid bit");
+
+        if (dut.dirty_array[1] !== 1'b0)
+            $fatal(1, "Read refill incorrectly set dirty bit");
+
+        if (dut.tag_array[1] !== 4'h4)
+            $fatal(1, "Refill installed incorrect tag");
+
+        if (dut.data_array[1] !== 32'hCAFE_BABE)
+            $fatal(1, "Refill installed incorrect data");
+
+        // Stall CPU response and verify stability.
+        repeat (2) begin
+            @(posedge clk);
+            #1;
+
+            if (cpu_rsp_valid !== 1'b1)
+                $fatal(1, "CPU response dropped while stalled");
+
+            if (cpu_rsp_rdata !== 32'hCAFE_BABE)
+                $fatal(1, "CPU response changed while stalled");
+        end
+
+        // Consume response.
+        @(negedge clk);
+        cpu_rsp_ready = 1;
+
+        @(posedge clk);
+        #1;
+        cpu_rsp_ready = 0;
+
+        if (cpu_req_ready !== 1'b1)
+            $fatal(1, "Controller did not return to IDLE");
+
+        // Second read to same address must hit.
+        cpu_req_valid = 1;
+        cpu_req_write = 0;
+        cpu_req_addr  = 8'h44;
 
         @(posedge clk);
         #1;
@@ -92,54 +188,15 @@ module cache_tb;
         #1;
 
         if (cpu_rsp_valid !== 1'b1)
-            $fatal(1, "Write-hit response missing");
+            $fatal(1, "Second access did not produce hit response");
 
-        if (cpu_rsp_rdata !== 32'h0000_0000)
-            $fatal(1, "Write response data is not zero");
-
-        if (dut.data_array[1] !== 32'hAA22_CC44)
-            $fatal(1, "WSTRB masking failed");
-
-        if (dut.dirty_array[1] !== 1'b1)
-            $fatal(1, "Dirty bit was not set");
-
-        if (dut.valid_array[1] !== 1'b1)
-            $fatal(1, "Valid bit changed");
-
-        if (dut.tag_array[1] !== 4'h0)
-            $fatal(1, "Tag changed");
+        if (cpu_rsp_rdata !== 32'hCAFE_BABE)
+            $fatal(1, "Read hit after refill returned wrong data");
 
         if (mem_req_valid !== 1'b0)
-            $fatal(1, "Write hit accessed memory");
+            $fatal(1, "Read hit after refill accessed memory");
 
-        repeat (3) begin
-            @(posedge clk);
-            #1;
-
-            if (cpu_rsp_valid !== 1'b1)
-                $fatal(1, "Response dropped while stalled");
-
-            if (cpu_rsp_rdata !== 32'h0000_0000)
-                $fatal(1, "Response data changed while stalled");
-
-            if (dut.data_array[1] !== 32'hAA22_CC44)
-                $fatal(1, "Cache data changed while stalled");
-        end
-
-        @(negedge clk);
-        cpu_rsp_ready = 1;
-
-        @(posedge clk);
-        #1;
-        cpu_rsp_ready = 0;
-
-        if (cpu_rsp_valid !== 1'b0)
-            $fatal(1, "Response remained valid after handshake");
-
-        if (cpu_req_ready !== 1'b1)
-            $fatal(1, "Controller did not return to IDLE");
-
-        $display("PASS: write hit, WSTRB masking and dirty update");
+        $display("PASS: clean read miss, refill and subsequent hit");
         $finish;
     end
 
