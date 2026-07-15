@@ -1,3 +1,4 @@
+
 module cache_controller #(
     parameter int unsigned ADDR_WIDTH = 8,
     parameter int unsigned DATA_WIDTH = 32,
@@ -86,7 +87,7 @@ module cache_controller #(
     logic [DATA_WIDTH-1:0] rsp_rdata_reg;
 
     // -------------------------------------------------------------------------
-    // Lookup signals derived from the captured CPU request
+    // Lookup signals
     // -------------------------------------------------------------------------
 
     logic [INDEX_WIDTH-1:0] req_index;
@@ -105,11 +106,6 @@ module cache_controller #(
 
     // -------------------------------------------------------------------------
     // WSTRB byte-mask function
-    //
-    // wstrb[0] controls bits [7:0]
-    // wstrb[1] controls bits [15:8]
-    // wstrb[2] controls bits [23:16]
-    // wstrb[3] controls bits [31:24]
     // -------------------------------------------------------------------------
 
     function automatic logic [DATA_WIDTH-1:0] apply_wstrb (
@@ -155,7 +151,7 @@ module cache_controller #(
         end else begin
             state <= next_state;
 
-            // Capture a new CPU request.
+            // Capture one CPU request.
             if (cpu_req_valid && cpu_req_ready) begin
                 req_write_reg <= cpu_req_write;
                 req_addr_reg  <= cpu_req_addr;
@@ -163,7 +159,7 @@ module cache_controller #(
                 req_wstrb_reg <= cpu_req_wstrb;
             end
 
-            // Complete read-hit or write-hit operation.
+            // Complete a read hit or write hit.
             if ((state == LOOKUP) && cache_hit) begin
                 if (req_write_reg) begin
                     data_array[req_index] <= apply_wstrb(
@@ -178,17 +174,31 @@ module cache_controller #(
                     rsp_rdata_reg <= data_array[req_index];
                 end
             end
-            // Install data returned by memory for a read miss.
+
+            // Install refill data for a read miss or write miss.
             if ((state == REFILL_WAIT) &&
                 mem_rsp_valid &&
                 mem_rsp_ready) begin
 
-                data_array[req_index]  <= mem_rsp_rdata;
                 tag_array[req_index]   <= req_tag;
                 valid_array[req_index] <= 1'b1;
-                dirty_array[req_index] <= 1'b0;
 
-                rsp_rdata_reg <= mem_rsp_rdata;
+                if (req_write_reg) begin
+                    // Write allocation:
+                    // merge CPU write into the word returned by memory.
+                    data_array[req_index] <= apply_wstrb(
+                        mem_rsp_rdata,
+                        req_wdata_reg,
+                        req_wstrb_reg
+                    );
+
+                    dirty_array[req_index] <= 1'b1;
+                    rsp_rdata_reg          <= '0;
+                end else begin
+                    data_array[req_index]  <= mem_rsp_rdata;
+                    dirty_array[req_index] <= 1'b0;
+                    rsp_rdata_reg          <= mem_rsp_rdata;
+                end
             end
         end
     end
@@ -212,7 +222,7 @@ module cache_controller #(
 
         mem_rsp_ready = 1'b0;
 
-                case (state)
+        case (state)
             IDLE: begin
                 cpu_req_ready = 1'b1;
 
@@ -225,12 +235,17 @@ module cache_controller #(
                 if (cache_hit) begin
                     next_state = RESPOND;
                 end else if (
-                    !req_write_reg &&
-                    (!valid_array[req_index] ||
-                     !dirty_array[req_index])
+                    !valid_array[req_index] ||
+                    !dirty_array[req_index]
                 ) begin
+                    // Invalid or clean miss.
+                    //
+                    // This supports both read misses and write misses.
                     next_state = REFILL_REQ;
                 end
+
+                // A dirty conflict miss intentionally remains in LOOKUP.
+                // Dirty eviction will be added in Stage 9.
             end
 
             REFILL_REQ: begin
@@ -267,3 +282,4 @@ module cache_controller #(
     end
 
 endmodule
+
