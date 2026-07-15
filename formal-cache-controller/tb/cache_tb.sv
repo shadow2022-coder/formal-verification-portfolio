@@ -43,6 +43,11 @@ module cache_tb;
 
     always #5 clk = ~clk;
 
+    initial begin
+        $dumpfile("build/cache_stage10.vcd");
+        $dumpvars(0, cache_tb);
+    end
+
     cache_controller dut (
         .clk,
         .rst_n,
@@ -619,7 +624,156 @@ module cache_tb;
 
         $display("PASS 8: memory-request backpressure");
 
-        $display("PASS: directed scenarios 1 through 8");
+                // ---------------------------------------------------------------------
+        // Scenario 9: Delayed memory response
+        //
+        // Address 0x88:
+        // tag = 8, index = 2.
+        //
+        // Index 2 currently contains the clean 0x48 line, so this produces
+        // a clean conflict miss without requiring writeback.
+        // ---------------------------------------------------------------------
+
+        mem.memory[34] = 32'h2468_ACE0;
+        response_delay_cycles = 8'd8;
+
+        @(negedge clk);
+
+        cpu_req_valid = 1'b1;
+        cpu_req_write = 1'b0;
+        cpu_req_addr  = 8'h88;
+        cpu_req_wdata = '0;
+        cpu_req_wstrb = '0;
+
+        @(posedge clk);
+        #1;
+        cpu_req_valid = 1'b0;
+
+        // Wait until the refill request is accepted.
+        while (!(mem_req_valid && mem_req_ready)) begin
+            @(posedge clk);
+            #1;
+        end
+
+        // The configured memory delay must prevent an early CPU response.
+        repeat (5) begin
+            @(posedge clk);
+            #1;
+
+            if (cpu_rsp_valid !== 1'b0) begin
+                $fatal(
+                    1,
+                    "CPU response occurred before delayed memory response"
+                );
+            end
+        end
+
+        // Wait for the delayed transaction to complete.
+        while (cpu_rsp_valid !== 1'b1) begin
+            @(posedge clk);
+            #1;
+        end
+
+        if (cpu_rsp_rdata !== 32'h2468_ACE0) begin
+            $fatal(1, "Delayed response returned incorrect data");
+        end
+
+        if (dut.valid_array[2] !== 1'b1 ||
+            dut.dirty_array[2] !== 1'b0 ||
+            dut.tag_array[2] !== 4'h8 ||
+            dut.data_array[2] !== 32'h2468_ACE0) begin
+            $fatal(1, "Delayed refill installed incorrect cache line");
+        end
+
+        @(negedge clk);
+        cpu_rsp_ready = 1'b1;
+
+        @(posedge clk);
+        #1;
+
+        @(negedge clk);
+        cpu_rsp_ready = 1'b0;
+
+        response_delay_cycles = 8'd2;
+
+        $display("PASS 9: delayed memory response");
+
+        // ---------------------------------------------------------------------
+        // Scenario 10: CPU-response backpressure
+        //
+        // Read 0x88 again. This is now a hit. Keep cpu_rsp_ready low and
+        // verify that cpu_rsp_valid and cpu_rsp_rdata remain stable.
+        // ---------------------------------------------------------------------
+
+        reads_before = mem_read_requests;
+
+        @(negedge clk);
+
+        cpu_req_valid = 1'b1;
+        cpu_req_write = 1'b0;
+        cpu_req_addr  = 8'h88;
+        cpu_req_wdata = '0;
+        cpu_req_wstrb = '0;
+
+        @(posedge clk);
+        #1;
+        cpu_req_valid = 1'b0;
+
+        while (cpu_rsp_valid !== 1'b1) begin
+            @(posedge clk);
+            #1;
+        end
+
+        if (cpu_rsp_rdata !== 32'h2468_ACE0) begin
+            $fatal(1, "Backpressured response initially had wrong data");
+        end
+
+        if (mem_read_requests !== reads_before) begin
+            $fatal(1, "Response-backpressure test unexpectedly missed");
+        end
+
+        // Keep the response blocked.
+        repeat (5) begin
+            @(posedge clk);
+            #1;
+
+            if (cpu_rsp_valid !== 1'b1) begin
+                $fatal(1, "cpu_rsp_valid dropped during backpressure");
+            end
+
+            if (cpu_rsp_rdata !== 32'h2468_ACE0) begin
+                $fatal(1, "cpu_rsp_rdata changed during backpressure");
+            end
+
+            if (cpu_req_ready !== 1'b0) begin
+                $fatal(
+                    1,
+                    "Cache accepted a new request while response was pending"
+                );
+            end
+        end
+
+        // Consume the held response.
+        @(negedge clk);
+        cpu_rsp_ready = 1'b1;
+
+        @(posedge clk);
+        #1;
+
+        @(negedge clk);
+        cpu_rsp_ready = 1'b0;
+
+        if (cpu_rsp_valid !== 1'b0) begin
+            $fatal(1, "cpu_rsp_valid remained high after handshake");
+        end
+
+        if (cpu_req_ready !== 1'b1) begin
+            $fatal(1, "Controller did not return to IDLE");
+        end
+
+        $display("PASS 10: CPU-response backpressure");
+
+        $display("PASS: all 10 directed cache scenarios");
         $finish;
     end
 
