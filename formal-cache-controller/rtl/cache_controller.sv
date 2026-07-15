@@ -222,7 +222,7 @@ module cache_controller #(
 
         mem_rsp_ready = 1'b0;
 
-        case (state)
+                case (state)
             IDLE: begin
                 cpu_req_ready = 1'b1;
 
@@ -235,17 +235,42 @@ module cache_controller #(
                 if (cache_hit) begin
                     next_state = RESPOND;
                 end else if (
-                    !valid_array[req_index] ||
-                    !dirty_array[req_index]
+                    valid_array[req_index] &&
+                    dirty_array[req_index]
                 ) begin
+                    // Dirty conflict miss: write back victim first.
+                    next_state = WRITEBACK_REQ;
+                end else begin
                     // Invalid or clean miss.
-                    //
-                    // This supports both read misses and write misses.
                     next_state = REFILL_REQ;
                 end
+            end
 
-                // A dirty conflict miss intentionally remains in LOOKUP.
-                // Dirty eviction will be added in Stage 9.
+            WRITEBACK_REQ: begin
+                mem_req_valid = 1'b1;
+                mem_req_write = 1'b1;
+
+                // Reconstruct the victim address using the stored tag.
+                mem_req_addr = {
+                    tag_array[req_index],
+                    req_index,
+                    {OFFSET_WIDTH{1'b0}}
+                };
+
+                mem_req_wdata = data_array[req_index];
+
+                if (mem_req_ready) begin
+                    next_state = WRITEBACK_WAIT;
+                end
+            end
+
+            WRITEBACK_WAIT: begin
+                // Both reads and writes receive a memory completion response.
+                mem_rsp_ready = 1'b1;
+
+                if (mem_rsp_valid) begin
+                    next_state = REFILL_REQ;
+                end
             end
 
             REFILL_REQ: begin
