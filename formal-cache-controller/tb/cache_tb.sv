@@ -2,9 +2,10 @@
 
 module cache_tb;
 
-    logic clk = 0;
+    logic clk = 1'b0;
     logic rst_n;
 
+    // CPU request
     logic        cpu_req_valid;
     logic        cpu_req_ready;
     logic        cpu_req_write;
@@ -12,19 +13,33 @@ module cache_tb;
     logic [31:0] cpu_req_wdata;
     logic [3:0]  cpu_req_wstrb;
 
+    // CPU response
     logic        cpu_rsp_valid;
     logic        cpu_rsp_ready;
     logic [31:0] cpu_rsp_rdata;
 
+    // Memory request
     logic        mem_req_valid;
     logic        mem_req_ready;
     logic        mem_req_write;
     logic [7:0]  mem_req_addr;
     logic [31:0] mem_req_wdata;
 
+    // Memory response
     logic        mem_rsp_valid;
     logic        mem_rsp_ready;
     logic [31:0] mem_rsp_rdata;
+
+    // Memory-model controls
+    logic       force_req_stall;
+    logic [7:0] response_delay_cycles;
+
+    integer mem_read_requests;
+    integer mem_write_requests;
+
+    logic [31:0] read_data;
+    integer      reads_before;
+    integer      writes_before;
 
     always #5 clk = ~clk;
 
@@ -54,252 +69,342 @@ module cache_tb;
         .mem_rsp_rdata
     );
 
+    memory_model mem (
+        .clk,
+        .rst_n,
+
+        .mem_req_valid,
+        .mem_req_ready,
+        .mem_req_write,
+        .mem_req_addr,
+        .mem_req_wdata,
+
+        .mem_rsp_valid,
+        .mem_rsp_ready,
+        .mem_rsp_rdata,
+
+        .force_req_stall,
+        .response_delay_cycles
+    );
+
+    // Count accepted backing-memory transactions.
+    always_ff @(posedge clk or negedge rst_n) begin
+        if (!rst_n) begin
+            mem_read_requests  <= 0;
+            mem_write_requests <= 0;
+        end else if (mem_req_valid && mem_req_ready) begin
+            if (mem_req_write) begin
+                mem_write_requests <= mem_write_requests + 1;
+            end else begin
+                mem_read_requests <= mem_read_requests + 1;
+            end
+        end
+    end
+
+    task automatic reset_system;
+        begin
+            rst_n         = 1'b0;
+
+            cpu_req_valid = 1'b0;
+            cpu_req_write = 1'b0;
+            cpu_req_addr  = '0;
+            cpu_req_wdata = '0;
+            cpu_req_wstrb = '0;
+            cpu_rsp_ready = 1'b0;
+
+            force_req_stall      = 1'b0;
+            response_delay_cycles = 8'd2;
+
+            repeat (3) @(posedge clk);
+            @(negedge clk);
+            rst_n = 1'b1;
+        end
+    endtask
+
+    task automatic cpu_read (
+        input  logic [7:0]  address,
+        output logic [31:0] returned_data
+    );
+        integer timeout;
+
+        begin
+            timeout = 0;
+
+            while (cpu_req_ready !== 1'b1) begin
+                @(posedge clk);
+                #1;
+
+                timeout = timeout + 1;
+
+                if (timeout > 100) begin
+                    $fatal(1, "Timeout waiting for CPU request readiness");
+                end
+            end
+
+            @(negedge clk);
+
+            cpu_req_valid = 1'b1;
+            cpu_req_write = 1'b0;
+            cpu_req_addr  = address;
+            cpu_req_wdata = '0;
+            cpu_req_wstrb = '0;
+
+            @(posedge clk);
+            #1;
+
+            cpu_req_valid = 1'b0;
+
+            timeout = 0;
+
+            while (cpu_rsp_valid !== 1'b1) begin
+                @(posedge clk);
+                #1;
+
+                timeout = timeout + 1;
+
+                if (timeout > 100) begin
+                    $fatal(1, "Timeout waiting for CPU read response");
+                end
+            end
+
+            returned_data = cpu_rsp_rdata;
+
+            @(negedge clk);
+            cpu_rsp_ready = 1'b1;
+
+            @(posedge clk);
+            #1;
+
+            @(negedge clk);
+            cpu_rsp_ready = 1'b0;
+        end
+    endtask
+
+    task automatic cpu_write (
+        input logic [7:0]  address,
+        input logic [31:0] write_data,
+        input logic [3:0]  write_strobe
+    );
+        integer timeout;
+
+        begin
+            timeout = 0;
+
+            while (cpu_req_ready !== 1'b1) begin
+                @(posedge clk);
+                #1;
+
+                timeout = timeout + 1;
+
+                if (timeout > 100) begin
+                    $fatal(1, "Timeout waiting for CPU request readiness");
+                end
+            end
+
+            @(negedge clk);
+
+            cpu_req_valid = 1'b1;
+            cpu_req_write = 1'b1;
+            cpu_req_addr  = address;
+            cpu_req_wdata = write_data;
+            cpu_req_wstrb = write_strobe;
+
+            @(posedge clk);
+            #1;
+
+            cpu_req_valid = 1'b0;
+
+            timeout = 0;
+
+            while (cpu_rsp_valid !== 1'b1) begin
+                @(posedge clk);
+                #1;
+
+                timeout = timeout + 1;
+
+                if (timeout > 100) begin
+                    $fatal(1, "Timeout waiting for CPU write response");
+                end
+            end
+
+            if (cpu_rsp_rdata !== 32'h0000_0000) begin
+                $fatal(1, "Write completion response data was not zero");
+            end
+
+            @(negedge clk);
+            cpu_rsp_ready = 1'b1;
+
+            @(posedge clk);
+            #1;
+
+            @(negedge clk);
+            cpu_rsp_ready = 1'b0;
+        end
+    endtask
+
     initial begin
-        rst_n         = 0;
+        reset_system();
 
-        cpu_req_valid = 0;
-        cpu_req_write = 0;
-        cpu_req_addr  = 0;
-        cpu_req_wdata = 0;
-        cpu_req_wstrb = 0;
-        cpu_rsp_ready = 0;
+        // Address 0x04:
+        // word index = 1
+        // cache index = 1
+        // tag = 0
+        mem.memory[1] = 32'h1122_3344;
 
-        mem_req_ready = 0;
-        mem_rsp_valid = 0;
-        mem_rsp_rdata = 0;
+        // ---------------------------------------------------------------------
+        // Scenario 1: Cold read miss and refill
+        // ---------------------------------------------------------------------
 
-        repeat (2) @(posedge clk);
-        @(negedge clk);
-        rst_n = 1;
+        reads_before = mem_read_requests;
 
-        // Dirty victim represents address 0x04:
-        // tag = 0, index = 1.
-        dut.valid_array[1] = 1'b1;
-        dut.dirty_array[1] = 1'b1;
-        dut.tag_array[1]   = 4'h0;
-        dut.data_array[1]  = 32'hDEAD_BEEF;
+        cpu_read(8'h04, read_data);
 
-        // Conflicting write request to 0x44:
-        // tag = 4, index = 1.
-        cpu_req_valid = 1;
-        cpu_req_write = 1;
-        cpu_req_addr  = 8'h44;
-        cpu_req_wdata = 32'hAABB_CCDD;
-        cpu_req_wstrb = 4'b0101;
-
-        // IDLE -> LOOKUP.
-        @(posedge clk);
-        #1;
-        cpu_req_valid = 0;
-
-        // LOOKUP -> WRITEBACK_REQ.
-        @(posedge clk);
-        #1;
-
-        if (mem_req_valid !== 1'b1)
-            $fatal(1, "Dirty write miss did not issue writeback");
-
-        if (mem_req_write !== 1'b1)
-            $fatal(1, "Victim request was not a memory write");
-
-        // Victim address must use stored tag 0, producing 0x04.
-        // It must not use incoming tag 4, which would produce 0x44.
-        if (mem_req_addr !== 8'h04)
-            $fatal(1, "Writeback used incorrect victim address");
-
-        if (mem_req_wdata !== 32'hDEAD_BEEF)
-            $fatal(1, "Writeback used incorrect victim data");
-
-        // Stall writeback request.
-        repeat (2) begin
-            @(posedge clk);
-            #1;
-
-            if (mem_req_valid !== 1'b1)
-                $fatal(1, "Writeback request dropped while stalled");
-
-            if (mem_req_write !== 1'b1)
-                $fatal(1, "Writeback request type changed");
-
-            if (mem_req_addr !== 8'h04)
-                $fatal(1, "Writeback address changed while stalled");
-
-            if (mem_req_wdata !== 32'hDEAD_BEEF)
-                $fatal(1, "Writeback data changed while stalled");
+        if (read_data !== 32'h1122_3344) begin
+            $fatal(1, "Cold read miss returned incorrect data");
         end
 
-        // Accept writeback request.
-        @(negedge clk);
-        mem_req_ready = 1;
-
-        @(posedge clk);
-        #1;
-        mem_req_ready = 0;
-
-        if (mem_rsp_ready !== 1'b1)
-            $fatal(1, "Cache not ready for writeback acknowledgement");
-
-        // Refill must not begin before writeback acknowledgement.
-        repeat (2) begin
-            @(posedge clk);
-            #1;
-
-            if (mem_req_valid !== 1'b0)
-                $fatal(1, "Refill began before writeback acknowledgement");
-
-            if (dut.tag_array[1] !== 4'h0)
-                $fatal(1, "Victim tag changed before acknowledgement");
-
-            if (dut.data_array[1] !== 32'hDEAD_BEEF)
-                $fatal(1, "Victim data changed before acknowledgement");
-
-            if (dut.dirty_array[1] !== 1'b1)
-                $fatal(1, "Victim dirty bit cleared before acknowledgement");
-
-            if (cpu_rsp_valid !== 1'b0)
-                $fatal(1, "CPU response occurred before miss completion");
+        if (mem_read_requests !== reads_before + 1) begin
+            $fatal(1, "Cold read miss did not issue one memory read");
         end
 
-        // Acknowledge writeback.
-        @(negedge clk);
-        mem_rsp_valid = 1;
-        mem_rsp_rdata = 0;
-
-        @(posedge clk);
-        #1;
-        mem_rsp_valid = 0;
-
-        // Refill request must now target incoming address 0x44.
-        if (mem_req_valid !== 1'b1)
-            $fatal(1, "Refill did not begin after writeback acknowledgement");
-
-        if (mem_req_write !== 1'b0)
-            $fatal(1, "Refill request was incorrectly marked as write");
-
-        if (mem_req_addr !== 8'h44)
-            $fatal(1, "Refill used incorrect incoming address");
-
-        // Stall refill request.
-        repeat (2) begin
-            @(posedge clk);
-            #1;
-
-            if (mem_req_valid !== 1'b1)
-                $fatal(1, "Refill request dropped while stalled");
-
-            if (mem_req_write !== 1'b0)
-                $fatal(1, "Refill request type changed");
-
-            if (mem_req_addr !== 8'h44)
-                $fatal(1, "Refill address changed while stalled");
+        if (dut.valid_array[1] !== 1'b1) begin
+            $fatal(1, "Cold refill did not set valid");
         end
 
-        // Accept refill request.
-        @(negedge clk);
-        mem_req_ready = 1;
-
-        @(posedge clk);
-        #1;
-        mem_req_ready = 0;
-
-        if (mem_rsp_ready !== 1'b1)
-            $fatal(1, "Cache not ready for refill response");
-
-        // Delay refill response.
-        repeat (2) begin
-            @(posedge clk);
-            #1;
-
-            if (cpu_rsp_valid !== 1'b0)
-                $fatal(1, "CPU response occurred before refill data");
+        if (dut.dirty_array[1] !== 1'b0) begin
+            $fatal(1, "Cold read refill incorrectly set dirty");
         end
 
-        // Refill data:
-        //
-        // Memory word = 11 22 33 44
-        // CPU word    = AA BB CC DD
-        // WSTRB       = 0  1  0  1
-        // Result      = 11 BB 33 DD
-        @(negedge clk);
-        mem_rsp_valid = 1;
-        mem_rsp_rdata = 32'h1122_3344;
-
-        @(posedge clk);
-        #1;
-        mem_rsp_valid = 0;
-
-        if (cpu_rsp_valid !== 1'b1)
-            $fatal(1, "Write completion response missing");
-
-        if (cpu_rsp_rdata !== 32'h0000_0000)
-            $fatal(1, "Write completion response data must be zero");
-
-        if (dut.valid_array[1] !== 1'b1)
-            $fatal(1, "Refill did not set valid bit");
-
-        if (dut.dirty_array[1] !== 1'b1)
-            $fatal(1, "Write-miss refill did not set dirty bit");
-
-        if (dut.tag_array[1] !== 4'h4)
-            $fatal(1, "Refill installed incorrect incoming tag");
-
-        if (dut.data_array[1] !== 32'h11BB_33DD)
-            $fatal(1, "Write-miss WSTRB merge produced incorrect data");
-
-        // Stall CPU completion response.
-        repeat (2) begin
-            @(posedge clk);
-            #1;
-
-            if (cpu_rsp_valid !== 1'b1)
-                $fatal(1, "CPU response dropped while stalled");
-
-            if (cpu_rsp_rdata !== 32'h0000_0000)
-                $fatal(1, "Write response data changed while stalled");
-
-            if (dut.data_array[1] !== 32'h11BB_33DD)
-                $fatal(1, "Installed cache data changed while stalled");
+        if (dut.tag_array[1] !== 4'h0) begin
+            $fatal(1, "Cold refill installed incorrect tag");
         end
 
-        // Consume write response.
-        @(negedge clk);
-        cpu_rsp_ready = 1;
+        if (dut.data_array[1] !== 32'h1122_3344) begin
+            $fatal(1, "Cold refill installed incorrect data");
+        end
 
-        @(posedge clk);
-        #1;
-        cpu_rsp_ready = 0;
+        $display("PASS 1: cold read miss and refill");
 
-        if (cpu_req_ready !== 1'b1)
-            $fatal(1, "Controller did not return to IDLE");
+        // ---------------------------------------------------------------------
+        // Scenario 2: Second read to same address must hit
+        // ---------------------------------------------------------------------
 
-        // Read the newly allocated address.
-        // It must hit and return the merged word.
-        cpu_req_valid = 1;
-        cpu_req_write = 0;
-        cpu_req_addr  = 8'h44;
-        cpu_req_wdata = 0;
-        cpu_req_wstrb = 0;
+        reads_before = mem_read_requests;
 
-        @(posedge clk);
-        #1;
-        cpu_req_valid = 0;
+        cpu_read(8'h04, read_data);
 
-        @(posedge clk);
-        #1;
+        if (read_data !== 32'h1122_3344) begin
+            $fatal(1, "Read hit returned incorrect data");
+        end
 
-        if (cpu_rsp_valid !== 1'b1)
-            $fatal(1, "Read after dirty write miss did not hit");
-
-        if (cpu_rsp_rdata !== 32'h11BB_33DD)
-            $fatal(1, "Read after dirty write miss returned wrong data");
-
-        if (mem_req_valid !== 1'b0)
+        if (mem_read_requests !== reads_before) begin
             $fatal(1, "Read hit unexpectedly accessed memory");
+        end
 
-        $display(
-            "PASS: dirty write miss, eviction, refill and WSTRB merge"
+        $display("PASS 2: second read hits");
+
+        // ---------------------------------------------------------------------
+        // Scenario 3: Full write hit sets dirty
+        // ---------------------------------------------------------------------
+
+        reads_before  = mem_read_requests;
+        writes_before = mem_write_requests;
+
+        cpu_write(
+            8'h04,
+            32'hAABB_CCDD,
+            4'b1111
         );
 
+        if (dut.data_array[1] !== 32'hAABB_CCDD) begin
+            $fatal(1, "Full write hit stored incorrect data");
+        end
+
+        if (dut.dirty_array[1] !== 1'b1) begin
+            $fatal(1, "Full write hit did not set dirty");
+        end
+
+        if (dut.valid_array[1] !== 1'b1) begin
+            $fatal(1, "Full write hit changed valid state");
+        end
+
+        if (dut.tag_array[1] !== 4'h0) begin
+            $fatal(1, "Full write hit changed tag");
+        end
+
+        if (mem_read_requests !== reads_before ||
+            mem_write_requests !== writes_before) begin
+            $fatal(1, "Write hit unexpectedly accessed memory");
+        end
+
+        // Write-back policy means backing memory is still unchanged.
+        if (mem.memory[1] !== 32'h1122_3344) begin
+            $fatal(1, "Write hit incorrectly updated backing memory");
+        end
+
+        $display("PASS 3: write hit sets dirty");
+
+        // ---------------------------------------------------------------------
+        // Scenario 4: Read-after-write returns cached updated data
+        // ---------------------------------------------------------------------
+
+        reads_before = mem_read_requests;
+
+        cpu_read(8'h04, read_data);
+
+        if (read_data !== 32'hAABB_CCDD) begin
+            $fatal(1, "Read-after-write returned incorrect data");
+        end
+
+        if (mem_read_requests !== reads_before) begin
+            $fatal(1, "Read-after-write unexpectedly accessed memory");
+        end
+
+        $display("PASS 4: read-after-write returns updated data");
+
+        // ---------------------------------------------------------------------
+        // Scenario 5: Partial WSTRB write
+        //
+        // Old word = AA BB CC DD
+        // New word = 55 66 77 88
+        // WSTRB    = 0  1  0  1
+        //
+        // Updated bytes:
+        // byte 2 = 66
+        // byte 0 = 88
+        //
+        // Result = AA 66 CC 88
+        // ---------------------------------------------------------------------
+
+        cpu_write(
+            8'h04,
+            32'h5566_7788,
+            4'b0101
+        );
+
+        if (dut.data_array[1] !== 32'hAA66_CC88) begin
+            $fatal(1, "Partial WSTRB write produced incorrect data");
+        end
+
+        if (dut.dirty_array[1] !== 1'b1) begin
+            $fatal(1, "Partial write did not preserve dirty state");
+        end
+
+        reads_before = mem_read_requests;
+
+        cpu_read(8'h04, read_data);
+
+        if (read_data !== 32'hAA66_CC88) begin
+            $fatal(1, "Read after partial write returned wrong data");
+        end
+
+        if (mem_read_requests !== reads_before) begin
+            $fatal(1, "Partial-write readback unexpectedly accessed memory");
+        end
+
+        $display("PASS 5: partial WSTRB write");
+
+        $display("PASS: directed scenarios 1 through 5");
         $finish;
     end
 
