@@ -31,20 +31,24 @@ module cache_tb;
     cache_controller dut (
         .clk,
         .rst_n,
+
         .cpu_req_valid,
         .cpu_req_ready,
         .cpu_req_write,
         .cpu_req_addr,
         .cpu_req_wdata,
         .cpu_req_wstrb,
+
         .cpu_rsp_valid,
         .cpu_rsp_ready,
         .cpu_rsp_rdata,
+
         .mem_req_valid,
         .mem_req_ready,
         .mem_req_write,
         .mem_req_addr,
         .mem_req_wdata,
+
         .mem_rsp_valid,
         .mem_rsp_ready,
         .mem_rsp_rdata
@@ -52,6 +56,7 @@ module cache_tb;
 
     initial begin
         rst_n         = 0;
+
         cpu_req_valid = 0;
         cpu_req_write = 0;
         cpu_req_addr  = 0;
@@ -68,19 +73,21 @@ module cache_tb;
         rst_n = 1;
 
         // Dirty victim represents address 0x04:
-        // stored tag = 0, index = 1.
+        // tag = 0, index = 1.
         dut.valid_array[1] = 1'b1;
         dut.dirty_array[1] = 1'b1;
         dut.tag_array[1]   = 4'h0;
         dut.data_array[1]  = 32'hDEAD_BEEF;
 
-        // Conflicting read request to 0x44:
-        // incoming tag = 4, index = 1.
+        // Conflicting write request to 0x44:
+        // tag = 4, index = 1.
         cpu_req_valid = 1;
-        cpu_req_write = 0;
+        cpu_req_write = 1;
         cpu_req_addr  = 8'h44;
+        cpu_req_wdata = 32'hAABB_CCDD;
+        cpu_req_wstrb = 4'b0101;
 
-        // Request accepted: IDLE -> LOOKUP.
+        // IDLE -> LOOKUP.
         @(posedge clk);
         #1;
         cpu_req_valid = 0;
@@ -90,12 +97,13 @@ module cache_tb;
         #1;
 
         if (mem_req_valid !== 1'b1)
-            $fatal(1, "Dirty miss did not generate writeback request");
+            $fatal(1, "Dirty write miss did not issue writeback");
 
         if (mem_req_write !== 1'b1)
-            $fatal(1, "Dirty victim request was not a memory write");
+            $fatal(1, "Victim request was not a memory write");
 
-        // Critical check: victim address is 0x04, not incoming 0x44.
+        // Victim address must use stored tag 0, producing 0x04.
+        // It must not use incoming tag 4, which would produce 0x44.
         if (mem_req_addr !== 8'h04)
             $fatal(1, "Writeback used incorrect victim address");
 
@@ -111,7 +119,7 @@ module cache_tb;
                 $fatal(1, "Writeback request dropped while stalled");
 
             if (mem_req_write !== 1'b1)
-                $fatal(1, "Writeback request type changed while stalled");
+                $fatal(1, "Writeback request type changed");
 
             if (mem_req_addr !== 8'h04)
                 $fatal(1, "Writeback address changed while stalled");
@@ -120,7 +128,7 @@ module cache_tb;
                 $fatal(1, "Writeback data changed while stalled");
         end
 
-        // Accept the writeback request.
+        // Accept writeback request.
         @(negedge clk);
         mem_req_ready = 1;
 
@@ -131,7 +139,7 @@ module cache_tb;
         if (mem_rsp_ready !== 1'b1)
             $fatal(1, "Cache not ready for writeback acknowledgement");
 
-        // Victim must remain intact while waiting for acknowledgement.
+        // Refill must not begin before writeback acknowledgement.
         repeat (2) begin
             @(posedge clk);
             #1;
@@ -146,13 +154,13 @@ module cache_tb;
                 $fatal(1, "Victim data changed before acknowledgement");
 
             if (dut.dirty_array[1] !== 1'b1)
-                $fatal(1, "Victim dirty bit cleared too early");
+                $fatal(1, "Victim dirty bit cleared before acknowledgement");
 
             if (cpu_rsp_valid !== 1'b0)
-                $fatal(1, "CPU response occurred before eviction completed");
+                $fatal(1, "CPU response occurred before miss completion");
         end
 
-        // Send writeback acknowledgement.
+        // Acknowledge writeback.
         @(negedge clk);
         mem_rsp_valid = 1;
         mem_rsp_rdata = 0;
@@ -161,15 +169,15 @@ module cache_tb;
         #1;
         mem_rsp_valid = 0;
 
-        // Cache must now issue the refill request for 0x44.
+        // Refill request must now target incoming address 0x44.
         if (mem_req_valid !== 1'b1)
             $fatal(1, "Refill did not begin after writeback acknowledgement");
 
         if (mem_req_write !== 1'b0)
-            $fatal(1, "Refill request incorrectly marked as write");
+            $fatal(1, "Refill request was incorrectly marked as write");
 
         if (mem_req_addr !== 8'h44)
-            $fatal(1, "Refill request used incorrect incoming address");
+            $fatal(1, "Refill used incorrect incoming address");
 
         // Stall refill request.
         repeat (2) begin
@@ -178,6 +186,9 @@ module cache_tb;
 
             if (mem_req_valid !== 1'b1)
                 $fatal(1, "Refill request dropped while stalled");
+
+            if (mem_req_write !== 1'b0)
+                $fatal(1, "Refill request type changed");
 
             if (mem_req_addr !== 8'h44)
                 $fatal(1, "Refill address changed while stalled");
@@ -203,34 +214,39 @@ module cache_tb;
                 $fatal(1, "CPU response occurred before refill data");
         end
 
-        // Return refill data for 0x44.
+        // Refill data:
+        //
+        // Memory word = 11 22 33 44
+        // CPU word    = AA BB CC DD
+        // WSTRB       = 0  1  0  1
+        // Result      = 11 BB 33 DD
         @(negedge clk);
         mem_rsp_valid = 1;
-        mem_rsp_rdata = 32'hCAFE_BABE;
+        mem_rsp_rdata = 32'h1122_3344;
 
         @(posedge clk);
         #1;
         mem_rsp_valid = 0;
 
         if (cpu_rsp_valid !== 1'b1)
-            $fatal(1, "CPU response missing after dirty eviction refill");
+            $fatal(1, "Write completion response missing");
 
-        if (cpu_rsp_rdata !== 32'hCAFE_BABE)
-            $fatal(1, "Dirty-miss read returned incorrect data");
+        if (cpu_rsp_rdata !== 32'h0000_0000)
+            $fatal(1, "Write completion response data must be zero");
 
         if (dut.valid_array[1] !== 1'b1)
-            $fatal(1, "Refill did not leave line valid");
+            $fatal(1, "Refill did not set valid bit");
 
-        if (dut.dirty_array[1] !== 1'b0)
-            $fatal(1, "Read refill did not clear dirty bit");
+        if (dut.dirty_array[1] !== 1'b1)
+            $fatal(1, "Write-miss refill did not set dirty bit");
 
         if (dut.tag_array[1] !== 4'h4)
             $fatal(1, "Refill installed incorrect incoming tag");
 
-        if (dut.data_array[1] !== 32'hCAFE_BABE)
-            $fatal(1, "Refill installed incorrect data");
+        if (dut.data_array[1] !== 32'h11BB_33DD)
+            $fatal(1, "Write-miss WSTRB merge produced incorrect data");
 
-        // Verify CPU response stability.
+        // Stall CPU completion response.
         repeat (2) begin
             @(posedge clk);
             #1;
@@ -238,11 +254,14 @@ module cache_tb;
             if (cpu_rsp_valid !== 1'b1)
                 $fatal(1, "CPU response dropped while stalled");
 
-            if (cpu_rsp_rdata !== 32'hCAFE_BABE)
-                $fatal(1, "CPU response changed while stalled");
+            if (cpu_rsp_rdata !== 32'h0000_0000)
+                $fatal(1, "Write response data changed while stalled");
+
+            if (dut.data_array[1] !== 32'h11BB_33DD)
+                $fatal(1, "Installed cache data changed while stalled");
         end
 
-        // Consume CPU response.
+        // Consume write response.
         @(negedge clk);
         cpu_rsp_ready = 1;
 
@@ -253,7 +272,34 @@ module cache_tb;
         if (cpu_req_ready !== 1'b1)
             $fatal(1, "Controller did not return to IDLE");
 
-        $display("PASS: dirty eviction, writeback, refill and read completion");
+        // Read the newly allocated address.
+        // It must hit and return the merged word.
+        cpu_req_valid = 1;
+        cpu_req_write = 0;
+        cpu_req_addr  = 8'h44;
+        cpu_req_wdata = 0;
+        cpu_req_wstrb = 0;
+
+        @(posedge clk);
+        #1;
+        cpu_req_valid = 0;
+
+        @(posedge clk);
+        #1;
+
+        if (cpu_rsp_valid !== 1'b1)
+            $fatal(1, "Read after dirty write miss did not hit");
+
+        if (cpu_rsp_rdata !== 32'h11BB_33DD)
+            $fatal(1, "Read after dirty write miss returned wrong data");
+
+        if (mem_req_valid !== 1'b0)
+            $fatal(1, "Read hit unexpectedly accessed memory");
+
+        $display(
+            "PASS: dirty write miss, eviction, refill and WSTRB merge"
+        );
+
         $finish;
     end
 
