@@ -4,33 +4,33 @@ module cache_controller #(
     parameter int unsigned NUM_LINES  = 4
 ) (
     // Clock and active-low reset
-    input  logic                          clk,
-    input  logic                          rst_n,
+    input  logic                      clk,
+    input  logic                      rst_n,
 
     // CPU request interface
-    input  logic                          cpu_req_valid,
-    output logic                          cpu_req_ready,
-    input  logic                          cpu_req_write,
-    input  logic [ADDR_WIDTH-1:0]         cpu_req_addr,
-    input  logic [DATA_WIDTH-1:0]         cpu_req_wdata,
-    input  logic [(DATA_WIDTH/8)-1:0]     cpu_req_wstrb,
+    input  logic                      cpu_req_valid,
+    output logic                      cpu_req_ready,
+    input  logic                      cpu_req_write,
+    input  logic [ADDR_WIDTH-1:0]     cpu_req_addr,
+    input  logic [DATA_WIDTH-1:0]     cpu_req_wdata,
+    input  logic [(DATA_WIDTH/8)-1:0] cpu_req_wstrb,
 
     // CPU response interface
-    output logic                          cpu_rsp_valid,
-    input  logic                          cpu_rsp_ready,
-    output logic [DATA_WIDTH-1:0]         cpu_rsp_rdata,
+    output logic                      cpu_rsp_valid,
+    input  logic                      cpu_rsp_ready,
+    output logic [DATA_WIDTH-1:0]     cpu_rsp_rdata,
 
     // Memory request interface
-    output logic                          mem_req_valid,
-    input  logic                          mem_req_ready,
-    output logic                          mem_req_write,
-    output logic [ADDR_WIDTH-1:0]         mem_req_addr,
-    output logic [DATA_WIDTH-1:0]         mem_req_wdata,
+    output logic                      mem_req_valid,
+    input  logic                      mem_req_ready,
+    output logic                      mem_req_write,
+    output logic [ADDR_WIDTH-1:0]     mem_req_addr,
+    output logic [DATA_WIDTH-1:0]     mem_req_wdata,
 
     // Memory response interface
-    input  logic                          mem_rsp_valid,
-    output logic                          mem_rsp_ready,
-    input  logic [DATA_WIDTH-1:0]         mem_rsp_rdata
+    input  logic                      mem_rsp_valid,
+    output logic                      mem_rsp_ready,
+    input  logic [DATA_WIDTH-1:0]     mem_rsp_rdata
 );
 
     // -------------------------------------------------------------------------
@@ -72,29 +72,50 @@ module cache_controller #(
 
     // -------------------------------------------------------------------------
     // Captured CPU request
-    //
-    // A request may remain active for several cycles during writeback/refill,
-    // so the complete request must be stored after the CPU handshake.
     // -------------------------------------------------------------------------
 
-    logic                          req_write_reg;
-    logic [ADDR_WIDTH-1:0]         req_addr_reg;
-    logic [DATA_WIDTH-1:0]         req_wdata_reg;
-    logic [BYTE_LANES-1:0]         req_wstrb_reg;
+    logic                      req_write_reg;
+    logic [ADDR_WIDTH-1:0]     req_addr_reg;
+    logic [DATA_WIDTH-1:0]     req_wdata_reg;
+    logic [BYTE_LANES-1:0]     req_wstrb_reg;
 
     // -------------------------------------------------------------------------
     // Registered CPU response data
-    //
-    // This register will later allow the response payload to remain stable
-    // while cpu_rsp_valid is asserted and cpu_rsp_ready is low.
     // -------------------------------------------------------------------------
 
     logic [DATA_WIDTH-1:0] rsp_rdata_reg;
 
     // -------------------------------------------------------------------------
-    // Output and next-state defaults
-    //
-    // Functional state behavior will be added incrementally in later stages.
+    // Sequential state and request storage
+    // -------------------------------------------------------------------------
+
+    always_ff @(posedge clk or negedge rst_n) begin
+        if (!rst_n) begin
+            state         <= IDLE;
+
+            valid_array   <= '0;
+            dirty_array   <= '0;
+
+            req_write_reg <= 1'b0;
+            req_addr_reg  <= '0;
+            req_wdata_reg <= '0;
+            req_wstrb_reg <= '0;
+
+            rsp_rdata_reg <= '0;
+        end else begin
+            state <= next_state;
+
+            if (cpu_req_valid && cpu_req_ready) begin
+                req_write_reg <= cpu_req_write;
+                req_addr_reg  <= cpu_req_addr;
+                req_wdata_reg <= cpu_req_wdata;
+                req_wstrb_reg <= cpu_req_wstrb;
+            end
+        end
+    end
+
+    // -------------------------------------------------------------------------
+    // Combinational output and next-state logic
     // -------------------------------------------------------------------------
 
     always_comb begin
@@ -111,6 +132,20 @@ module cache_controller #(
         mem_req_wdata = '0;
 
         mem_rsp_ready = 1'b0;
+
+        case (state)
+            IDLE: begin
+                cpu_req_ready = 1'b1;
+
+                if (cpu_req_valid && cpu_req_ready) begin
+                    next_state = LOOKUP;
+                end
+            end
+
+            default: begin
+                next_state = state;
+            end
+        endcase
     end
 
 endmodule
