@@ -1,0 +1,15 @@
+[options]
+mode bmc
+depth 16
+
+[engines]
+smtbmc boolector
+
+[script]
+read -formal -D FORMAL -D FORMAL_DATA -sv cache_controller_bug_wstrb.sv
+read -formal -sv cache_formal_top.sv
+prep -top cache_formal_top
+
+[files]
+cache_controller_bug_wstrb.sv
+cache_formal_top.sv

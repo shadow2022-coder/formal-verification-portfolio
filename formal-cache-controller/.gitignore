@@ -2,3 +2,5 @@ build/
 formal/cache/
 formal/cache_cover/
 formal/cache_data/
+formal/cache_bug_wb/
+formal/cache_bug_wstrb/

@@ -1,0 +1,17 @@
+[options]
+mode bmc
+depth 30
+
+[engines]
+smtbmc boolector
+
+[script]
+read -formal -sv cache_properties.sv
+read -formal -D FORMAL -sv cache_controller_bug_wb_addr.sv
+read -formal -sv cache_formal_top.sv
+prep -top cache_formal_top
+
+[files]
+cache_properties.sv
+cache_controller_bug_wb_addr.sv
+cache_formal_top.sv
